@@ -18,7 +18,7 @@ HEBRING strictly separates **Primitive Tokens** from **Semantic Tokens**:
 | **Context** | Completely context-agnostic | Purpose-specific (e.g. text, surface, action) |
 | **Example** | `--hb-color-blue-600` | `--hb-color-primary` (mapped to blue-600) |
 | **Changes** | Rarely change once calibrated | Can change across themes (light, dark) |
-| **Phase** | **Phase 03.2 (Current)** | **Phase 03.3 (Subsequent)** |
+| **Status** | Implemented ([primitives.css](file:///Users/user/Documents/HEBRING/hebring/src/tokens/primitives.css)) | Implemented ([semantic.css](file:///Users/user/Documents/HEBRING/hebring/src/tokens/semantic.css)) |
 
 ---
 
@@ -181,3 +181,13 @@ To protect architectural boundaries, the following are strictly excluded from Ph
 - **Theme Overrides & Dark Mode**: Multi-theme switching belongs in semantic token mappings and theme definitions.
 - **Responsive Tokens**: Dynamic viewport clamp tokens are not introduced here.
 - **CSS Preprocessors / JavaScript**: Tokens are pure, standard CSS Custom Properties.
+
+---
+
+## 9. Further Documentation
+
+- **[Semantic Tokens Reference](semantic-tokens.md)**: Contextual role mappings and WCAG contrast validation.
+- **[Theme Architecture](theme-architecture.md)**: `data-theme` activation, Light default behavior, and Dark overrides.
+- **[Token Developer Usage Guide](token-usage.md)**: Best practices, practical component examples, and anti-patterns.
+- **[Design Token Architecture](design-token-architecture.md)**: Source structure, composition boundaries, and import mechanics.
+

@@ -149,3 +149,13 @@ HEBRING explicitly avoids component-scoped tokens such as `--hb-button-bg`, `--h
 1. **Prevents Token Bloat**: Component tokens create hundreds of redundant aliases that simply point back to semantic tokens.
 2. **Promotes Composition**: Components styled using semantic tokens (`--hb-color-surface`, `--hb-color-border`, `--hb-color-primary`) automatically share visual coherence across the system.
 3. **Streamlines Theming**: In Phase 03.4, swapping semantic tokens cleanly re-themes every component in the framework without touching individual component files.
+
+---
+
+## 5. Further Documentation
+
+- **[Theme Architecture](theme-architecture.md)**: `data-theme` activation, Light default behavior, and Dark overrides.
+- **[Token Developer Usage Guide](token-usage.md)**: Best practices, practical component examples, and anti-patterns.
+- **[Primitive Tokens Reference](primitive-tokens.md)**: Raw color palettes, 4px spacing scale, typography, radii, shadows, and motion values.
+- **[Design Token Architecture](design-token-architecture.md)**: Source structure, composition boundaries, and import mechanics.
+

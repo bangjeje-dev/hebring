@@ -14,7 +14,8 @@ The token system is structured in the dedicated `src/tokens/` domain:
 src/tokens/
 ├── index.css        # Token composition entry point
 ├── primitives.css   # Raw, context-agnostic values
-└── semantic.css     # Intent-driven, contextual mappings
+├── semantic.css     # Intent-driven, contextual mappings (Light default)
+└── themes.css       # Theme overrides ([data-theme="dark"])
 ```
 
 ---
@@ -53,13 +54,14 @@ The internal composition boundary for the tokens domain. It imports token files 
 ```css
 @import "./primitives.css";
 @import "./semantic.css";
+@import "./themes.css";
 ```
 
 ### `src/tokens/primitives.css`
 Contains raw, context-agnostic design decisions. Primitives represent absolute design values with no implied role or usage context.
 
 **Responsibilities:**
-- Raw color scales (Neutral, Blue, Green, Yellow, Red across steps 50–950).
+- Raw color scales (Neutral, Blue, Green, Yellow, Red across steps 50–950, plus foundational white/black).
 - Spacing scales (strict 4px base system from `--hb-space-0` to `--hb-space-32`).
 - Typography scales (sans with Outfit/system fallbacks, monospace, font sizes xs–6xl, weights regular–bold, line heights, letter spacings).
 - Border radii (none–full), box shadows (none–xl), and motion (durations, easings).
@@ -67,7 +69,7 @@ Contains raw, context-agnostic design decisions. Primitives represent absolute d
 *Implemented in Phase 03.2. See [Primitive Design Tokens](primitive-tokens.md) for full reference.*
 
 ### `src/tokens/semantic.css`
-Contains contextual, intent-based design mappings that reference primitive tokens.
+Contains contextual, intent-based design mappings that reference primitive tokens. Represents the default Light theme on `:root, [data-theme="light"]`.
 
 **Responsibilities:**
 - Role-based colors (background, surface, text, border, primary, status roles).
@@ -75,6 +77,12 @@ Contains contextual, intent-based design mappings that reference primitive token
 - Semantic typography families (body, heading, code).
 
 *Implemented in Phase 03.3. See [Semantic Design Tokens](semantic-tokens.md) for full reference.*
+
+### `src/tokens/themes.css`
+Contains theme-specific semantic token overrides (such as `[data-theme="dark"]`). Components consume semantic tokens and remain completely theme-agnostic.
+
+*Implemented in Phase 03.4. See [Theme Architecture](theme-architecture.md) for full reference.*
+
 
 ---
 
@@ -211,5 +219,15 @@ Phase 03.3 established the following semantic token roles defined in `src/tokens
 2. **No Utility Classes**: Utility classes belong exclusively to `src/utilities/`.
 3. **No Build-Step Requirement**: Token files are authored in pure, standard CSS. No CSS preprocessors (Sass, Less), JavaScript compilers, or generator scripts are required.
 4. **No Layer Assignment**: Token source files are not wrapped in `@layer`.
+
+---
+
+## 10. Design Token Documentation Map
+
+- **[Primitive Tokens Reference](primitive-tokens.md)**: Exhaustive reference tables for literal scales (colors, spacing, typography, radii, shadows, motion).
+- **[Semantic Tokens Reference](semantic-tokens.md)**: Role definitions, primitive mappings, and WCAG contrast validations.
+- **[Theme Architecture](theme-architecture.md)**: `data-theme` activation, Light default behavior, Dark theme overrides, and nested inheritance.
+- **[Token Developer Usage Guide](token-usage.md)**: Practical guidelines, best practices, component examples, and anti-patterns.
+
 
 

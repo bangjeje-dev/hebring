@@ -324,6 +324,19 @@ src/tokens/
 
 Applications can define custom themes (e.g., `[data-theme="brand"]`) by declaring semantic token overrides in their own stylesheets without modifying HEBRING framework files.
 
+---
+
+## 9. Design Token Documentation Suite
+
+For complete developer guides and technical specifications, refer to:
+
+- [Design Token Architecture](design-token-architecture.md) — Source structure, composition boundaries, and import mechanics.
+- [Primitive Tokens Reference](primitive-tokens.md) — Context-agnostic scales: colors, spacing, typography, radii, shadows, motion.
+- [Semantic Tokens Reference](semantic-tokens.md) — Intent-driven role mappings and WCAG AA contrast validation.
+- [Theme Architecture](theme-architecture.md) — Theme activation (`data-theme`), Light default behavior, Dark overrides, and nested inheritance.
+- [Token Developer Usage Guide](token-usage.md) — Practical component implementation rules, custom themes, and architectural anti-patterns.
+
+
 
 
 

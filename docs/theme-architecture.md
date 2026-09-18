@@ -209,3 +209,13 @@ HEBRING relies on explicit `data-theme` activation rather than automatic media q
 1. **Predictable SSR**: Prevents hydration flashes or layout shifts when server-rendered pages encounter client-side theme states.
 2. **User Agency**: Many web applications allow users to choose Light, Dark, or System preference explicitly. Relying strictly on CSS media queries forces an all-or-nothing OS-level switch.
 3. **Future Extension**: Developers who desire automatic OS-level adaptation can easily bridge `prefers-color-scheme` to `data-theme` or add a media query block in application CSS without framework rigidity.
+
+---
+
+## 8. Further Documentation
+
+- **[Token Developer Usage Guide](token-usage.md)**: Best practices, practical component examples, and anti-patterns.
+- **[Semantic Tokens Reference](semantic-tokens.md)**: Contextual role mappings and WCAG contrast validation.
+- **[Primitive Tokens Reference](primitive-tokens.md)**: Raw color palettes, 4px spacing scale, typography, radii, shadows, and motion values.
+- **[Design Token Architecture](design-token-architecture.md)**: Source structure, composition boundaries, and import mechanics.
+
