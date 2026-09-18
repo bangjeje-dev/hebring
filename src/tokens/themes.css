@@ -1,0 +1,79 @@
+/**
+ * HEBRING — Theme Architecture
+ *
+ * Themes operate exclusively through semantic token overrides.
+ * Components consume semantic tokens and remain completely theme-agnostic.
+ * Defined outside of any cascade layer.
+ */
+
+/* ==================================================
+   DARK THEME OVERRIDES
+   Activated via: [data-theme="dark"]
+   ================================================== */
+
+[data-theme="dark"] {
+  /* ==================================================
+     1. BACKGROUND ROLES
+     ================================================== */
+  --hb-color-background: var(--hb-color-neutral-950);
+  --hb-color-background-subtle: var(--hb-color-neutral-900);
+
+  /* ==================================================
+     2. SURFACE ROLES
+     ================================================== */
+  --hb-color-surface: var(--hb-color-neutral-900);
+  --hb-color-surface-raised: var(--hb-color-neutral-800);
+  --hb-color-surface-muted: var(--hb-color-neutral-800);
+
+  /* ==================================================
+     3. TEXT ROLES
+     ================================================== */
+  --hb-color-text: var(--hb-color-neutral-50);
+  --hb-color-text-muted: var(--hb-color-neutral-400);
+  --hb-color-text-subtle: var(--hb-color-neutral-500);
+  --hb-color-text-disabled: var(--hb-color-neutral-600);
+
+  /* ==================================================
+     4. BORDER ROLES
+     ================================================== */
+  --hb-color-border: var(--hb-color-neutral-800);
+  --hb-color-border-strong: var(--hb-color-neutral-700);
+
+  /* ==================================================
+     5. PRIMARY BRAND & ACTION ROLES
+     ================================================== */
+  --hb-color-primary: var(--hb-color-blue-500);
+  --hb-color-primary-hover: var(--hb-color-blue-400);
+  --hb-color-primary-active: var(--hb-color-blue-600);
+  --hb-color-primary-subtle: var(--hb-color-blue-950);
+  --hb-color-on-primary: var(--hb-color-black);
+
+  /* ==================================================
+     6. STATUS ROLES
+     ================================================== */
+
+  /* Success */
+  --hb-color-success: var(--hb-color-green-500);
+  --hb-color-success-subtle: var(--hb-color-green-950);
+  --hb-color-on-success: var(--hb-color-black);
+
+  /* Warning */
+  --hb-color-warning: var(--hb-color-yellow-500);
+  --hb-color-warning-subtle: var(--hb-color-yellow-950);
+  --hb-color-on-warning: var(--hb-color-black);
+
+  /* Danger */
+  --hb-color-danger: var(--hb-color-red-500);
+  --hb-color-danger-subtle: var(--hb-color-red-950);
+  --hb-color-on-danger: var(--hb-color-black);
+
+  /* Info */
+  --hb-color-info: var(--hb-color-blue-500);
+  --hb-color-info-subtle: var(--hb-color-blue-950);
+  --hb-color-on-info: var(--hb-color-black);
+
+  /* ==================================================
+     7. FOCUS INDICATOR
+     ================================================== */
+  --hb-color-focus: var(--hb-color-blue-500);
+}

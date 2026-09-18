@@ -5,7 +5,8 @@
  * Defined globally on :root outside of any cascade layer.
  */
 
-:root {
+:root,
+[data-theme="light"] {
   /* ==================================================
      1. BACKGROUND ROLES
      ================================================== */

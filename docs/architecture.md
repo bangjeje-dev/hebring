@@ -295,6 +295,36 @@ HEBRING defines its intent-driven design roles as semantic tokens in `src/tokens
 - **Themes & Dark Mode**: Multi-theme switching (`[data-theme="dark"]`, `prefers-color-scheme`) belongs exclusively to **Phase 03.4**.
 - **Component-Specific Tokens**: Tokens like `--hb-button-*` or `--hb-card-*` remain prohibited to maintain decoupled, composable architecture.
 
+---
+
+## 8. Theme Architecture
+
+HEBRING implements theming exclusively through semantic token overrides declared in `src/tokens/themes.css` (see [Theme Architecture](theme-architecture.md) for complete guide):
+
+### Core Theme Principles
+
+1. **Tokens Over Components**: Themes override semantic design tokens. Components consume semantic tokens directly and remain completely theme-agnostic. No component-specific theme classes (e.g. `.hb-card--dark`, `.dark .hb-button`) exist in HEBRING.
+2. **Official Activation (`data-theme`)**: Themes are activated via the `data-theme` HTML attribute selector (`<html data-theme="dark">`), avoiding class collisions and scaling cleanly to custom named themes.
+3. **Default Light Behavior**: No attribute implies Light theme. In `semantic.css`, `:root, [data-theme="light"]` declares default Light semantics without redundant duplication.
+4. **Pure CSS Inheritance**: Nested theming works predictably across subtrees (`<div data-theme="dark">` inside light, or `<div data-theme="light">` inside dark) via standard CSS custom property inheritance without JavaScript.
+5. **No `@layer tokens`**: Themes are token definitions, not visual cascade layers.
+6. **Explicit Over Mechanical Inversion**: Dark mode maps intentional semantic roles (e.g. primary shifts to blue-500 for WCAG AA readability on dark surfaces) rather than mechanically inverting lightness.
+
+### Source Architecture Integration
+
+```
+src/tokens/
+├── index.css        # Entry point composing primitives, semantic, and themes
+├── primitives.css   # Context-agnostic raw scales
+├── semantic.css     # Light theme defaults (:root, [data-theme="light"])
+└── themes.css       # Dark theme overrides ([data-theme="dark"])
+```
+
+### Extensibility
+
+Applications can define custom themes (e.g., `[data-theme="brand"]`) by declaring semantic token overrides in their own stylesheets without modifying HEBRING framework files.
+
+
 
 
 
