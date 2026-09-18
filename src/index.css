@@ -1,16 +1,15 @@
 /**
  * HEBRING CSS Framework
  *
- * Foundational Cascade Layer Architecture:
- * The explicit order establishes cascade precedence.
- * Later layers have higher precedence in the cascade:
+ * Public Entry Point
+ * Explicit Cascade Layer Order:
  * reset < base < layout < components < utilities
  */
 
 @layer reset, base, layout, components, utilities;
 
-/* Foundation */
-@import "./foundation/reset.css";
-@import "./foundation/base.css";
-
-/* Future architectural layers (layout, components, utilities) will be connected here */
+/* Domain Composition Boundaries */
+@import "./foundation/index.css";
+@import "./layout/index.css";
+@import "./components/index.css";
+@import "./utilities/index.css";

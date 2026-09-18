@@ -1,0 +1,11 @@
+/**
+ * HEBRING — Layout Domain
+ *
+ * Architectural entry point for structural layout primitives
+ * (containers, grids, flex helpers, and page scaffolding).
+ * Specific layout modules will be introduced in subsequent phases.
+ */
+
+@layer layout {
+  /* Layout primitives will be composed here */
+}

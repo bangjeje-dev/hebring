@@ -1,0 +1,11 @@
+/**
+ * HEBRING — Utilities Domain
+ *
+ * Architectural entry point for single-purpose utility classes
+ * (spacing, display, sizing, typography, etc.).
+ * Utility modules will be introduced in subsequent phases.
+ */
+
+@layer utilities {
+  /* Utility modules will be composed here */
+}

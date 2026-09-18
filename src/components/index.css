@@ -1,0 +1,11 @@
+/**
+ * HEBRING — Components Domain
+ *
+ * Architectural entry point for reusable UI components
+ * (buttons, cards, inputs, badges, alerts, etc.).
+ * Component modules will be introduced in subsequent phases.
+ */
+
+@layer components {
+  /* Component modules will be composed here */
+}

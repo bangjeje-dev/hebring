@@ -1,0 +1,8 @@
+/**
+ * HEBRING — Foundation Domain
+ *
+ * Composes browser normalization and foundational element defaults.
+ */
+
+@import "./reset.css";
+@import "./base.css";
