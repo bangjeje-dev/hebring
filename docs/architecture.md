@@ -260,5 +260,41 @@ HEBRING defines its foundational design values as primitive tokens in `src/token
 - Semantic tokens (`--hb-color-primary`, `--hb-color-surface`, `--hb-color-text`) are deferred to **Phase 03.3**.
 - Component-specific tokens, utility classes, and layout classes remain strictly excluded from the `tokens/` domain.
 
+---
+
+## 7. Semantic Design Tokens
+
+HEBRING defines its intent-driven design roles as semantic tokens in `src/tokens/semantic.css` (see [Semantic Design Tokens](semantic-tokens.md) for full reference tables):
+
+### Role-Based Architecture & Mapping Rules
+
+- **Intent Over Value**: Semantic tokens describe functional purpose (e.g. `--hb-color-text-muted`), never physical appearance or raw metrics.
+- **Reference Primitives Only**: Semantic tokens strictly reference primitive tokens via `var(--hb-...)` and never duplicate literal hex or unit values.
+- **Global Scope**: Declared on `:root` alongside primitives, providing framework-wide design coherence across all cascade layers without introducing `@layer tokens;`.
+
+### Implemented Semantic Categories
+
+1. **Background Roles**: `--hb-color-background` (`white`), `--hb-color-background-subtle` (`neutral-50`).
+2. **Surface Roles**: `--hb-color-surface` (`white`), `--hb-color-surface-raised` (`white`), `--hb-color-surface-muted` (`neutral-100`).
+3. **Text Roles**: `--hb-color-text` (`neutral-900`), `--hb-color-text-muted` (`neutral-600`), `--hb-color-text-subtle` (`neutral-500`), `--hb-color-text-disabled` (`neutral-400`).
+4. **Border Roles**: `--hb-color-border` (`neutral-200`), `--hb-color-border-strong` (`neutral-300`).
+5. **Primary Action Roles**:
+   - `--hb-color-primary` (`blue-600`, `#2563EB`)
+   - `--hb-color-primary-hover` (`blue-700`), `--hb-color-primary-active` (`blue-800`), `--hb-color-primary-subtle` (`blue-50`)
+   - `--hb-color-on-primary` (`white`, contrast 5.17:1)
+6. **Status Roles**:
+   - **Success**: `--hb-color-success` (`green-600`), `--hb-color-success-subtle` (`green-50`), `--hb-color-on-success` (`black`, contrast 6.37:1 for WCAG AA)
+   - **Warning**: `--hb-color-warning` (`yellow-600`), `--hb-color-warning-subtle` (`yellow-50`), `--hb-color-on-warning` (`black`, contrast 7.15:1 for WCAG AAA)
+   - **Danger**: `--hb-color-danger` (`red-600`), `--hb-color-danger-subtle` (`red-50`), `--hb-color-on-danger` (`white`, contrast 4.83:1 for WCAG AA)
+   - **Info**: `--hb-color-info` (`blue-600`), `--hb-color-info-subtle` (`blue-50`), `--hb-color-on-info` (`white`, contrast 5.17:1 for WCAG AA)
+7. **Focus Indicator**: `--hb-color-focus` (`blue-600`).
+8. **Semantic Typography**: `--hb-font-family-body` (`sans`), `--hb-font-family-heading` (`sans`), `--hb-font-family-code` (`mono`).
+
+### Architectural Exclusions
+
+- **Themes & Dark Mode**: Multi-theme switching (`[data-theme="dark"]`, `prefers-color-scheme`) belongs exclusively to **Phase 03.4**.
+- **Component-Specific Tokens**: Tokens like `--hb-button-*` or `--hb-card-*` remain prohibited to maintain decoupled, composable architecture.
+
+
 
 

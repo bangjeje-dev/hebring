@@ -70,12 +70,11 @@ Contains raw, context-agnostic design decisions. Primitives represent absolute d
 Contains contextual, intent-based design mappings that reference primitive tokens.
 
 **Responsibilities:**
-- Role-based colors (e.g., primary action, secondary, danger, success, warning).
-- Surface and background tokens (e.g., page background, surface elevated, surface overlay).
-- Text roles (e.g., text primary, text muted, text inverse).
-- Interactive state tokens (hover, active, focus outlines).
+- Role-based colors (background, surface, text, border, primary, status roles).
+- Interactive state tokens (hover, active, focus indicator).
+- Semantic typography families (body, heading, code).
 
-*Note: In Phase 03.1, this file serves as structural scaffolding. Specific semantic mappings will be introduced in subsequent phases.*
+*Implemented in Phase 03.3. See [Semantic Design Tokens](semantic-tokens.md) for full reference.*
 
 ---
 
@@ -137,8 +136,8 @@ All design tokens adhere to the established HEBRING naming syntax (Phase 02.3):
 --hb-{category}-{name}
 ```
 
-- **Primitive Example (Future)**: `--hb-color-blue-600`, `--hb-space-4`, `--hb-radius-md`
-- **Semantic Example (Future)**: `--hb-color-primary`, `--hb-color-surface`, `--hb-color-text`
+- **Primitive Example**: `--hb-color-blue-600`, `--hb-space-4`, `--hb-radius-md`
+- **Semantic Example**: `--hb-color-primary`, `--hb-color-surface`, `--hb-color-text`
 
 ---
 
@@ -147,8 +146,7 @@ All design tokens adhere to the established HEBRING naming syntax (Phase 02.3):
 Phase 03.2 established the following six categories of primitive tokens defined in `src/tokens/primitives.css` (see [Primitive Design Tokens](primitive-tokens.md) for values and details):
 
 1. **Colors (`--hb-color-{palette}-{step}`)**:
-   - 5 palettes: Neutral, Blue, Green, Yellow, Red.
-   - 11 steps per palette: `50`, `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900`, `950`.
+   - 5 palettes: Neutral, Blue, Green, Yellow, Red (steps 50–950), plus foundational `--hb-color-white` (#FFFFFF) and `--hb-color-black` (#000000).
    - `--hb-color-blue-600` is defined as `#2563EB` (approved default primary source).
 2. **Spacing (`--hb-space-{step}`)**:
    - Strict 4px base scale: `0` (0px), `1` (4px), `2` (8px), `3` (12px), `4` (16px), `5` (20px), `6` (24px), `8` (32px), `10` (40px), `12` (48px), `16` (64px), `20` (80px), `24` (96px), `32` (128px).
@@ -168,10 +166,50 @@ Phase 03.2 established the following six categories of primitive tokens defined 
 
 ---
 
-## 8. Architectural Constraints
+## 8. Implemented Semantic Token Roles
+
+Phase 03.3 established the following semantic token roles defined in `src/tokens/semantic.css` (see [Semantic Design Tokens](semantic-tokens.md) for full reference tables):
+
+1. **Background Roles**:
+   - `--hb-color-background`: `var(--hb-color-white)`
+   - `--hb-color-background-subtle`: `var(--hb-color-neutral-50)`
+2. **Surface Roles**:
+   - `--hb-color-surface`: `var(--hb-color-white)`
+   - `--hb-color-surface-raised`: `var(--hb-color-white)`
+   - `--hb-color-surface-muted`: `var(--hb-color-neutral-100)`
+3. **Text Roles**:
+   - `--hb-color-text`: `var(--hb-color-neutral-900)`
+   - `--hb-color-text-muted`: `var(--hb-color-neutral-600)`
+   - `--hb-color-text-subtle`: `var(--hb-color-neutral-500)`
+   - `--hb-color-text-disabled`: `var(--hb-color-neutral-400)`
+4. **Border Roles**:
+   - `--hb-color-border`: `var(--hb-color-neutral-200)`
+   - `--hb-color-border-strong`: `var(--hb-color-neutral-300)`
+5. **Primary Action Roles**:
+   - `--hb-color-primary`: `var(--hb-color-blue-600)` (#2563EB)
+   - `--hb-color-primary-hover`: `var(--hb-color-blue-700)`
+   - `--hb-color-primary-active`: `var(--hb-color-blue-800)`
+   - `--hb-color-primary-subtle`: `var(--hb-color-blue-50)`
+   - `--hb-color-on-primary`: `var(--hb-color-white)`
+6. **Status Roles**:
+   - Success: `--hb-color-success` (`var(--hb-color-green-600)`), `--hb-color-success-subtle` (`var(--hb-color-green-50)`), `--hb-color-on-success` (`var(--hb-color-black)`)
+   - Warning: `--hb-color-warning` (`var(--hb-color-yellow-600)`), `--hb-color-warning-subtle` (`var(--hb-color-yellow-50)`), `--hb-color-on-warning` (`var(--hb-color-black)`)
+   - Danger: `--hb-color-danger` (`var(--hb-color-red-600)`), `--hb-color-danger-subtle` (`var(--hb-color-red-50)`), `--hb-color-on-danger` (`var(--hb-color-white)`)
+   - Info: `--hb-color-info` (`var(--hb-color-blue-600)`), `--hb-color-info-subtle` (`var(--hb-color-blue-50)`), `--hb-color-on-info` (`var(--hb-color-white)`)
+7. **Focus Indicator**:
+   - `--hb-color-focus`: `var(--hb-color-blue-600)`
+8. **Semantic Typography**:
+   - `--hb-font-family-body`: `var(--hb-font-family-sans)`
+   - `--hb-font-family-heading`: `var(--hb-font-family-sans)`
+   - `--hb-font-family-code`: `var(--hb-font-family-mono)`
+
+---
+
+## 9. Architectural Constraints
 
 1. **No Component or Layout Styles**: `src/tokens/` contains only custom property definitions; no CSS class selectors, element selectors, or layout rules belong in this domain.
 2. **No Utility Classes**: Utility classes belong exclusively to `src/utilities/`.
 3. **No Build-Step Requirement**: Token files are authored in pure, standard CSS. No CSS preprocessors (Sass, Less), JavaScript compilers, or generator scripts are required.
 4. **No Layer Assignment**: Token source files are not wrapped in `@layer`.
+
 
