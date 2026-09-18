@@ -120,3 +120,51 @@ HEBRING follows a strict, predictable naming syntax across its public API (see [
 8. **Semantic Elements**: Plain HTML elements (e.g. `<h1>`, `<p>`) are styled directly in base/foundation without forcing utility or heading classes on every tag.
 9. **Naming Style**: Strict lowercase kebab-case across all tokens, classes, and properties.
 10. **Namespace Isolation**: `hb-` is reserved for HEBRING; user/application classes exist freely outside this prefix.
+
+---
+
+## 4. Utility vs Component Philosophy
+
+HEBRING is neither purely utility-first nor purely component-first. It is a layered and composable CSS framework built on the guiding principle (see [Utility vs Component Philosophy](utility-vs-component.md) for complete details):
+
+> **"Utility handles one thing. Component defines a reusable UI pattern."**
+
+### Architectural Domains & Responsibilities
+
+1. **Foundation (`reset`, `base`)**:
+   - Manages browser normalization, CSS resets, and baseline semantic element defaults.
+   - Does not contain UI components, layout primitives, or utility classes.
+2. **Layout (`layout`)**:
+   - Meaningful structural layout primitives (`hb-container`, `hb-grid`, `hb-stack`).
+   - Represents reusable spatial concepts rather than utilities for every CSS property.
+3. **Components (`components`)**:
+   - Reusable visual interface patterns (`hb-button`, `hb-card`, `hb-alert`).
+   - May contain multiple CSS declarations defining a cohesive pattern.
+   - **Baseline Completeness**: Components must be self-sufficient and never require utility classes to become functional or visually valid.
+4. **Utilities (`utilities`)**:
+   - Small, single-purpose CSS adjustments (`hb-p-4`, `hb-flex`, `hb-w-full`).
+   - Follows the principle: *"Useful primitives, not every possible CSS declaration."*
+
+### Independence and Composition
+
+- **Component Independence**: Components must not depend on utilities to function or be complete.
+- **Utility Independence**: Utilities operate at their own abstraction level and do not depend on or target specific components.
+- **Natural Composition**: Components establish UI identity (`hb-button`); utilities provide narrow adjustments (`hb-w-full`).
+- **Cascade Precedence**: Because `@layer utilities` is declared after `@layer components`, utilities override component properties cleanly via the native cascade without specificity escalation or `!important`.
+
+### Decision Tree
+
+When adding styling abstractions to HEBRING:
+
+1. **Foundational browser/HTML rule?** → `foundation`
+2. **Meaningful structural layout primitive?** → `layout`
+3. **Reusable UI pattern?** → `components`
+4. **Narrow, single-purpose adjustment?** → `utilities`
+5. **None of the above?** → Re-evaluate the abstraction instead of creating a new class.
+
+### Conceptual Responsibility vs Import Dependencies
+
+This domain hierarchy reflects **conceptual responsibility** and **cascade layer order**. It does **not** define an import dependency chain:
+- Domains do not import one another.
+- All domains are independently composed at the framework entry point (`src/index.css`) into their respective native `@layer` slots.
+
