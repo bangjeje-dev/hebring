@@ -8,8 +8,12 @@
 
 @layer reset, base, layout, components, utilities;
 
+/* Design Tokens (Value System) */
+@import "./tokens/index.css";
+
 /* Domain Composition Boundaries */
 @import "./foundation/index.css";
 @import "./layout/index.css";
 @import "./components/index.css";
 @import "./utilities/index.css";
+

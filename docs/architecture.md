@@ -168,3 +168,58 @@ This domain hierarchy reflects **conceptual responsibility** and **cascade layer
 - Domains do not import one another.
 - All domains are independently composed at the framework entry point (`src/index.css`) into their respective native `@layer` slots.
 
+---
+
+## 5. Design Token Source Architecture
+
+HEBRING establishes a dedicated `tokens/` domain to house design values as CSS Custom Properties (see [Design Token Architecture](design-token-architecture.md) for full details).
+
+### Domain Structure & Responsibilities
+
+```
+src/tokens/
+├── index.css        # Entry point composing primitive and semantic tokens
+├── primitives.css   # Raw, context-agnostic values (scales, steps, base units)
+└── semantic.css     # Intent-driven mappings (roles, surfaces, states)
+```
+
+1. **`tokens/index.css`**: Composes `primitives.css` and `semantic.css` into a unified token export.
+2. **`primitives.css`**: Future home for literal design values (color palettes, spacing units, typography scales, radii) independent of UI context.
+3. **`semantic.css`**: Future home for contextual, purpose-driven aliases (e.g. primary color, surface background) referencing primitives.
+
+### Token Dependency Hierarchy
+
+Values flow strictly in one direction:
+
+```
+Primitive Tokens  →  Semantic Tokens  →  Framework Styling (reset, base, layout, components, utilities)
+```
+
+### Tokens Are Not a Cascade Layer
+
+Design tokens are a **value system**, not a visual cascade layer. They are intentionally **not** placed in `@layer tokens;`. The established layer order remains:
+
+```css
+@layer reset, base, layout, components, utilities;
+```
+
+Because CSS custom properties resolve via standard DOM inheritance rather than selector cascade priority, declaring tokens outside of `@layer` makes them globally accessible across all framework layers.
+
+### Public Entry Point & Composition Boundaries
+
+`src/index.css` remains the **single public entry point** for the framework:
+
+```
+src/index.css
+  ├── @import "./tokens/index.css";
+  ├── @import "./foundation/index.css";
+  ├── @import "./layout/index.css";
+  ├── @import "./components/index.css";
+  └── @import "./utilities/index.css";
+```
+
+### No Circular Imports
+
+Component, layout, and utility modules never import `tokens/` directly. The framework entry point composes tokens prior to the visual styling layers, eliminating circular dependencies and tangled stylesheet import graphs.
+
+

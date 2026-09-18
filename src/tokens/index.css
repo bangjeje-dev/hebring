@@ -1,0 +1,10 @@
+/**
+ * HEBRING — Design Tokens Domain
+ *
+ * Architectural entry point for design tokens.
+ * Design tokens represent a value system declared as CSS Custom Properties,
+ * rather than a visual cascade layer.
+ */
+
+@import "./primitives.css";
+@import "./semantic.css";
