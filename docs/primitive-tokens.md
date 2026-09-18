@@ -24,9 +24,18 @@ HEBRING strictly separates **Primitive Tokens** from **Semantic Tokens**:
 
 ## 2. Color Primitives
 
-HEBRING provides 5 curated, coherent color palettes. Each palette spans 11 steps from `50` (lightest tint) to `950` (deepest shade).
+### Foundational Absolute Colors
+
+HEBRING defines two universal absolute color primitives:
+
+- `--hb-color-white`: `#FFFFFF`
+- `--hb-color-black`: `#000000`
+
+These represent universal absolute extremes and are intentionally separate from the contextual `Neutral` 50–950 scale. They serve as reliable base values for overlays, high-contrast text, borders, and theme baselines. They are raw primitives, not semantic tokens.
 
 ### Palettes
+
+HEBRING provides 5 curated, coherent color palettes. Each palette spans 11 steps from `50` (lightest tint) to `950` (deepest shade).
 
 - **Neutral**: Slate-tinted neutral calibrated for high-contrast UI text, borders, and surfaces.
 - **Blue**: Vibrant brand & action scale. Step `600` (`#2563EB`) is the approved source for primary actions.

@@ -10,6 +10,10 @@
      1. COLOR PALETTES
      ================================================== */
 
+  /* Foundational Absolute Colors */
+  --hb-color-white: #FFFFFF;
+  --hb-color-black: #000000;
+
   /* Neutral */
   --hb-color-neutral-50: #f8fafc;
   --hb-color-neutral-100: #f1f5f9;
