@@ -14,12 +14,18 @@
     box-sizing: border-box;
   }
 
-  /* 2. Document Canvas: Eliminate arbitrary user-agent margin */
+  /* 2. Document & Viewport: Prevent automatic font inflation on mobile devices */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* 3. Document Canvas: Eliminate arbitrary user-agent margin */
   body {
     margin: 0;
   }
 
-  /* 3. Media & Replaced Elements: Prevent container overflow while preserving aspect ratio */
+  /* 4. Media & Replaced Elements: Prevent container overflow while preserving aspect ratio */
   img,
   video,
   canvas {

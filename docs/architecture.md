@@ -352,12 +352,13 @@ src/foundation/
 ### Reset Layer Principles (`reset.css`)
 - **Minimal & Non-Aggressive**: Eliminates layout-breaking user-agent bugs while preserving native semantic HTML behavior and accessibility affordances.
 - **Predictable Box Sizing**: Enforces `box-sizing: border-box` across all elements and pseudo-elements inside `@layer reset`.
+- **Mobile Viewport Normalization**: Prevents automatic font inflation on mobile devices via `html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }`.
 - **Canvas Normalization**: Removes arbitrary 8px `body` margin.
 - **Media Overflow Containment**: Constrains `img`, `video`, and `canvas` with `max-width: 100%; height: auto;` and `svg` with `max-width: 100%;` without forcing `display: block` or dictating `<picture>` wrapper behavior.
 - **Accessibility Invariant**: Strictly forbids blanket focus removal (`outline: none`). Interaction accessibility is maintained in reset; color contrast is managed in tokens/components.
 
-For comprehensive architectural rationale and boundaries with future typography/form phases, refer to:
-- [Reset Philosophy](reset-philosophy.md) — Deep dive into minimal normalization, media philosophy, accessibility guarantees, and layer boundaries.
+For comprehensive architectural rationale, candidate evaluation matrix, and boundaries with future typography/form phases, refer to:
+- [Reset Philosophy](reset-philosophy.md) — Deep dive into minimal normalization, media philosophy, accessibility guarantees, candidate classifications, and layer boundaries.
 
 
 

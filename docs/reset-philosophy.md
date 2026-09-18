@@ -167,7 +167,50 @@ User-agent stylesheets universally apply an arbitrary `margin: 8px` to `<body>`.
 
 ---
 
-## 8. Reset vs. Base Responsibility
+## 8. Mobile Viewport Text-Size Inflation Normalization (Phase 04.2)
+
+```css
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+```
+
+### Rationale
+On mobile devices (notably iOS Safari and mobile Chromium), switching orientations from portrait to landscape or rendering unconstrained layouts can trigger an automatic browser heuristic known as "font inflation" or "text size adjustment". The browser arbitrarily scales up paragraph text sizes, disrupting responsive typography and causing unexpected overflows.
+
+- **Non-Aggressive**: Setting `-webkit-text-size-adjust: 100%; text-size-adjust: 100%;` prevents this automatic inflation without dictating font size.
+- **Accessibility Preserved**: This property does **not** disable pinch-to-zoom or interfere with user-configured browser accessibility text scaling (which alters the root font size). It ensures that the author's declared sizing is respected accurately at 100%.
+
+---
+
+## 9. Candidate Normalization Evaluation Matrix (Phase 04.2)
+
+To prevent visual creep and preserve domain boundaries, candidate normalization rules were evaluated using the **HEBRING 5-Point Normalization Test**:
+
+| Candidate Rule | Area | Classification | Destination | Rationale |
+| :--- | :--- | :---: | :--- | :--- |
+| `text-size-adjust: 100%` | Mobile Viewport | **A. Implemented** | `src/foundation/reset.css` | Fixes mobile WebKit/Blink font inflation bug in landscape mode without altering declared font size. |
+| `line-height: 1.5` | Typography | **B. Deferred** | Phase 04.3 Typography | Typographical rhythm opinion; belongs with font scales in `base.css`. |
+| `code { font-size: 1em; }` | Code Typography | **B. Deferred** | Phase 04.3 Typography | Obsolete Safari monospace quirk; belongs with monospace tokens in typography. |
+| `sub, sup` alignment | Typography | **B. Deferred** | Phase 04.3 Typography | Vertical alignment and font scaling in prose copy; belongs in typography. |
+| `tab-size: 4` | Typography | **B. Deferred** | Phase 04.3 Typography | Code formatting preference; belongs in typography defaults. |
+| `overflow-wrap: break-word`| Typography | **B. Deferred** | Phase 04.3 Typography | Content typography flow; belongs in typography defaults. |
+| Form `font: inherit` | Forms | **C. Deferred** | Phase 04.4 Forms | Belongs in unified form control normalization phase. |
+| Button background/border | Forms | **C. Deferred** | Phase 04.4 Forms | Strips interactive affordances if not accompanied by full form architecture. |
+| `fieldset { min-width: 0; }`| Forms | **C. Deferred** | Phase 04.4 Forms | Form container bugfix; consolidated into forms phase. |
+| `a { color: inherit; }` | Links | **D. Deferred** | Base / Utilities | Strips essential hyperlink affordance; visual design opinion. |
+| `table { border-collapse }` | Tabular Layout | **D. Deferred** | Base / Components | Data presentation layout model; belongs with table baselines. |
+| `iframe { border: 0; }` | Embedded Media | **D. Deferred** | Base (`base.css`) | Border styling; belongs in base element defaults. |
+| `[hidden] { display: none }` | HTML Semantics | **D. Deferred** | Base / Utilities | Adding `!important` to `@layer reset` violates framework specificity principles. |
+| `button { cursor: pointer }`| Interactive | **E. Rejected** | Do not implement | Prohibited global cursor change; UX preference contrary to UA defaults. |
+| `scroll-behavior: smooth` | Scrolling | **E. Rejected** | Do not implement | Prohibited UX behavior; potential vestibular accessibility issue. |
+| `::selection` styling | Theming | **E. Rejected** | Do not implement | Prohibited visual selection override; belongs to theme/app. |
+| `outline: none` on focus | Accessibility | **E. Rejected** | Do not implement | Catastrophic keyboard navigation accessibility regression. |
+
+---
+
+## 10. Reset vs. Base Responsibility
 
 To prevent architectural drift, HEBRING strictly delineates between `reset.css` and subsequent layers:
 
@@ -180,6 +223,7 @@ src/foundation/
 | Concern | `reset.css` (`@layer reset`) | `base.css` (`@layer base`) | Subsequent Phases |
 | :--- | :--- | :--- | :--- |
 | **Box Sizing** | `box-sizing: border-box` | Overrides if needed | Layout primitives |
+| **Mobile Viewport** | `text-size-adjust: 100%` | None | None |
 | **Body Canvas** | `margin: 0` | `background-color`, default `font-family`, base `color` | Themes |
 | **Typography Defaults** | **None** | Base font scale, line-height, text rendering | Phase 04.3 (Typography) |
 | **Headings & Paragraphs** | **None** (native margins preserved) | Typographic hierarchy, intentional margins | Phase 04.3 (Typography) |
@@ -190,7 +234,7 @@ src/foundation/
 
 ---
 
-## 9. Architectural Anti-Patterns Avoided
+## 11. Architectural Anti-Patterns Avoided
 
 The following anti-patterns are strictly prohibited in the HEBRING reset:
 
@@ -206,16 +250,19 @@ The following anti-patterns are strictly prohibited in the HEBRING reset:
 4. **Forcing `display: block` on Media in Reset**:
    - ❌ `img, svg { display: block; }`
    - Disrupts inline icon, badge, and inline avatar usage in typography and navigation.
-5. **Form Redesigns in the Reset Layer**:
+5. **Forcing `cursor: pointer` on Non-Links Globally**:
+   - ❌ `button, [role="button"] { cursor: pointer; }`
+   - Violates UA default semantics and imposes an uncalibrated UX opinion.
+6. **Form Redesigns in the Reset Layer**:
    - ❌ Resetting input borders, backgrounds, and button styles in `reset.css`.
    - Conflates normalization with form design; belongs in Phase 04.4.
-6. **Component or Utility Classes in Reset**:
+7. **Component or Utility Classes in Reset**:
    - ❌ Defining `.hb-reset` or `.hb-img-fluid` in `reset.css`.
    - The reset layer styles pure HTML elements via tag and universal selectors, never class names.
 
 ---
 
-## 10. Summary of Implemented Reset Rules
+## 12. Summary of Implemented Reset Rules
 
 The complete, active implementation of `src/foundation/reset.css`:
 
@@ -228,12 +275,18 @@ The complete, active implementation of `src/foundation/reset.css`:
     box-sizing: border-box;
   }
 
-  /* 2. Document Canvas: Eliminate arbitrary user-agent margin */
+  /* 2. Document & Viewport: Prevent automatic font inflation on mobile devices */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* 3. Document Canvas: Eliminate arbitrary user-agent margin */
   body {
     margin: 0;
   }
 
-  /* 3. Media & Replaced Elements: Prevent container overflow while preserving aspect ratio */
+  /* 4. Media & Replaced Elements: Prevent container overflow while preserving aspect ratio */
   img,
   video,
   canvas {
@@ -249,9 +302,10 @@ The complete, active implementation of `src/foundation/reset.css`:
 
 ---
 
-## 11. Further Documentation
+## 13. Further Documentation
 
 - **[Architecture Notes](architecture.md)**: Master framework cascade layers, source architecture, and domain boundaries.
 - **[Design Token Architecture](design-token-architecture.md)**: Value system structure and composition mechanics.
 - **[Semantic Tokens Reference](semantic-tokens.md)**: Role mappings and WCAG AA contrast calibrations.
 - **[Token Developer Usage Guide](token-usage.md)**: Developer best practices for styling components with tokens.
+
