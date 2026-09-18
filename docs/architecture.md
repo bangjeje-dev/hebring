@@ -23,7 +23,7 @@ reset → base → layout → components → utilities
 ```
 
 1. **`reset`**: Normalizes default browser behaviors and removes inconsistencies across user agents (see [Reset Philosophy](reset-philosophy.md)).
-2. **`base`**: Baseline typography, element styles, and core defaults (see [Typography](typography.md)).
+2. **`base`**: Baseline typography, element styles, and core defaults (see [Typography](typography.md) and [Form Foundation](forms.md)).
 3. **`layout`**: Structural scaffolding, grid systems, and page layout primitives.
 4. **`components`**: Composable visual interface patterns (cards, buttons, navigation, etc.).
 5. **`utilities`**: Single-purpose override classes. Utilities intentionally carry the highest priority among HEBRING's framework layers, allowing direct property overrides without specificity escalation.
@@ -368,6 +368,16 @@ For comprehensive architectural rationale, candidate evaluation matrix, and boun
 
 For comprehensive typography specifications, refer to:
 - [Typography](typography.md) — Complete specification of heading scales, prose spacing, link interactions, and monospace blocks.
+
+### Base Layer Form Foundation (`base.css`)
+- **Minimal / Native-Preserving**: Enhances native form controls (`button, input, select, textarea`) through typography and color inheritance without stripping native platform appearance, borders, or backgrounds.
+- **Inherited Metrics**: Uses `font: inherit; color: inherit; line-height: inherit;` to automatically harmonize form controls with active document typography and light/dark theme states without extra tokens.
+- **Fieldset Containment**: Normalizes `<fieldset>` with `min-width: 0;` to prevent flex/grid layout blowout bugs without removing borders, paddings, or legends.
+- **Preserved Invariants**: Zero `appearance: none`, zero `outline: none`, zero forced `width: 100%`, and zero cursor changes.
+
+For comprehensive form foundation specifications, refer to:
+- [Form Foundation](forms.md) — Technical specifications, inheritance mechanics, layout normalization, and scope boundaries.
+
 
 
 

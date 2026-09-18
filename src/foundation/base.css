@@ -187,4 +187,21 @@
   sup {
     top: -0.5em;
   }
+
+  /* ==================================================
+     10. FORM CONTROLS BASELINE
+     ================================================== */
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+    line-height: inherit;
+  }
+
+  fieldset {
+    min-width: 0;
+  }
 }
+

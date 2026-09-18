@@ -345,4 +345,5 @@ For detailed specifications, refer to the individual documents across the HEBRIN
 - [Semantic Tokens Reference](semantic-tokens.md) — Role definitions, primitive mappings, and WCAG 2.1 AA mathematical contrast ratios.
 - [Theme Architecture](theme-architecture.md) — `data-theme` activation, Light/Dark override strategy, and nested inheritance.
 - [Typography](typography.md) — Baseline document typography, heading scale hierarchy, prose spacing, and inline semantics.
+- [Form Foundation](forms.md) — Minimal, native-preserving form control foundation, typography inheritance, and fieldset normalization.
 - [Architecture Notes](architecture.md) — Master framework architecture document covering Cascade Layers, Source Structure, Naming Conventions, Component Philosophy, and Tokens.
