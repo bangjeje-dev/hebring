@@ -1,4 +1,4 @@
-# Architecture Notes — Cascade Layers & Source Structure
+# Architecture Notes — Cascade Layers, Source Structure & Naming Convention
 
 ## 1. Cascade Layer Architecture
 
@@ -103,3 +103,20 @@ HEBRING adheres to the principle of **One Responsibility → One CSS Module**.
 Future components and utilities will reside in dedicated, granular files (e.g. `components/button.css`, `utilities/spacing.css`) rather than monolithic files.
 
 > **Note**: Actual layout primitives, UI components, and utility classes will be introduced in subsequent phases. Current domain `index.css` files exist strictly as architectural entry points.
+
+---
+
+## 3. Naming Convention
+
+HEBRING follows a strict, predictable naming syntax across its public API (see [Naming Convention](naming-convention.md) for complete details):
+
+1. **Framework Prefix**: All framework classes are prefixed with `hb-` (e.g., `hb-button`, `hb-card`).
+2. **Components**: `hb-{component}` (lowercase kebab-case).
+3. **Modifiers / Variants**: `hb-{component}--{modifier}` using double hyphens (e.g., `hb-button--primary`).
+4. **Component Elements**: `hb-{component}__{element}` using double underscores (e.g., `hb-card__header`). Avoid deep chains like `hb-card__header__title`.
+5. **States**: `is-{state}` or `has-{state}` without the `hb-` prefix (e.g., `<button class="hb-button is-active">`).
+6. **Utilities**: `hb-{property}-{value}` representing single-purpose utility rules (e.g., `hb-p-4`, `hb-flex`, `hb-text-center`).
+7. **Custom Properties**: All CSS variables use the `--hb-` prefix (e.g., `--hb-color-primary`, `--hb-space-4`).
+8. **Semantic Elements**: Plain HTML elements (e.g. `<h1>`, `<p>`) are styled directly in base/foundation without forcing utility or heading classes on every tag.
+9. **Naming Style**: Strict lowercase kebab-case across all tokens, classes, and properties.
+10. **Namespace Isolation**: `hb-` is reserved for HEBRING; user/application classes exist freely outside this prefix.
