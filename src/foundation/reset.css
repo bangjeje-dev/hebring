@@ -7,5 +7,28 @@
  */
 
 @layer reset {
-  /* Placeholder for reset styles */
+  /* 1. Box Model: Predictable sizing across all elements and pseudo-elements */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* 2. Document Canvas: Eliminate arbitrary user-agent margin */
+  body {
+    margin: 0;
+  }
+
+  /* 3. Media & Replaced Elements: Prevent container overflow while preserving aspect ratio */
+  img,
+  video,
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  svg {
+    max-width: 100%;
+  }
 }
+

@@ -22,7 +22,7 @@ The hierarchy flows in ascending priority:
 reset → base → layout → components → utilities
 ```
 
-1. **`reset`**: Normalizes default browser behaviors and removes inconsistencies across user agents.
+1. **`reset`**: Normalizes default browser behaviors and removes inconsistencies across user agents (see [Reset Philosophy](reset-philosophy.md)).
 2. **`base`**: Baseline typography, element styles, and core defaults.
 3. **`layout`**: Structural scaffolding, grid systems, and page layout primitives.
 4. **`components`**: Composable visual interface patterns (cards, buttons, navigation, etc.).
@@ -335,6 +335,30 @@ For complete developer guides and technical specifications, refer to:
 - [Semantic Tokens Reference](semantic-tokens.md) — Intent-driven role mappings and WCAG AA contrast validation.
 - [Theme Architecture](theme-architecture.md) — Theme activation (`data-theme`), Light default behavior, Dark overrides, and nested inheritance.
 - [Token Developer Usage Guide](token-usage.md) — Practical component implementation rules, custom themes, and architectural anti-patterns.
+
+---
+
+## 10. Foundation Architecture & Reset Philosophy
+
+Phase 04 establishes the **Foundation Domain** (`src/foundation/`), composed of two sequential cascade layers:
+
+```
+src/foundation/
+├── index.css   # Composes reset.css and base.css
+├── reset.css   # Browser normalization (@layer reset)
+└── base.css    # Foundational defaults & typography (@layer base)
+```
+
+### Reset Layer Principles (`reset.css`)
+- **Minimal & Non-Aggressive**: Eliminates layout-breaking user-agent bugs while preserving native semantic HTML behavior and accessibility affordances.
+- **Predictable Box Sizing**: Enforces `box-sizing: border-box` across all elements and pseudo-elements inside `@layer reset`.
+- **Canvas Normalization**: Removes arbitrary 8px `body` margin.
+- **Media Overflow Containment**: Constrains `img`, `video`, and `canvas` with `max-width: 100%; height: auto;` and `svg` with `max-width: 100%;` without forcing `display: block` or dictating `<picture>` wrapper behavior.
+- **Accessibility Invariant**: Strictly forbids blanket focus removal (`outline: none`). Interaction accessibility is maintained in reset; color contrast is managed in tokens/components.
+
+For comprehensive architectural rationale and boundaries with future typography/form phases, refer to:
+- [Reset Philosophy](reset-philosophy.md) — Deep dive into minimal normalization, media philosophy, accessibility guarantees, and layer boundaries.
+
 
 
 
