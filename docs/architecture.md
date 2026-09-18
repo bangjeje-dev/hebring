@@ -23,7 +23,7 @@ reset → base → layout → components → utilities
 ```
 
 1. **`reset`**: Normalizes default browser behaviors and removes inconsistencies across user agents (see [Reset Philosophy](reset-philosophy.md)).
-2. **`base`**: Baseline typography, element styles, and core defaults.
+2. **`base`**: Baseline typography, element styles, and core defaults (see [Typography](typography.md)).
 3. **`layout`**: Structural scaffolding, grid systems, and page layout primitives.
 4. **`components`**: Composable visual interface patterns (cards, buttons, navigation, etc.).
 5. **`utilities`**: Single-purpose override classes. Utilities intentionally carry the highest priority among HEBRING's framework layers, allowing direct property overrides without specificity escalation.
@@ -359,6 +359,16 @@ src/foundation/
 
 For comprehensive architectural rationale, candidate evaluation matrix, and boundaries with future typography/form phases, refer to:
 - [Reset Philosophy](reset-philosophy.md) — Deep dive into minimal normalization, media philosophy, accessibility guarantees, candidate classifications, and layer boundaries.
+
+### Base Layer Typography (`base.css`)
+- **Semantic First**: Raw semantic HTML (`h1`–`h6`, `p`, `a`, `ul`, `ol`, `code`, `blockquote`) receives accessible, balanced styling without requiring framework classes.
+- **Strict Token Mapping**: Uses semantic tokens for font families (`--hb-font-family-body`, `--hb-font-family-heading`, `--hb-font-family-code`) and text colors (`--hb-color-text`, `--hb-color-primary`), scaling with themes.
+- **Layer & Specificity Strategy**: Authored with flat element selectors inside `@layer base` (`reset < base < layout < components < utilities`), allowing future utilities to override base styles effortlessly without `!important`.
+- **Vertical Rhythm**: Bottom-margin flow (`margin-top: 0; margin-bottom: var(--hb-space-*)`) eliminates collapsing margin friction.
+
+For comprehensive typography specifications, refer to:
+- [Typography](typography.md) — Complete specification of heading scales, prose spacing, link interactions, and monospace blocks.
+
 
 
 
