@@ -1,0 +1,28 @@
+{
+  "name": "hebring",
+  "version": "0.1.0",
+  "description": "A modern, lightweight, and understandable CSS framework for building web interfaces.",
+  "type": "module",
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "css",
+    "css-framework",
+    "framework-agnostic",
+    "lightweight",
+    "modern-css"
+  ],
+  "author": "HEBRING Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hebring/hebring.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hebring/hebring/issues"
+  },
+  "homepage": "https://github.com/hebring/hebring#readme"
+}
