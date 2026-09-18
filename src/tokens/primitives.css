@@ -1,8 +1,166 @@
 /**
  * HEBRING — Primitive Design Tokens
  *
- * Future home for raw, context-agnostic design values
- * (colors, spacing scale, typography scale, radii, transitions, z-index).
- *
- * Specific primitive values will be introduced in subsequent phases.
+ * Context-agnostic, raw design values.
+ * Defined globally on :root outside of any cascade layer.
  */
+
+:root {
+  /* ==================================================
+     1. COLOR PALETTES
+     ================================================== */
+
+  /* Neutral */
+  --hb-color-neutral-50: #f8fafc;
+  --hb-color-neutral-100: #f1f5f9;
+  --hb-color-neutral-200: #e2e8f0;
+  --hb-color-neutral-300: #cbd5e1;
+  --hb-color-neutral-400: #94a3b8;
+  --hb-color-neutral-500: #64748b;
+  --hb-color-neutral-600: #475569;
+  --hb-color-neutral-700: #334155;
+  --hb-color-neutral-800: #1e293b;
+  --hb-color-neutral-900: #0f172a;
+  --hb-color-neutral-950: #020617;
+
+  /* Blue (Primary Source) */
+  --hb-color-blue-50: #eff6ff;
+  --hb-color-blue-100: #dbeafe;
+  --hb-color-blue-200: #bfdbfe;
+  --hb-color-blue-300: #93c5fd;
+  --hb-color-blue-400: #60a5fa;
+  --hb-color-blue-500: #3b82f6;
+  --hb-color-blue-600: #2563EB;
+  --hb-color-blue-700: #1d4ed8;
+  --hb-color-blue-800: #1e40af;
+  --hb-color-blue-900: #1e3a8a;
+  --hb-color-blue-950: #172554;
+
+  /* Green */
+  --hb-color-green-50: #f0fdf4;
+  --hb-color-green-100: #dcfce7;
+  --hb-color-green-200: #bbf7d0;
+  --hb-color-green-300: #86efac;
+  --hb-color-green-400: #4ade80;
+  --hb-color-green-500: #22c55e;
+  --hb-color-green-600: #16a34a;
+  --hb-color-green-700: #15803d;
+  --hb-color-green-800: #166534;
+  --hb-color-green-900: #14532d;
+  --hb-color-green-950: #052e16;
+
+  /* Yellow */
+  --hb-color-yellow-50: #fefce8;
+  --hb-color-yellow-100: #fef9c3;
+  --hb-color-yellow-200: #fef08a;
+  --hb-color-yellow-300: #fde047;
+  --hb-color-yellow-400: #facc15;
+  --hb-color-yellow-500: #eab308;
+  --hb-color-yellow-600: #ca8a04;
+  --hb-color-yellow-700: #a16207;
+  --hb-color-yellow-800: #854d0e;
+  --hb-color-yellow-900: #713f12;
+  --hb-color-yellow-950: #422006;
+
+  /* Red */
+  --hb-color-red-50: #fef2f2;
+  --hb-color-red-100: #fee2e2;
+  --hb-color-red-200: #fecaca;
+  --hb-color-red-300: #fca5a5;
+  --hb-color-red-400: #f87171;
+  --hb-color-red-500: #ef4444;
+  --hb-color-red-600: #dc2626;
+  --hb-color-red-700: #b91c1c;
+  --hb-color-red-800: #991b1b;
+  --hb-color-red-900: #7f1d1d;
+  --hb-color-red-950: #450a0a;
+
+  /* ==================================================
+     2. SPACING SCALE (4px Base System)
+     ================================================== */
+  --hb-space-0: 0px;
+  --hb-space-1: 4px;
+  --hb-space-2: 8px;
+  --hb-space-3: 12px;
+  --hb-space-4: 16px;
+  --hb-space-5: 20px;
+  --hb-space-6: 24px;
+  --hb-space-8: 32px;
+  --hb-space-10: 40px;
+  --hb-space-12: 48px;
+  --hb-space-16: 64px;
+  --hb-space-20: 80px;
+  --hb-space-24: 96px;
+  --hb-space-32: 128px;
+
+  /* ==================================================
+     3. TYPOGRAPHY
+     ================================================== */
+
+  /* Font Families */
+  --hb-font-family-sans: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --hb-font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Font Sizes */
+  --hb-font-size-xs: 0.75rem;
+  --hb-font-size-sm: 0.875rem;
+  --hb-font-size-md: 1rem;
+  --hb-font-size-lg: 1.125rem;
+  --hb-font-size-xl: 1.25rem;
+  --hb-font-size-2xl: 1.5rem;
+  --hb-font-size-3xl: 1.875rem;
+  --hb-font-size-4xl: 2.25rem;
+  --hb-font-size-5xl: 3rem;
+  --hb-font-size-6xl: 3.75rem;
+
+  /* Font Weights */
+  --hb-font-weight-regular: 400;
+  --hb-font-weight-medium: 500;
+  --hb-font-weight-semibold: 600;
+  --hb-font-weight-bold: 700;
+
+  /* Line Heights */
+  --hb-line-height-tight: 1.25;
+  --hb-line-height-normal: 1.5;
+  --hb-line-height-relaxed: 1.75;
+
+  /* Letter Spacings */
+  --hb-letter-spacing-tight: -0.02em;
+  --hb-letter-spacing-normal: 0em;
+  --hb-letter-spacing-wide: 0.025em;
+
+  /* ==================================================
+     4. RADIUS
+     ================================================== */
+  --hb-radius-none: 0px;
+  --hb-radius-sm: 4px;
+  --hb-radius-md: 8px;
+  --hb-radius-lg: 12px;
+  --hb-radius-xl: 16px;
+  --hb-radius-2xl: 24px;
+  --hb-radius-full: 9999px;
+
+  /* ==================================================
+     5. SHADOW
+     ================================================== */
+  --hb-shadow-none: none;
+  --hb-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --hb-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --hb-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --hb-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* ==================================================
+     6. MOTION
+     ================================================== */
+
+  /* Durations */
+  --hb-duration-instant: 50ms;
+  --hb-duration-fast: 150ms;
+  --hb-duration-normal: 250ms;
+  --hb-duration-slow: 350ms;
+
+  /* Easings */
+  --hb-ease-linear: linear;
+  --hb-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --hb-ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+}

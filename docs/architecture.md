@@ -222,4 +222,43 @@ src/index.css
 
 Component, layout, and utility modules never import `tokens/` directly. The framework entry point composes tokens prior to the visual styling layers, eliminating circular dependencies and tangled stylesheet import graphs.
 
+---
+
+## 6. Primitive Design Tokens
+
+HEBRING defines its foundational design values as primitive tokens in `src/tokens/primitives.css` (see [Primitive Design Tokens](primitive-tokens.md) for full reference tables):
+
+### Primitive Scope & Characteristics
+
+- **Context-Agnostic**: Values represent absolute design metrics without encoding component or semantic roles.
+- **Global Declaration**: Declared globally on `:root` outside `@layer` to ensure universal availability across all layers.
+- **Strict Namespacing**: Uses the `--hb-{category}-{name}` prefix.
+
+### Implemented Token Categories
+
+1. **Color Palettes**:
+   - 5 cohesive palettes: Neutral, Blue, Green, Yellow, Red.
+   - 11 numeric steps per palette (50–950).
+   - `--hb-color-blue-600` is defined as `#2563EB` (the approved default primary source).
+2. **Spacing Scale**:
+   - Strict 4px base system: `--hb-space-0` (0px) through `--hb-space-32` (128px).
+3. **Typography**:
+   - Font families: `--hb-font-family-sans` (prioritizing "Outfit" with system fallbacks; zero bundled font files) and `--hb-font-family-mono`.
+   - Font sizes: 10-step progression from `--hb-font-size-xs` (0.75rem) to `--hb-font-size-6xl` (3.75rem).
+   - Font weights: 4 intentional weights (`regular`, `medium`, `semibold`, `bold`).
+   - Line heights: `tight` (1.25), `normal` (1.5), `relaxed` (1.75).
+   - Letter spacings: `tight` (-0.02em), `normal` (0em), `wide` (0.025em).
+4. **Border Radius**:
+   - 7-step scale from `--hb-radius-none` (0px) to `--hb-radius-full` (9999px).
+5. **Box Shadows**:
+   - Restrained elevation system: `none`, `sm`, `md`, `lg`, `xl`.
+6. **Motion**:
+   - Transition durations (`instant`, `fast`, `normal`, `slow`) and standard/emphasized easing curves.
+
+### Architectural Exclusions
+
+- Semantic tokens (`--hb-color-primary`, `--hb-color-surface`, `--hb-color-text`) are deferred to **Phase 03.3**.
+- Component-specific tokens, utility classes, and layout classes remain strictly excluded from the `tokens/` domain.
+
+
 
