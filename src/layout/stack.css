@@ -1,0 +1,14 @@
+/**
+ * HEBRING — Stack Primitive
+ *
+ * Establishes a vertical relationship between direct children
+ * with consistent spacing.
+ */
+
+@layer layout {
+  .hb-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--hb-space-4);
+  }
+}
