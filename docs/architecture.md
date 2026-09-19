@@ -485,3 +485,4 @@ Phase 09 establishes the **Theme System** as an architectural concern operating 
 
 For a comprehensive overview of the theme architecture, philosophical boundaries, and intended usage model, refer to:
 - [Theme Philosophy](theme-philosophy.md) — Documentation of the semantic token boundary, the data-attribute mechanism, application-controlled switching, and explicit exclusions.
+- [Theme Architecture](theme-architecture.md) — Documentation of the theme scope, inheritance model, source structure, and fallback behavior.
