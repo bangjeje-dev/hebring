@@ -469,3 +469,19 @@ For a comprehensive overview of the responsive philosophy and architectural boun
 - [Responsive Philosophy](responsive-philosophy.md) — Documentation of the mobile-first approach, cascade interactions, application CSS principles, and explicit exclusions (e.g. `@container`).
 - [Breakpoint Architecture](breakpoint-architecture.md) — Documentation of the official viewport thresholds, behavioral models, and architectural boundaries.
 - [Responsive Utility Scope](responsive-utility-scope.md) — Documentation of the official responsive syntax, included and excluded utility categories, and application boundaries.
+
+---
+
+## 15. Theme System Architecture
+
+Phase 09 establishes the **Theme System** as an architectural concern operating exclusively at the semantic token layer.
+
+### Core Theme Principles
+- **Contextual Token Mapping**: Themes are contextual overrides of semantic tokens (e.g., `--hb-color-primary`). Themes do NOT redefine primitive design tokens or dictate visual styles in components.
+- **Component Independence**: Components consume semantic tokens and automatically adapt to theme changes. Components do not contain theme-specific CSS selectors (`.dark .hb-button`).
+- **Data Attribute Mechanism**: Themes are activated via the `data-theme` attribute (`<html data-theme="dark">`), providing localized or global overrides via pure CSS cascade inheritance.
+- **Default Baseline**: The root semantic token mapping serves as the default theme. Applying a specific theme attribute is not required for the framework to function.
+- **Framework Agnostic**: The theme architecture relies entirely on CSS custom properties and attribute selectors. There is no JavaScript, DOM detection, or framework dependency required.
+
+For a comprehensive overview of the theme architecture, philosophical boundaries, and intended usage model, refer to:
+- [Theme Philosophy](theme-philosophy.md) — Documentation of the semantic token boundary, the data-attribute mechanism, application-controlled switching, and explicit exclusions.
