@@ -27,4 +27,58 @@
   .hb-text-start { text-align: start; }
   .hb-text-center { text-align: center; }
   .hb-text-end { text-align: end; }
+
+  /* RESPONSIVE TYPOGRAPHY (sm) */
+  @media (min-width: 640px) {
+    .hb-text-xs-sm { font-size: var(--hb-font-size-xs); }
+    .hb-text-sm-sm { font-size: var(--hb-font-size-sm); }
+    .hb-text-md-sm { font-size: var(--hb-font-size-md); }
+    .hb-text-lg-sm { font-size: var(--hb-font-size-lg); }
+    .hb-text-xl-sm { font-size: var(--hb-font-size-xl); }
+    .hb-text-2xl-sm { font-size: var(--hb-font-size-2xl); }
+    .hb-text-3xl-sm { font-size: var(--hb-font-size-3xl); }
+    .hb-text-4xl-sm { font-size: var(--hb-font-size-4xl); }
+    .hb-text-5xl-sm { font-size: var(--hb-font-size-5xl); }
+    .hb-text-6xl-sm { font-size: var(--hb-font-size-6xl); }
+
+    .hb-text-start-sm { text-align: start; }
+    .hb-text-center-sm { text-align: center; }
+    .hb-text-end-sm { text-align: end; }
+  }
+
+  /* RESPONSIVE TYPOGRAPHY (md) */
+  @media (min-width: 768px) {
+    .hb-text-xs-md { font-size: var(--hb-font-size-xs); }
+    .hb-text-sm-md { font-size: var(--hb-font-size-sm); }
+    .hb-text-md-md { font-size: var(--hb-font-size-md); }
+    .hb-text-lg-md { font-size: var(--hb-font-size-lg); }
+    .hb-text-xl-md { font-size: var(--hb-font-size-xl); }
+    .hb-text-2xl-md { font-size: var(--hb-font-size-2xl); }
+    .hb-text-3xl-md { font-size: var(--hb-font-size-3xl); }
+    .hb-text-4xl-md { font-size: var(--hb-font-size-4xl); }
+    .hb-text-5xl-md { font-size: var(--hb-font-size-5xl); }
+    .hb-text-6xl-md { font-size: var(--hb-font-size-6xl); }
+
+    .hb-text-start-md { text-align: start; }
+    .hb-text-center-md { text-align: center; }
+    .hb-text-end-md { text-align: end; }
+  }
+
+  /* RESPONSIVE TYPOGRAPHY (lg) */
+  @media (min-width: 1024px) {
+    .hb-text-xs-lg { font-size: var(--hb-font-size-xs); }
+    .hb-text-sm-lg { font-size: var(--hb-font-size-sm); }
+    .hb-text-md-lg { font-size: var(--hb-font-size-md); }
+    .hb-text-lg-lg { font-size: var(--hb-font-size-lg); }
+    .hb-text-xl-lg { font-size: var(--hb-font-size-xl); }
+    .hb-text-2xl-lg { font-size: var(--hb-font-size-2xl); }
+    .hb-text-3xl-lg { font-size: var(--hb-font-size-3xl); }
+    .hb-text-4xl-lg { font-size: var(--hb-font-size-4xl); }
+    .hb-text-5xl-lg { font-size: var(--hb-font-size-5xl); }
+    .hb-text-6xl-lg { font-size: var(--hb-font-size-6xl); }
+
+    .hb-text-start-lg { text-align: start; }
+    .hb-text-center-lg { text-align: center; }
+    .hb-text-end-lg { text-align: end; }
+  }
 }

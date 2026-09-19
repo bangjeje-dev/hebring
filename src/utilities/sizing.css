@@ -10,4 +10,28 @@
 
   .hb-h-auto { height: auto; }
   .hb-h-full { height: 100%; }
+
+  /* RESPONSIVE SIZING (sm) */
+  @media (min-width: 640px) {
+    .hb-w-auto-sm { width: auto; }
+    .hb-w-full-sm { width: 100%; }
+    .hb-h-auto-sm { height: auto; }
+    .hb-h-full-sm { height: 100%; }
+  }
+
+  /* RESPONSIVE SIZING (md) */
+  @media (min-width: 768px) {
+    .hb-w-auto-md { width: auto; }
+    .hb-w-full-md { width: 100%; }
+    .hb-h-auto-md { height: auto; }
+    .hb-h-full-md { height: 100%; }
+  }
+
+  /* RESPONSIVE SIZING (lg) */
+  @media (min-width: 1024px) {
+    .hb-w-auto-lg { width: auto; }
+    .hb-w-full-lg { width: 100%; }
+    .hb-h-auto-lg { height: auto; }
+    .hb-h-full-lg { height: 100%; }
+  }
 }
