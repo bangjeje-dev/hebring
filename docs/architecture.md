@@ -427,10 +427,12 @@ Phase 06 establishes the **Utilities Domain** (`src/utilities/`), providing sing
 - **Display & Visibility**: Flow control (`block`, `inline`, `none`) and visibility (`visible`, `hidden`). Note that `hb-flex` and `hb-grid` are explicitly preserved as layout primitives.
 - **Sizing**: Minimal width and height boundaries (`auto`, `full`).
 - **Typography**: Narrow overrides for font size, weight, and logical alignment.
+- **Alignment**: Item-level logical alignments (`align-self`, `justify-self`).
 
 For a comprehensive overview of the utility APIs, refer to:
 - [Spacing Utilities](spacing-utilities.md) — Documentation of margin, padding, and gap utility families.
 - [Display & Visibility Utilities](display-visibility-utilities.md) — Documentation of flow and visibility overrides.
 - [Sizing Utilities](sizing-utilities.md) — Documentation of the minimal width and height API.
 - [Typography Utilities](typography-utilities.md) — Documentation of font size, weight, and alignment overrides.
+- [Alignment Utilities](alignment-utilities.md) — Documentation of item-level alignment boundaries.
 

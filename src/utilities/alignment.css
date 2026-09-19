@@ -1,0 +1,21 @@
+/**
+ * HEBRING — Alignment Utilities
+ *
+ * Single-purpose item-level alignment utilities.
+ */
+
+@layer utilities {
+  /* SELF ALIGNMENT */
+  .hb-self-auto { align-self: auto; }
+  .hb-self-start { align-self: start; }
+  .hb-self-center { align-self: center; }
+  .hb-self-end { align-self: end; }
+  .hb-self-stretch { align-self: stretch; }
+
+  /* JUSTIFY SELF */
+  .hb-justify-self-auto { justify-self: auto; }
+  .hb-justify-self-start { justify-self: start; }
+  .hb-justify-self-center { justify-self: center; }
+  .hb-justify-self-end { justify-self: end; }
+  .hb-justify-self-stretch { justify-self: stretch; }
+}
