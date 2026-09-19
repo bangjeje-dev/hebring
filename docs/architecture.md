@@ -69,7 +69,8 @@ src/
 │   ├── stack.css
 │   ├── cluster.css
 │   ├── grid.css
-│   └── flex.css
+│   ├── flex.css
+│   └── center.css
 │
 ├── components/
 │   └── index.css
@@ -394,6 +395,16 @@ Phase 05 establishes the **Layout Domain** (`src/layout/`), focusing on structur
 - **Clear Separation**: Layouts manage spatial relationships, alignment, and distribution. They **never** define component visual identity (borders, backgrounds, shadows).
 - **Composability**: Layout primitives (`hb-container`, `hb-stack`, `hb-cluster`, `hb-grid`, `hb-center`, `hb-flow`) are designed to be freely nested to construct complex page structures.
 - **Native Foundations**: Built on native CSS Flexbox and Grid without relying on JavaScript or arbitrary rigid columns.
+
+### Architectural Distinctions
+
+HEBRING carefully distinguishes its core layout primitives:
+- **`hb-container`**: Defines a content width boundary.
+- **`hb-stack`**: Defines a vertical relationship between children with a default gap.
+- **`hb-cluster`**: Defines a horizontal grouping relationship with wrapping.
+- **`hb-grid`**: Defines a two-dimensional CSS Grid context.
+- **`hb-flex`**: Defines a neutral Flexbox context without additional layout opinions.
+- **`hb-center`**: Defines an opinionated centering pattern using Flexbox.
 
 For a comprehensive overview of the layout design patterns and composition model, refer to:
 - [Layout Philosophy](layout-philosophy.md) — Conceptual foundations, primitive vocabulary, and compositional rules.

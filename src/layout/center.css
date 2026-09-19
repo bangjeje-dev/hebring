@@ -1,0 +1,14 @@
+/**
+ * HEBRING — Center Primitive
+ *
+ * An opinionated layout pattern for centering its content
+ * horizontally and vertically using native CSS Flexbox.
+ */
+
+@layer layout {
+  .hb-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
