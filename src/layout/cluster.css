@@ -1,0 +1,14 @@
+/**
+ * HEBRING — Cluster Primitive
+ *
+ * Establishes a horizontal grouping relationship between direct children,
+ * allowing them to wrap naturally when available space is insufficient.
+ */
+
+@layer layout {
+  .hb-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--hb-space-4);
+  }
+}
