@@ -6,6 +6,4 @@
  * Utility modules will be introduced in subsequent phases.
  */
 
-@layer utilities {
-  /* Utility modules will be composed here */
-}
+@import "./spacing.css";

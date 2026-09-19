@@ -410,3 +410,21 @@ HEBRING carefully distinguishes its core layout primitives:
 
 For a comprehensive overview of the layout design patterns and composition model, refer to:
 - [Layout Philosophy](layout-philosophy.md) — Conceptual foundations, primitive vocabulary, and compositional rules.
+
+---
+
+## 12. Utilities
+
+Phase 06 establishes the **Utilities Domain** (`src/utilities/`), providing single-purpose, small, composable classes for granular overrides.
+
+### Core Utility Principles
+- **Conveniences, Not Constraints**: Utilities exist to augment components and layouts, not to build everything from scratch.
+- **Token-Aware**: Utilities directly map to existing primitive and semantic tokens (e.g., `--hb-space-*`).
+- **Logical First**: Utilities use logical properties for layout flow (e.g., `inline`, `block`).
+
+### Implemented Utilities
+- **Spacing**: Padding, margin, and gap mapped to the 14-step spacing scale.
+
+For a comprehensive overview of the spacing API, refer to:
+- [Spacing Utilities](spacing-utilities.md) — Documentation of margin, padding, and gap utility families.
+
