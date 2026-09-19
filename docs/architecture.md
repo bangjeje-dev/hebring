@@ -70,7 +70,8 @@ src/
 │   ├── cluster.css
 │   ├── grid.css
 │   ├── flex.css
-│   └── center.css
+│   ├── center.css
+│   └── flow.css
 │
 ├── components/
 │   └── index.css
@@ -405,6 +406,7 @@ HEBRING carefully distinguishes its core layout primitives:
 - **`hb-grid`**: Defines a two-dimensional CSS Grid context.
 - **`hb-flex`**: Defines a neutral Flexbox context without additional layout opinions.
 - **`hb-center`**: Defines an opinionated centering pattern using Flexbox.
+- **`hb-flow`**: Defines vertical content rhythm using normal document flow.
 
 For a comprehensive overview of the layout design patterns and composition model, refer to:
 - [Layout Philosophy](layout-philosophy.md) — Conceptual foundations, primitive vocabulary, and compositional rules.

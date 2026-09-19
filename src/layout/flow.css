@@ -1,0 +1,11 @@
+/**
+ * HEBRING — Flow Primitive
+ *
+ * Provides vertical content rhythm while preserving normal CSS document flow.
+ */
+
+@layer layout {
+  .hb-flow > * + * {
+    margin-block-start: var(--hb-space-4);
+  }
+}
