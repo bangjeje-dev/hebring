@@ -468,4 +468,4 @@ HEBRING recognizes a constrained, minimal set of `min-width` breakpoints:
 For a comprehensive overview of the responsive philosophy and architectural boundaries, refer to:
 - [Responsive Philosophy](responsive-philosophy.md) — Documentation of the mobile-first approach, cascade interactions, application CSS principles, and explicit exclusions (e.g. `@container`).
 - [Breakpoint Architecture](breakpoint-architecture.md) — Documentation of the official viewport thresholds, behavioral models, and architectural boundaries.
-
+- [Responsive Utility Scope](responsive-utility-scope.md) — Documentation of the official responsive syntax, included and excluded utility categories, and application boundaries.
