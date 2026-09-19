@@ -447,3 +447,18 @@ For a comprehensive overview of the component architecture, composition boundari
 - [Component Naming and States](component-naming-and-states.md) — Structural BEM-style grammar and the native HTML/ARIA state philosophy.
 - [Component Tokens](component-tokens.md) — Architectural rules for optional, locally-scoped component tokens.
 
+---
+
+## 14. Responsive System Architecture
+
+Phase 08 establishes the **Responsive System** as an architectural concern layered over the existing cascade.
+
+### Core Principles
+- **Mobile-First**: Default styles represent the baseline experience and must work natively without requiring breakpoints.
+- **Cascade Preservation**: Responsive behavior does not create a new cascade layer. The existing canonical layer order (`reset → base → layout → components → utilities`) remains authoritative. Responsive enhancements modify behavior from *within* their respective domains using native CSS `@media` rules.
+- **Independence from Design Tokens**: Breakpoints are viewport threshold boundaries rather than literal design tokens. They are not defined in the `tokens/` domain.
+- **Constraint**: HEBRING avoids breakpoint explosion and auto-generation of responsive variants. The framework provides utility-level and component-level responsiveness strictly where semantically meaningful.
+
+For a comprehensive overview of the responsive philosophy and architectural boundaries, refer to:
+- [Responsive Philosophy](responsive-philosophy.md) — Documentation of the mobile-first approach, cascade interactions, application CSS principles, and explicit exclusions (e.g. `@container`).
+
