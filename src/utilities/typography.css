@@ -1,0 +1,30 @@
+/**
+ * HEBRING — Typography Utilities
+ *
+ * Single-purpose utilities for font size, weight, and alignment.
+ */
+
+@layer utilities {
+  /* FONT SIZE */
+  .hb-text-xs { font-size: var(--hb-font-size-xs); }
+  .hb-text-sm { font-size: var(--hb-font-size-sm); }
+  .hb-text-md { font-size: var(--hb-font-size-md); }
+  .hb-text-lg { font-size: var(--hb-font-size-lg); }
+  .hb-text-xl { font-size: var(--hb-font-size-xl); }
+  .hb-text-2xl { font-size: var(--hb-font-size-2xl); }
+  .hb-text-3xl { font-size: var(--hb-font-size-3xl); }
+  .hb-text-4xl { font-size: var(--hb-font-size-4xl); }
+  .hb-text-5xl { font-size: var(--hb-font-size-5xl); }
+  .hb-text-6xl { font-size: var(--hb-font-size-6xl); }
+
+  /* FONT WEIGHT */
+  .hb-font-normal { font-weight: var(--hb-font-weight-normal); }
+  .hb-font-medium { font-weight: var(--hb-font-weight-medium); }
+  .hb-font-semibold { font-weight: var(--hb-font-weight-semibold); }
+  .hb-font-bold { font-weight: var(--hb-font-weight-bold); }
+
+  /* TEXT ALIGNMENT */
+  .hb-text-start { text-align: start; }
+  .hb-text-center { text-align: center; }
+  .hb-text-end { text-align: end; }
+}
