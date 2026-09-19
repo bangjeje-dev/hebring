@@ -436,3 +436,12 @@ For a comprehensive overview of the utility APIs, refer to:
 - [Typography Utilities](typography-utilities.md) — Documentation of font size, weight, and alignment overrides.
 - [Alignment Utilities](alignment-utilities.md) — Documentation of item-level alignment boundaries.
 
+---
+
+## 13. Component Architecture
+
+Phase 07 establishes the **Component Domain** (`src/components/`), focusing on reusable UI patterns and their boundaries within the framework.
+
+For a comprehensive overview of the component architecture, composition boundaries, and the Local Playground, refer to:
+- [Component Architecture](component-architecture.md) — Architectural rules, dependencies, file organization, and Local Playground usage.
+
