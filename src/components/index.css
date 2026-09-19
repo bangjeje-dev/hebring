@@ -6,6 +6,4 @@
  * Component modules will be introduced in subsequent phases.
  */
 
-@layer components {
-  /* Component modules will be composed here */
-}
+@import "./button.css";

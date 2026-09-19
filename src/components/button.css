@@ -1,0 +1,119 @@
+/**
+ * HEBRING — Button Component
+ */
+
+@layer components {
+  .hb-button {
+    /* Local Component Tokens */
+    --hb-button-bg: var(--hb-color-primary);
+    --hb-button-text: var(--hb-color-on-primary);
+    --hb-button-border: var(--hb-color-primary);
+    --hb-button-hover-bg: var(--hb-color-primary-hover);
+    --hb-button-hover-border: var(--hb-color-primary-hover);
+    --hb-button-active-bg: var(--hb-color-primary-active);
+    --hb-button-active-border: var(--hb-color-primary-active);
+    --hb-button-focus-ring: var(--hb-color-focus);
+
+    /* Geometry / Typography Defaults */
+    --hb-button-padding-y: var(--hb-space-2);
+    --hb-button-padding-x: var(--hb-space-4);
+    --hb-button-font-size: var(--hb-font-size-md);
+
+    /* Base Styling */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: var(--hb-font-family-body, inherit);
+    font-weight: var(--hb-font-weight-medium);
+    font-size: var(--hb-button-font-size);
+    line-height: var(--hb-line-height-normal);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+
+    /* Box Model */
+    padding: var(--hb-button-padding-y) var(--hb-button-padding-x);
+    border-radius: var(--hb-radius-md);
+    border: 1px solid var(--hb-button-border);
+    background-color: var(--hb-button-bg);
+    color: var(--hb-button-text);
+
+    /* Transitions */
+    transition: background-color var(--hb-duration-fast) var(--hb-ease-standard),
+                border-color var(--hb-duration-fast) var(--hb-ease-standard),
+                color var(--hb-duration-fast) var(--hb-ease-standard),
+                box-shadow var(--hb-duration-fast) var(--hb-ease-standard),
+                opacity var(--hb-duration-fast) var(--hb-ease-standard);
+  }
+
+  /* Interaction States */
+  .hb-button:hover {
+    background-color: var(--hb-button-hover-bg);
+    border-color: var(--hb-button-hover-border);
+  }
+
+  .hb-button:focus-visible {
+    outline: 2px solid transparent; /* Hide native outline visually */
+    box-shadow: 0 0 0 2px var(--hb-color-background), 0 0 0 4px var(--hb-button-focus-ring);
+  }
+
+  .hb-button:active {
+    background-color: var(--hb-button-active-bg);
+    border-color: var(--hb-button-active-border);
+  }
+
+  .hb-button:disabled {
+    cursor: not-allowed;
+    background-color: var(--hb-color-surface-muted);
+    border-color: var(--hb-color-border);
+    color: var(--hb-color-text-disabled);
+    box-shadow: none;
+  }
+
+  /* Loading State */
+  .hb-button.is-loading {
+    cursor: wait;
+    opacity: 0.8;
+    pointer-events: none; /* Prevent clicks while loading */
+  }
+
+  /*
+   * Variants
+   */
+  .hb-button--secondary {
+    --hb-button-bg: var(--hb-color-surface);
+    --hb-button-text: var(--hb-color-text);
+    --hb-button-border: var(--hb-color-border-strong);
+    --hb-button-hover-bg: var(--hb-color-surface-muted);
+    --hb-button-hover-border: var(--hb-color-border-strong);
+    --hb-button-active-bg: var(--hb-color-neutral-200); /* primitive fallback for active surface */
+    --hb-button-active-border: var(--hb-color-border-strong);
+  }
+
+  .hb-button--danger {
+    --hb-button-bg: var(--hb-color-danger);
+    --hb-button-text: var(--hb-color-on-danger);
+    --hb-button-border: var(--hb-color-danger);
+    --hb-button-hover-bg: var(--hb-color-red-700); /* primitive fallback */
+    --hb-button-hover-border: var(--hb-color-red-700);
+    --hb-button-active-bg: var(--hb-color-red-800);
+    --hb-button-active-border: var(--hb-color-red-800);
+  }
+
+  /*
+   * Sizes
+   */
+  .hb-button--sm {
+    --hb-button-padding-y: var(--hb-space-1);
+    --hb-button-padding-x: var(--hb-space-3);
+    --hb-button-font-size: var(--hb-font-size-sm);
+  }
+
+  .hb-button--lg {
+    --hb-button-padding-y: var(--hb-space-3);
+    --hb-button-padding-x: var(--hb-space-6);
+    --hb-button-font-size: var(--hb-font-size-lg);
+  }
+}
