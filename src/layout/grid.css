@@ -1,0 +1,13 @@
+/**
+ * HEBRING — Grid Primitive
+ *
+ * Establishes a two-dimensional layout context using native CSS Grid,
+ * providing consistent spacing between grid items.
+ */
+
+@layer layout {
+  .hb-grid {
+    display: grid;
+    gap: var(--hb-space-4);
+  }
+}
