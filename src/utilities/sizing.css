@@ -1,0 +1,13 @@
+/**
+ * HEBRING — Sizing Utilities
+ *
+ * Single-purpose utilities for width and height constraints.
+ */
+
+@layer utilities {
+  .hb-w-auto { width: auto; }
+  .hb-w-full { width: 100%; }
+
+  .hb-h-auto { height: auto; }
+  .hb-h-full { height: 100%; }
+}
