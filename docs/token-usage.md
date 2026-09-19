@@ -34,7 +34,7 @@ HEBRING structures design values in a clean, one-directional hierarchy:
                            │
                            ▼
 ┌────────────────────────────────────────────────────────┐
-│  5. Application UI                                     │  Markup with clean semantics
+│  5. Application UI & Local Component Tokens            │  Markup with clean semantics
 │  Consistent user interface across all themes           │  Zero component-level theme logic
 └────────────────────────────────────────────────────────┘
 ```
@@ -259,8 +259,9 @@ All HEBRING components immediately adapt to the custom theme without touching an
 To maintain design system integrity, avoid the following anti-patterns:
 
 1. **Component-Specific Global Tokens**:
-   - ❌ `--hb-button-height`, `--hb-card-padding`, `--hb-modal-width`
-   - ✅ Components should consume generic semantic tokens (`--hb-space-4`, `--hb-radius-md`, `--hb-color-surface`).
+   - ❌ `--hb-button-height`, `--hb-card-padding`, `--hb-modal-width` defined globally in `src/tokens/`.
+   - ✅ Components should consume generic semantic tokens directly (`--hb-space-4`, `--hb-radius-md`, `--hb-color-surface`).
+   - ✅ **Exception**: Local component tokens are perfectly fine if defined *inside* the component's CSS module for internal wiring (Phase 07.4).
 2. **Hardcoding Component Colors**:
    - ❌ Directly referencing `#ffffff` or `var(--hb-color-neutral-900)` in component rules.
    - ✅ Reference role tokens: `var(--hb-color-surface)`, `var(--hb-color-text)`.
@@ -344,6 +345,7 @@ For detailed specifications, refer to the individual documents across the HEBRIN
 - [Primitive Tokens Reference](primitive-tokens.md) — Raw color palettes, 4px spacing scale, typography, radii, shadows, and motion values.
 - [Semantic Tokens Reference](semantic-tokens.md) — Role definitions, primitive mappings, and WCAG 2.1 AA mathematical contrast ratios.
 - [Theme Architecture](theme-architecture.md) — `data-theme` activation, Light/Dark override strategy, and nested inheritance.
+- [Component Tokens](component-tokens.md) — Optional local component tokens for implementation wiring.
 - [Typography](typography.md) — Baseline document typography, heading scale hierarchy, prose spacing, and inline semantics.
 - [Form Foundation](forms.md) — Minimal, native-preserving form control foundation, typography inheritance, and fieldset normalization.
 - [Architecture Notes](architecture.md) — Master framework architecture document covering Cascade Layers, Source Structure, Naming Conventions, Component Philosophy, and Tokens.

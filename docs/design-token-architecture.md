@@ -104,12 +104,19 @@ The HEBRING design token architecture follows a strict, one-directional flow of 
 ┌────────────────────────────────────────────────────────┐
 │  Framework Styling                                     │  Consumed across:
 │  (foundation, layout, components, utilities)          │  reset, base, layout, components, utilities
+└──────────────────────────┬─────────────────────────────┘
+                           │
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│  Optional Local Component Tokens                       │  Internal wiring (e.g. --hb-button-bg)
+│  (Scoped locally inside component CSS)                 │  Not global, not a new token category
 └────────────────────────────────────────────────────────┘
 ```
 
 1. **Primitives** define literal design scales.
 2. **Semantics** reference primitives to assign purpose (e.g. assigning a specific blue step to primary actions).
 3. **Framework Layers** consume semantic tokens (and primitives where appropriate) via `var(--hb-...)`.
+4. **Local Component Tokens** (optional) are defined within component stylesheets to abstract complex internal wiring or state changes.
 
 ---
 
@@ -226,8 +233,6 @@ Phase 03.3 established the following semantic token roles defined in `src/tokens
 
 - **[Primitive Tokens Reference](primitive-tokens.md)**: Exhaustive reference tables for literal scales (colors, spacing, typography, radii, shadows, motion).
 - **[Semantic Tokens Reference](semantic-tokens.md)**: Role definitions, primitive mappings, and WCAG contrast validations.
-- **[Theme Architecture](theme-architecture.md)**: `data-theme` activation, Light default behavior, Dark theme overrides, and nested inheritance.
-- **[Token Developer Usage Guide](token-usage.md)**: Practical guidelines, best practices, component examples, and anti-patterns.
-
-
-
+- [Theme Architecture](theme-architecture.md) — `data-theme` activation, Light default behavior, Dark overrides, and nested inheritance.
+- [Component Tokens](component-tokens.md) — Architectural rules for optional, locally-scoped component tokens.
+- [Token Developer Usage Guide](token-usage.md) — Practical guidelines, best practices, component examples, and anti-patterns.

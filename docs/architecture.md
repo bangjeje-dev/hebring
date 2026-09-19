@@ -445,4 +445,5 @@ Phase 07 establishes the **Component Domain** (`src/components/`), focusing on r
 For a comprehensive overview of the component architecture, composition boundaries, and the Local Playground, refer to:
 - [Component Architecture](component-architecture.md) — Architectural rules, dependencies, file organization, and Local Playground usage.
 - [Component Naming and States](component-naming-and-states.md) — Structural BEM-style grammar and the native HTML/ARIA state philosophy.
+- [Component Tokens](component-tokens.md) — Architectural rules for optional, locally-scoped component tokens.
 
