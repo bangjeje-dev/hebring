@@ -378,11 +378,17 @@ For comprehensive typography specifications, refer to:
 For comprehensive form foundation specifications, refer to:
 - [Form Foundation](forms.md) — Technical specifications, inheritance mechanics, layout normalization, and scope boundaries.
 
+---
 
+## 11. Layout Philosophy
 
+Phase 05 establishes the **Layout Domain** (`src/layout/`), focusing on structural relationships rather than individual element styling or single-purpose utility overrides.
 
+### Core Layout Principles
+- **Intent Over Implementation**: Layout primitives use semantic names (`hb-stack`, `hb-cluster`) rather than functioning as collections of CSS property aliases (`hb-flex-col`).
+- **Clear Separation**: Layouts manage spatial relationships, alignment, and distribution. They **never** define component visual identity (borders, backgrounds, shadows).
+- **Composability**: Layout primitives (`hb-container`, `hb-stack`, `hb-cluster`, `hb-grid`, `hb-center`, `hb-flow`) are designed to be freely nested to construct complex page structures.
+- **Native Foundations**: Built on native CSS Flexbox and Grid without relying on JavaScript or arbitrary rigid columns.
 
-
-
-
-
+For a comprehensive overview of the layout design patterns and composition model, refer to:
+- [Layout Philosophy](layout-philosophy.md) — Conceptual foundations, primitive vocabulary, and compositional rules.
