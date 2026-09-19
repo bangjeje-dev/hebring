@@ -459,6 +459,13 @@ Phase 08 establishes the **Responsive System** as an architectural concern layer
 - **Independence from Design Tokens**: Breakpoints are viewport threshold boundaries rather than literal design tokens. They are not defined in the `tokens/` domain.
 - **Constraint**: HEBRING avoids breakpoint explosion and auto-generation of responsive variants. The framework provides utility-level and component-level responsiveness strictly where semantically meaningful.
 
+### Official Breakpoint Vocabulary
+HEBRING recognizes a constrained, minimal set of `min-width` breakpoints:
+- `sm`: `640px`
+- `md`: `768px`
+- `lg`: `1024px`
+
 For a comprehensive overview of the responsive philosophy and architectural boundaries, refer to:
 - [Responsive Philosophy](responsive-philosophy.md) — Documentation of the mobile-first approach, cascade interactions, application CSS principles, and explicit exclusions (e.g. `@container`).
+- [Breakpoint Architecture](breakpoint-architecture.md) — Documentation of the official viewport thresholds, behavioral models, and architectural boundaries.
 

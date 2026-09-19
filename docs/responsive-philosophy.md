@@ -12,7 +12,7 @@ HEBRING strictly adheres to a **mobile-first** responsive philosophy:
 
 - **Breakpoints are architectural, not design tokens**: Breakpoints define viewport threshold behavior, not literal visual values. Therefore, they are not treated strictly as design tokens.
 - **Small and understandable API**: The number of breakpoints must remain deliberately minimal. HEBRING avoids breakpoint explosion.
-- *Note: Exact breakpoint values and names are NOT defined in this phase. They will be evaluated in subsequent implementation phases.*
+- *Note: Exact breakpoint values and names are defined in [Breakpoint Architecture](breakpoint-architecture.md) (Phase 08.2).*
 
 ## Responsive Mechanism
 
