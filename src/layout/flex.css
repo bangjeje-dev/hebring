@@ -1,0 +1,11 @@
+/**
+ * HEBRING — Flex Primitive
+ *
+ * Establishes an explicit, neutral native CSS Flexbox layout context.
+ */
+
+@layer layout {
+  .hb-flex {
+    display: flex;
+  }
+}
