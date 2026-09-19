@@ -6,6 +6,4 @@
  * Specific layout modules will be introduced in subsequent phases.
  */
 
-@layer layout {
-  /* Layout primitives will be composed here */
-}
+@import "./container.css";

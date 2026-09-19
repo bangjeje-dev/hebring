@@ -1,0 +1,22 @@
+/**
+ * HEBRING — Container Primitive
+ *
+ * Establishes a content width boundary, horizontal centering,
+ * and viewport breathing room.
+ */
+
+@layer layout {
+  .hb-container {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: var(--hb-space-4);
+    
+    /* 
+     * Architecturally conservative max-width.
+     * Hardcoded because a generic `size` or `max-width` primitive token
+     * category does not yet exist in HEBRING's token architecture.
+     * 80rem = 1280px.
+     */
+    max-width: 80rem;
+  }
+}
