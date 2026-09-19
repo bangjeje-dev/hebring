@@ -1,0 +1,19 @@
+/**
+ * HEBRING — Display & Visibility Utilities
+ *
+ * Single-purpose utilities for display flow and visibility control.
+ */
+
+@layer utilities {
+  /* DISPLAY */
+  .hb-block { display: block; }
+  .hb-inline { display: inline; }
+  .hb-inline-block { display: inline-block; }
+  .hb-inline-flex { display: inline-flex; }
+  .hb-inline-grid { display: inline-grid; }
+  .hb-none { display: none; }
+
+  /* VISIBILITY */
+  .hb-visible { visibility: visible; }
+  .hb-invisible { visibility: hidden; }
+}

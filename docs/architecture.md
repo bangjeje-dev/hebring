@@ -424,7 +424,9 @@ Phase 06 establishes the **Utilities Domain** (`src/utilities/`), providing sing
 
 ### Implemented Utilities
 - **Spacing**: Padding, margin, and gap mapped to the 14-step spacing scale.
+- **Display & Visibility**: Flow control (`block`, `inline`, `none`) and visibility (`visible`, `hidden`). Note that `hb-flex` and `hb-grid` are explicitly preserved as layout primitives.
 
-For a comprehensive overview of the spacing API, refer to:
+For a comprehensive overview of the utility APIs, refer to:
 - [Spacing Utilities](spacing-utilities.md) — Documentation of margin, padding, and gap utility families.
+- [Display & Visibility Utilities](display-visibility-utilities.md) — Documentation of flow and visibility overrides.
 
