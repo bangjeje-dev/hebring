@@ -3,6 +3,31 @@ set -e
 
 echo "Running Responsive Utility Tests..."
 
+# Verify Breakpoint Architecture
+echo "Checking breakpoint architecture..."
+for file in src/utilities/*.css; do
+  # Ignore non-responsive utility files for breakpoint check if they don't have media queries at all
+  if grep -q "@media" "$file"; then
+    if ! grep -q "@media (min-width: 640px)" "$file"; then
+      echo "❌ Error: Missing sm (640px) min-width breakpoint in $file"
+      exit 1
+    fi
+    if ! grep -q "@media (min-width: 768px)" "$file"; then
+      echo "❌ Error: Missing md (768px) min-width breakpoint in $file"
+      exit 1
+    fi
+    if ! grep -q "@media (min-width: 1024px)" "$file"; then
+      echo "❌ Error: Missing lg (1024px) min-width breakpoint in $file"
+      exit 1
+    fi
+    if grep -q "@media (max-width" "$file"; then
+      echo "❌ Error: Found max-width media query in $file (violates mobile-first min-width contract)"
+      exit 1
+    fi
+  fi
+done
+echo "✅ Breakpoint architecture verified (640/768/1024 min-width)."
+
 # Verify Display utilities
 DISPLAY_CSS="src/utilities/display.css"
 DISPLAY_CLASSES=("hb-block" "hb-inline" "hb-inline-block" "hb-inline-flex" "hb-inline-grid" "hb-none" "hb-visible" "hb-invisible")
@@ -67,6 +92,23 @@ for class in "${ALIGNMENT_CLASSES[@]}"; do
 done
 echo "✅ Responsive alignment utilities verified."
 
+# Verify NO responsive layout boundary violations
+LAYOUT_DIR="src/layout"
+if grep -rE "\.hb-(stack|grid|container|flex|cluster|center|flow)-(sm|md|lg)" "$LAYOUT_DIR" 2>/dev/null; then
+  echo "❌ Error: Found responsive layout modifier."
+  exit 1
+fi
+echo "✅ No responsive layout modifiers found."
+
+# Verify NO responsive component boundary violations
+COMPONENTS_DIR="src/components"
+if grep -rE "\.hb-[a-z0-9-]+-(sm|md|lg)\b" "$COMPONENTS_DIR" 2>/dev/null | grep -vE "\.hb-[a-z0-9-]+--(sm|lg)\b" >/dev/null; then
+  echo "❌ Error: Found responsive component modifier."
+  grep -rE "\.hb-[a-z0-9-]+-(sm|md|lg)\b" "$COMPONENTS_DIR" 2>/dev/null | grep -vE "\.hb-[a-z0-9-]+--(sm|lg)\b"
+  exit 1
+fi
+echo "✅ No responsive component modifiers found."
+
 # Verify NO responsive spacing
 SPACING_CSS="src/utilities/spacing.css"
 if grep -qE "(hb-p-|hb-m-|hb-gap-).+-(sm|md|lg)" "$SPACING_CSS"; then
@@ -81,6 +123,13 @@ if grep -rE "(sm|md|lg|xl|2xl)-(xl|2xl)" src/utilities/; then
   exit 1
 fi
 echo "✅ No xl/2xl utilities found."
+
+# Verify NO breakpoint token variables
+if grep -rE -e "--hb-breakpoint-(sm|md|lg)" src/; then
+  echo "❌ Error: Found breakpoint tokens (breakpoints should be architectural thresholds, not primitive tokens)."
+  exit 1
+fi
+echo "✅ No breakpoint tokens found."
 
 # Verify NO @layer responsive
 if grep -r "@layer responsive" src/utilities/; then
