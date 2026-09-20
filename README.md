@@ -4,9 +4,9 @@ A modern, lightweight, and understandable CSS framework for building web interfa
 
 ## Project Status
 
-**Early Development — Phase 01: Project Foundation**
+**Stable — Phase 11**
 
-HEBRING is currently in its initial setup phase. The project foundation is established, and architecture design for core CSS layers is underway. It is not yet ready for production use.
+HEBRING is functionally complete with a stable foundational architecture. The framework's core CSS layers (reset, base, layout, components, utilities) are established.
 
 ## Core Philosophy
 
@@ -42,7 +42,7 @@ hebring/
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) (v18 or newer recommended)
-- [pnpm](https://pnpm.io/) (v9 or newer recommended)
+- npm (v9 or newer recommended)
 
 ### Getting Started
 
@@ -69,7 +69,7 @@ Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/hebring/hebring.git
 cd hebring
-pnpm install
+npm install
 ```
 
 > **Note**: The core CSS will have no runtime JavaScript dependencies. Tooling and scripts in this repository are strictly for development, testing, and distribution workflows.

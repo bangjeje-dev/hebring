@@ -108,6 +108,6 @@ When you import HEBRING, these layers cascade in a strict, predictable order (`r
 To get the most out of HEBRING, we recommend exploring the documentation in this sequence:
 
 1. **[Documentation Philosophy](documentation-philosophy.md)**: Understand the HEBRING mental model.
-2. **[Architecture](architecture.md)**: Learn how the framework's CSS layers interact.
-3. **[Themes](theme-philosophy.md)**: Discover how semantic token mapping powers effortless theming.
-4. **[Responsive Design](responsive-philosophy.md)**: Learn how to build for multiple viewports.
+2. **[Architecture](architecture-guide.md)**: Learn how the framework's CSS layers interact.
+3. **[Themes](themes.md)**: Discover how semantic token mapping powers effortless theming.
+4. **[Responsive Design](responsive.md)**: Learn how to build for multiple viewports.
