@@ -62,7 +62,7 @@ check_not_grep "$SRC_UTILS/sizing.css" "\.hb-w-[0-9]" "Sizing: no arbitrary widt
 check_not_grep "$SRC_UTILS/sizing.css" "\.hb-(max|min)-[wh]" "Sizing: no max/min width/height utilities"
 
 # 4. Typography Utilities
-check_grep "$SRC_UTILS/typography.css" "\.hb-text-md" "Typography: hb-text-md exists"
+check_grep "$SRC_UTILS/typography.css" "\.hb-text-base" "Typography: hb-text-base exists"
 check_grep "$SRC_UTILS/typography.css" "\.hb-text-center" "Typography: hb-text-center exists"
 check_grep "$SRC_UTILS/typography.css" "\.hb-font-bold" "Typography: hb-font-bold exists"
 check_grep "$SRC_UTILS/typography.css" "var\(--hb-font-" "Typography: maps to font tokens"

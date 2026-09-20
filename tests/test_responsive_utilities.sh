@@ -31,7 +31,7 @@ echo "✅ Responsive sizing utilities verified."
 
 # Verify Typography utilities
 TYPOGRAPHY_CSS="src/utilities/typography.css"
-TYPOGRAPHY_CLASSES=("hb-text-xs" "hb-text-sm" "hb-text-md" "hb-text-lg" "hb-text-xl" "hb-text-2xl" "hb-text-3xl" "hb-text-4xl" "hb-text-5xl" "hb-text-6xl" "hb-text-start" "hb-text-center" "hb-text-end")
+TYPOGRAPHY_CLASSES=("hb-text-xs" "hb-text-sm" "hb-text-base" "hb-text-lg" "hb-text-xl" "hb-text-2xl" "hb-text-3xl" "hb-text-4xl" "hb-text-5xl" "hb-text-6xl" "hb-text-start" "hb-text-center" "hb-text-end")
 for class in "${TYPOGRAPHY_CLASSES[@]}"; do
   for bp in "sm" "md" "lg"; do
     if ! grep -qF ".$class-$bp" "$TYPOGRAPHY_CSS"; then

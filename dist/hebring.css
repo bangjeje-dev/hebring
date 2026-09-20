@@ -1481,7 +1481,7 @@
     font-size: var(--hb-font-size-sm);
   }
 
-  .hb-text-md {
+  .hb-text-base {
     font-size: var(--hb-font-size-md);
   }
 
@@ -1550,7 +1550,7 @@
       font-size: var(--hb-font-size-sm);
     }
 
-    .hb-text-md-sm {
+    .hb-text-base-sm {
       font-size: var(--hb-font-size-md);
     }
 
@@ -1604,7 +1604,7 @@
       font-size: var(--hb-font-size-sm);
     }
 
-    .hb-text-md-md {
+    .hb-text-base-md {
       font-size: var(--hb-font-size-md);
     }
 
@@ -1658,7 +1658,7 @@
       font-size: var(--hb-font-size-sm);
     }
 
-    .hb-text-md-lg {
+    .hb-text-base-lg {
       font-size: var(--hb-font-size-md);
     }
 

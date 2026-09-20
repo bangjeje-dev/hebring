@@ -8,7 +8,7 @@
   /* FONT SIZE */
   .hb-text-xs { font-size: var(--hb-font-size-xs); }
   .hb-text-sm { font-size: var(--hb-font-size-sm); }
-  .hb-text-md { font-size: var(--hb-font-size-md); }
+  .hb-text-base { font-size: var(--hb-font-size-md); }
   .hb-text-lg { font-size: var(--hb-font-size-lg); }
   .hb-text-xl { font-size: var(--hb-font-size-xl); }
   .hb-text-2xl { font-size: var(--hb-font-size-2xl); }
@@ -32,7 +32,7 @@
   @media (min-width: 640px) {
     .hb-text-xs-sm { font-size: var(--hb-font-size-xs); }
     .hb-text-sm-sm { font-size: var(--hb-font-size-sm); }
-    .hb-text-md-sm { font-size: var(--hb-font-size-md); }
+    .hb-text-base-sm { font-size: var(--hb-font-size-md); }
     .hb-text-lg-sm { font-size: var(--hb-font-size-lg); }
     .hb-text-xl-sm { font-size: var(--hb-font-size-xl); }
     .hb-text-2xl-sm { font-size: var(--hb-font-size-2xl); }
@@ -50,7 +50,7 @@
   @media (min-width: 768px) {
     .hb-text-xs-md { font-size: var(--hb-font-size-xs); }
     .hb-text-sm-md { font-size: var(--hb-font-size-sm); }
-    .hb-text-md-md { font-size: var(--hb-font-size-md); }
+    .hb-text-base-md { font-size: var(--hb-font-size-md); }
     .hb-text-lg-md { font-size: var(--hb-font-size-lg); }
     .hb-text-xl-md { font-size: var(--hb-font-size-xl); }
     .hb-text-2xl-md { font-size: var(--hb-font-size-2xl); }
@@ -68,7 +68,7 @@
   @media (min-width: 1024px) {
     .hb-text-xs-lg { font-size: var(--hb-font-size-xs); }
     .hb-text-sm-lg { font-size: var(--hb-font-size-sm); }
-    .hb-text-md-lg { font-size: var(--hb-font-size-md); }
+    .hb-text-base-lg { font-size: var(--hb-font-size-md); }
     .hb-text-lg-lg { font-size: var(--hb-font-size-lg); }
     .hb-text-xl-lg { font-size: var(--hb-font-size-xl); }
     .hb-text-2xl-lg { font-size: var(--hb-font-size-2xl); }
