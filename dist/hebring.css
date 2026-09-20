@@ -1983,9 +1983,6 @@
   --hb-ease-linear: linear;
   --hb-ease-standard: cubic-bezier(.4, 0, .2, 1);
   --hb-ease-emphasized: cubic-bezier(.2, 0, 0, 1);
-}
-
-:root, [data-theme="light"] {
   --hb-color-background: var(--hb-color-white);
   --hb-color-background-subtle: var(--hb-color-neutral-50);
   --hb-color-surface: var(--hb-color-white);
