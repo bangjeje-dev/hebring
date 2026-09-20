@@ -487,3 +487,4 @@ For a comprehensive overview of the theme architecture, philosophical boundaries
 - [Theme Philosophy](theme-philosophy.md) — Documentation of the semantic token boundary, the data-attribute mechanism, application-controlled switching, and explicit exclusions.
 - [Theme Architecture](theme-architecture.md) — Documentation of the theme scope, inheritance model, source structure, and fallback behavior.
 - [Theme Token Mapping](theme-token-mapping.md) — Documentation of themeable vs stable semantic tokens, mapping principles, and primitive token stability.
+- [Built-in Themes](built-in-themes.md) — Documentation of the official default and dark themes, including the complete semantic design contract.
