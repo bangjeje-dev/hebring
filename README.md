@@ -46,6 +46,24 @@ hebring/
 
 ### Getting Started
 
+Install HEBRING via npm:
+
+```bash
+npm install hebring
+```
+
+Import the compiled CSS artifact in your frontend project (e.g., Vite, Next.js, or plain HTML):
+
+```javascript
+import 'hebring';
+// or explicitly import the minified version:
+import 'hebring/min';
+```
+
+Alternatively, you can link the stylesheet directly in HTML if serving from a static location or CDN.
+
+### Local Development
+
 Clone the repository and install dependencies:
 
 ```bash

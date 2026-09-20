@@ -4,10 +4,18 @@
   "description": "A modern, lightweight, and understandable CSS framework for building web interfaces.",
   "type": "module",
   "files": [
+    "dist",
     "src",
     "README.md",
     "LICENSE"
   ],
+  "style": "./dist/hebring.css",
+  "exports": {
+    ".": "./dist/hebring.css",
+    "./css": "./dist/hebring.css",
+    "./min": "./dist/hebring.min.css",
+    "./package.json": "./package.json"
+  },
   "keywords": [
     "css",
     "css-framework",
