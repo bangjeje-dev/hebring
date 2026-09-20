@@ -24,5 +24,13 @@
   "bugs": {
     "url": "https://github.com/hebring/hebring/issues"
   },
-  "homepage": "https://github.com/hebring/hebring#readme"
+  "homepage": "https://github.com/hebring/hebring#readme",
+  "scripts": {
+    "build:css": "lightningcss --bundle src/index.css -o dist/hebring.css",
+    "build:min": "lightningcss --bundle --minify src/index.css -o dist/hebring.min.css",
+    "build": "npm run build:css && npm run build:min"
+  },
+  "devDependencies": {
+    "lightningcss-cli": "^1.33.0"
+  }
 }
