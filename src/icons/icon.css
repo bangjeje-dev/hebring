@@ -1,0 +1,16 @@
+/**
+ * HEBRING — Icon System
+ * Optional CSS foundation for sizing and aligning icons.
+ */
+
+.hb-icon {
+  --hb-icon-size: 1.5em; /* relative to text by default */
+  display: inline-block;
+  width: var(--hb-icon-size);
+  height: var(--hb-icon-size);
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.hb-icon--sm { --hb-icon-size: 1em; }
+.hb-icon--lg { --hb-icon-size: 2em; }
