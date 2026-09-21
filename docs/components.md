@@ -35,7 +35,9 @@ HEBRING intentionally maintains a minimal component footprint, focusing on essen
 
 Currently, the following components exist:
 - **Button** (`.hb-button`)
-
+- **Card** (`.hb-card`)
+- **Badge** (`.hb-badge`)
+- **Alert** (`.hb-alert`)
 *Note: HEBRING is a CSS foundation, not an exhaustive UI toolkit. It does not ship with complex interactive widgets like accordions or modals that inherently require JavaScript.*
 
 ---
@@ -120,3 +122,91 @@ Below are the smallest useful examples demonstrating how to construct buttons us
   Submitting...
 </button>
 ```
+
+---
+
+## 6. Card
+
+The `.hb-card` component provides a foundational structural container. It is a compositional UI component designed to hold content, not a layout primitive.
+
+### Anatomy
+A Card uses optional child elements to structure content:
+- `.hb-card` (Container)
+- `.hb-card__header` (Optional top section)
+- `.hb-card__body` (Main content area, fills available space)
+- `.hb-card__footer` (Optional bottom section)
+
+### CSS API
+The Card consumes semantic tokens (`--hb-color-surface`, `--hb-color-border`) mapping them to local variables.
+
+### HTML Example
+```html
+<article class="hb-card">
+  <header class="hb-card__header">
+    <h3 class="hb-text-lg">Card Title</h3>
+  </header>
+  <div class="hb-card__body">
+    <p>This is the main content of the card.</p>
+  </div>
+  <footer class="hb-card__footer">
+    <button class="hb-button hb-button--sm">Action</button>
+  </footer>
+</article>
+```
+
+### Accessibility & Responsive Behavior
+- **Accessibility**: Cards typically do not require specific ARIA roles unless acting as an interactive widget or article. Use semantic HTML like `<article>`, `<header>`, and `<footer>` where appropriate.
+- **Responsive**: Cards are fluid and adapt to their container (`display: flex`). Use layout primitives (e.g. `.hb-grid`) to arrange multiple cards responsively.
+- **Theme**: Automatically inherits dark mode via semantic surface and border tokens.
+
+---
+
+## 7. Badge
+
+The `.hb-badge` component is a compact, non-interactive semantic indicator often used for statuses, counts, or tags.
+
+### Variants
+Badges provide semantic color variants:
+- `.hb-badge` (Default/Neutral)
+- `.hb-badge--primary`
+- `.hb-badge--success`
+- `.hb-badge--warning`
+- `.hb-badge--danger`
+
+### CSS API
+Badges use `inline-flex` and consume subtle semantic background tokens paired with strong semantic text tokens to ensure readability.
+
+### HTML Example
+```html
+<span class="hb-badge hb-badge--success">Completed</span>
+```
+
+### Accessibility
+- Non-interactive by default. Do not use `<button>` unless extending functionality with JavaScript.
+- If used for counts, ensure context is available to screen readers (e.g. via visually hidden text).
+
+---
+
+## 8. Alert
+
+The `.hb-alert` component provides semantic feedback or state presentation to the user.
+
+### Variants
+Alerts provide contextual color variants using subtle backgrounds and bordered edges:
+- `.hb-alert` (Default)
+- `.hb-alert--info`
+- `.hb-alert--success`
+- `.hb-alert--warning`
+- `.hb-alert--danger`
+
+### HTML Example
+```html
+<div class="hb-alert hb-alert--danger" role="alert">
+  <strong>Error:</strong> Failed to save changes.
+</div>
+```
+
+### Accessibility
+- Use `role="alert"` for important and time-sensitive feedback.
+- Do not rely on color alone; ensure the text explicitly states the meaning or include an explicit icon in the HTML.
+- Colors mapped directly to semantic tokens to guarantee contrast ratios.

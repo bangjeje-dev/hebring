@@ -1,0 +1,44 @@
+/**
+ * HEBRING — Card Component
+ */
+@layer components {
+  .hb-card {
+    --hb-card-bg: var(--hb-color-surface);
+    --hb-card-border: var(--hb-color-border);
+    --hb-card-radius: var(--hb-radius-lg);
+    
+    display: flex;
+    flex-direction: column;
+    background-color: var(--hb-card-bg);
+    border: 1px solid var(--hb-card-border);
+    border-radius: var(--hb-card-radius);
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .hb-card__header {
+    --hb-card-header-padding-y: var(--hb-space-4);
+    --hb-card-header-padding-x: var(--hb-space-4);
+    --hb-card-header-border: var(--hb-color-border);
+    
+    padding: var(--hb-card-header-padding-y) var(--hb-card-header-padding-x);
+    border-bottom: 1px solid var(--hb-card-header-border);
+  }
+
+  .hb-card__body {
+    --hb-card-body-padding-y: var(--hb-space-4);
+    --hb-card-body-padding-x: var(--hb-space-4);
+    
+    padding: var(--hb-card-body-padding-y) var(--hb-card-body-padding-x);
+    flex: 1 1 auto;
+  }
+
+  .hb-card__footer {
+    --hb-card-footer-padding-y: var(--hb-space-4);
+    --hb-card-footer-padding-x: var(--hb-space-4);
+    --hb-card-footer-border: var(--hb-color-border);
+    
+    padding: var(--hb-card-footer-padding-y) var(--hb-card-footer-padding-x);
+    border-top: 1px solid var(--hb-card-footer-border);
+  }
+}

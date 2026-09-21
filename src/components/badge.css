@@ -1,0 +1,47 @@
+/**
+ * HEBRING — Badge Component
+ */
+@layer components {
+  .hb-badge {
+    --hb-badge-bg: var(--hb-color-surface-muted);
+    --hb-badge-text: var(--hb-color-text);
+    --hb-badge-padding-y: var(--hb-space-1);
+    --hb-badge-padding-x: var(--hb-space-2);
+    --hb-badge-radius: var(--hb-radius-full);
+    --hb-badge-font-size: var(--hb-font-size-xs);
+    --hb-badge-font-weight: var(--hb-font-weight-medium);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--hb-badge-padding-y) var(--hb-badge-padding-x);
+    border-radius: var(--hb-badge-radius);
+    background-color: var(--hb-badge-bg);
+    color: var(--hb-badge-text);
+    font-size: var(--hb-badge-font-size);
+    font-weight: var(--hb-badge-font-weight);
+    line-height: var(--hb-line-height-none);
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+
+  .hb-badge--primary {
+    --hb-badge-bg: var(--hb-color-primary-subtle);
+    --hb-badge-text: var(--hb-color-primary);
+  }
+
+  .hb-badge--success {
+    --hb-badge-bg: var(--hb-color-success-subtle);
+    --hb-badge-text: var(--hb-color-success);
+  }
+
+  .hb-badge--warning {
+    --hb-badge-bg: var(--hb-color-warning-subtle);
+    --hb-badge-text: var(--hb-color-warning-600, var(--hb-color-warning));
+  }
+
+  .hb-badge--danger {
+    --hb-badge-bg: var(--hb-color-danger-subtle);
+    --hb-badge-text: var(--hb-color-danger);
+  }
+}

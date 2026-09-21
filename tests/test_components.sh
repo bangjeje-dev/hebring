@@ -88,6 +88,35 @@ check_not_grep "$SRC_COMPONENTS/button.css" "\!important" "Button: no !important
 check_not_grep "$SRC_COMPONENTS/button.css" "\.hb-button-sm|\.hb-button-md|\.hb-button-lg|\.hb-button--.*-(sm|md|lg)" "Button: no responsive component modifiers"
 check_not_grep "$SRC_COMPONENTS/button.css" "@media" "Button: no internal media queries"
 
+# 10. Card Tests
+check_grep "$SRC_COMPONENTS/card.css" "^\s*\.hb-card\s*\{" "Card: class exists"
+check_grep "$SRC_COMPONENTS/card.css" "\.hb-card__header" "Card: header element exists"
+check_grep "$SRC_COMPONENTS/card.css" "\.hb-card__body" "Card: body element exists"
+check_grep "$SRC_COMPONENTS/card.css" "\.hb-card__footer" "Card: footer element exists"
+check_grep "$SRC_COMPONENTS/card.css" "var\(--hb-color-surface\)" "Card: uses semantic tokens"
+check_grep "$SRC_COMPONENTS/card.css" "@layer components" "Card: exists in correct CSS layer"
+check_not_grep "$SRC_COMPONENTS/card.css" "\.is-|\.has-" "Card: no JavaScript dependency"
+
+# 11. Badge Tests
+check_grep "$SRC_COMPONENTS/badge.css" "^\s*\.hb-badge\s*\{" "Badge: class exists"
+check_grep "$SRC_COMPONENTS/badge.css" "\.hb-badge--primary" "Badge: primary variant exists"
+check_grep "$SRC_COMPONENTS/badge.css" "\.hb-badge--success" "Badge: success variant exists"
+check_grep "$SRC_COMPONENTS/badge.css" "\.hb-badge--warning" "Badge: warning variant exists"
+check_grep "$SRC_COMPONENTS/badge.css" "\.hb-badge--danger" "Badge: danger variant exists"
+check_grep "$SRC_COMPONENTS/badge.css" "var\(--hb-color-surface-muted\)" "Badge: uses semantic tokens"
+check_grep "$SRC_COMPONENTS/badge.css" "@layer components" "Badge: exists in correct CSS layer"
+check_not_grep "$SRC_COMPONENTS/badge.css" "\.is-|\.has-" "Badge: no JavaScript dependency"
+
+# 12. Alert Tests
+check_grep "$SRC_COMPONENTS/alert.css" "^\s*\.hb-alert\s*\{" "Alert: class exists"
+check_grep "$SRC_COMPONENTS/alert.css" "\.hb-alert--info" "Alert: info variant exists"
+check_grep "$SRC_COMPONENTS/alert.css" "\.hb-alert--success" "Alert: success variant exists"
+check_grep "$SRC_COMPONENTS/alert.css" "\.hb-alert--warning" "Alert: warning variant exists"
+check_grep "$SRC_COMPONENTS/alert.css" "\.hb-alert--danger" "Alert: danger variant exists"
+check_grep "$SRC_COMPONENTS/alert.css" "var\(--hb-color-surface-muted\)" "Alert: uses semantic tokens"
+check_grep "$SRC_COMPONENTS/alert.css" "@layer components" "Alert: exists in correct CSS layer"
+check_not_grep "$SRC_COMPONENTS/alert.css" "\.is-|\.has-" "Alert: no JavaScript dependency"
+
 if [ $ERRORS -eq 0 ]; then
   echo "All Component tests passed!"
   exit 0
