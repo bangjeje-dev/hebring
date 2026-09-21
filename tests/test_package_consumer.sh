@@ -15,8 +15,8 @@ CONSUMER_DIR="$(mktemp -d)"
 trap 'echo "Cleaning up consumer directory: $CONSUMER_DIR"; rm -rf "$CONSUMER_DIR"' EXIT
 
 # Helper functions
-pass() { echo "✅ PASS: $1"; }
-fail() { echo "❌ FAIL: $1"; ((ERRORS++)); }
+pass() { echo "PASS: $1"; }
+fail() { echo "FAIL: $1"; ((ERRORS++)); }
 
 # ============================================================
 # 1. Build HEBRING
@@ -293,9 +293,9 @@ fi
 # ============================================================
 echo ""
 if [ $ERRORS -eq 0 ]; then
-  echo "🎉 All Package Consumer tests passed!"
+  echo "All Package Consumer tests passed!"
   exit 0
 else
-  echo "❌ $ERRORS Package Consumer test(s) failed."
+  echo "$ERRORS Package Consumer test(s) failed."
   exit 1
 fi

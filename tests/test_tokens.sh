@@ -12,28 +12,28 @@ ERRORS=0
 
 function check_file() {
   if [ ! -f "$1" ]; then
-    echo "❌ FAIL: $1 not found."
+    echo "FAIL: $1 not found."
     ((ERRORS++))
   else
-    echo "✅ PASS: Found $1"
+    echo "PASS: Found $1"
   fi
 }
 
 function check_grep() {
   if grep -q -E -e "$2" "$1"; then
-    echo "✅ PASS: $3"
+    echo "PASS: $3"
   else
-    echo "❌ FAIL: $3 (Expected to find '$2' in $1)"
+    echo "FAIL: $3 (Expected to find '$2' in $1)"
     ((ERRORS++))
   fi
 }
 
 function check_not_grep() {
   if grep -q -E -e "$2" "$1"; then
-    echo "❌ FAIL: $3 (Found forbidden '$2' in $1)"
+    echo "FAIL: $3 (Found forbidden '$2' in $1)"
     ((ERRORS++))
   else
-    echo "✅ PASS: $3"
+    echo "PASS: $3"
   fi
 }
 
@@ -77,24 +77,24 @@ check_not_grep "$THEMES" "data-theme=\"light\"" "Theme boundary: No built-in lig
 
 # 5. Duplicate Token Architecture
 if [ -f "$TOKENS_DIR/themes.css" ]; then
-  echo "❌ FAIL: Obsolete themes.css found"
+  echo "FAIL: Obsolete themes.css found"
   ((ERRORS++))
 else
-  echo "✅ PASS: No obsolete themes.css found"
+  echo "PASS: No obsolete themes.css found"
 fi
 
 if grep -q -E -e "--hb-color-primary: " "$PRIMITIVES"; then
-  echo "❌ FAIL: Semantic token found in primitives"
+  echo "FAIL: Semantic token found in primitives"
   ((ERRORS++))
 else
-  echo "✅ PASS: No duplicate semantic tokens in primitives"
+  echo "PASS: No duplicate semantic tokens in primitives"
 fi
 
 if grep -q -E -e "--hb-color-blue-600:" "$SEMANTIC"; then
-  echo "❌ FAIL: Primitive token redefined in semantic"
+  echo "FAIL: Primitive token redefined in semantic"
   ((ERRORS++))
 else
-  echo "✅ PASS: No duplicate primitive tokens in semantic"
+  echo "PASS: No duplicate primitive tokens in semantic"
 fi
 
 # 6. Consumption Boundaries
@@ -102,9 +102,9 @@ check_grep "src/components/button.css" "var\(--hb-color-primary\)" "Token consum
 check_not_grep "src/components/button.css" "var\(--hb-color-blue-600\)" "Token consumption: Components do not consume primitive tokens directly"
 
 if [ $ERRORS -eq 0 ]; then
-  echo "🎉 All Token tests passed!"
+  echo "All Token tests passed!"
   exit 0
 else
-  echo "❌ $ERRORS Token test(s) failed."
+  echo "$ERRORS Token test(s) failed."
   exit 1
 fi

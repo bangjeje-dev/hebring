@@ -14,7 +14,7 @@ UTILITY_FILES=(
 )
 
 if [ ! -f "$DIST_CSS" ]; then
-  echo "❌ FAIL: dist/hebring.css not found. Please run build first."
+  echo "FAIL: dist/hebring.css not found. Please run build first."
   exit 1
 fi
 
@@ -22,19 +22,19 @@ ERRORS=0
 
 function check_grep() {
   if grep -q -E -e "$2" "$1"; then
-    echo "✅ PASS: $3"
+    echo "PASS: $3"
   else
-    echo "❌ FAIL: $3 (Expected to find '$2' in $1)"
+    echo "FAIL: $3 (Expected to find '$2' in $1)"
     ((ERRORS++))
   fi
 }
 
 function check_not_grep() {
   if grep -q -E -e "$2" "$1"; then
-    echo "❌ FAIL: $3 (Found forbidden '$2' in $1)"
+    echo "FAIL: $3 (Found forbidden '$2' in $1)"
     ((ERRORS++))
   else
-    echo "✅ PASS: $3"
+    echo "PASS: $3"
   fi
 }
 
@@ -90,9 +90,9 @@ for FILE in "${UTILITY_FILES[@]}"; do
 done
 
 if [ $ERRORS -eq 0 ]; then
-  echo "🎉 All Utility tests passed!"
+  echo "All Utility tests passed!"
   exit 0
 else
-  echo "❌ $ERRORS Utility test(s) failed."
+  echo "$ERRORS Utility test(s) failed."
   exit 1
 fi

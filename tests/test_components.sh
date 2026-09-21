@@ -16,9 +16,9 @@ check_grep() {
   local pattern=$2
   local message=$3
   if grep -qE "$pattern" "$file"; then
-    echo "✅ PASS: $message"
+    echo "PASS: $message"
   else
-    echo "❌ FAIL: $message (Pattern '$pattern' not found in $file)"
+    echo "FAIL: $message (Pattern '$pattern' not found in $file)"
     ERRORS=$((ERRORS + 1))
   fi
 }
@@ -29,10 +29,10 @@ check_not_grep() {
   local pattern=$2
   local message=$3
   if grep -qE "$pattern" "$file"; then
-    echo "❌ FAIL: $message (Pattern '$pattern' unexpectedly found in $file)"
+    echo "FAIL: $message (Pattern '$pattern' unexpectedly found in $file)"
     ERRORS=$((ERRORS + 1))
   else
-    echo "✅ PASS: $message"
+    echo "PASS: $message"
   fi
 }
 
@@ -89,9 +89,9 @@ check_not_grep "$SRC_COMPONENTS/button.css" "\.hb-button-sm|\.hb-button-md|\.hb-
 check_not_grep "$SRC_COMPONENTS/button.css" "@media" "Button: no internal media queries"
 
 if [ $ERRORS -eq 0 ]; then
-  echo "🎉 All Component tests passed!"
+  echo "All Component tests passed!"
   exit 0
 else
-  echo "❌ $ERRORS Component test(s) failed."
+  echo "$ERRORS Component test(s) failed."
   exit 1
 fi

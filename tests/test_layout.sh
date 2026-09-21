@@ -16,7 +16,7 @@ LAYOUT_FILES=(
 )
 
 if [ ! -f "$DIST_CSS" ]; then
-  echo "❌ FAIL: dist/hebring.css not found. Please run build first."
+  echo "FAIL: dist/hebring.css not found. Please run build first."
   exit 1
 fi
 
@@ -24,19 +24,19 @@ ERRORS=0
 
 function check_grep() {
   if grep -q -E -e "$2" "$1"; then
-    echo "✅ PASS: $3"
+    echo "PASS: $3"
   else
-    echo "❌ FAIL: $3 (Expected to find '$2' in $1)"
+    echo "FAIL: $3 (Expected to find '$2' in $1)"
     ((ERRORS++))
   fi
 }
 
 function check_not_grep() {
   if grep -q -E -e "$2" "$1"; then
-    echo "❌ FAIL: $3 (Found forbidden '$2' in $1)"
+    echo "FAIL: $3 (Found forbidden '$2' in $1)"
     ((ERRORS++))
   else
-    echo "✅ PASS: $3"
+    echo "PASS: $3"
   fi
 }
 
@@ -98,9 +98,9 @@ done
 check_not_grep "$DIST_CSS" "\.hb-stack-sm|\.hb-stack-md|\.hb-stack-lg|\.hb-grid-md|\.hb-flex-lg|\.hb-container-md" "Global Layout: no undocumented breakpoint-specific variants"
 
 if [ $ERRORS -eq 0 ]; then
-  echo "🎉 All Layout tests passed!"
+  echo "All Layout tests passed!"
   exit 0
 else
-  echo "❌ $ERRORS Layout test(s) failed."
+  echo "$ERRORS Layout test(s) failed."
   exit 1
 fi

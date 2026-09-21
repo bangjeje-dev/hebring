@@ -9,37 +9,37 @@ ERRORS=0
 
 function check_file() {
   if [ ! -f "$1" ]; then
-    echo "❌ ERROR: $1 not found."
+    echo "ERROR: $1 not found."
     ((ERRORS++))
   else
-    echo "✅ Found $1"
+    echo "Found $1"
   fi
 }
 
 function check_grep() {
   if grep -q -E -e "$2" "$1"; then
-    echo "✅ Found pattern '$2' in $1"
+    echo "Found pattern '$2' in $1"
   else
-    echo "❌ ERROR: Missing pattern '$2' in $1"
+    echo "ERROR: Missing pattern '$2' in $1"
     ((ERRORS++))
   fi
 }
 
 function check_not_grep() {
   if grep -q -E -e "$2" "$1"; then
-    echo "❌ ERROR: Found forbidden '$2' in $1"
+    echo "ERROR: Found forbidden '$2' in $1"
     ((ERRORS++))
   else
-    echo "✅ No '$2' in $1"
+    echo "No '$2' in $1"
   fi
 }
 
 # 1. Build succeeds
 echo "Running build..."
 if npm run build >/dev/null 2>&1; then
-  echo "✅ Build succeeded"
+  echo "Build succeeded"
 else
-  echo "❌ ERROR: Build failed"
+  echo "ERROR: Build failed"
   exit 1
 fi
 
@@ -52,9 +52,9 @@ check_file "$MIN_CSS_FILE"
 
 # 3. Artifact content is structurally valid
 if [ -s "$CSS_FILE" ] && [ -s "$MIN_CSS_FILE" ]; then
-  echo "✅ Distribution files are non-empty"
+  echo "Distribution files are non-empty"
 else
-  echo "❌ ERROR: Distribution files are empty"
+  echo "ERROR: Distribution files are empty"
   ((ERRORS++))
 fi
 
@@ -84,9 +84,9 @@ check_grep "$PACKAGE_JSON" '"\./css": "./dist/hebring.css"'
 check_grep "$PACKAGE_JSON" '"\./min": "./dist/hebring.min.css"'
 
 if grep -q '"files": \[' "$PACKAGE_JSON" && grep -q '"dist"' "$PACKAGE_JSON" && grep -q '"src"' "$PACKAGE_JSON"; then
-  echo "✅ Package files array includes dist and src"
+  echo "Package files array includes dist and src"
 else
-  echo "❌ ERROR: Package files array missing or invalid"
+  echo "ERROR: Package files array missing or invalid"
   ((ERRORS++))
 fi
 
@@ -97,19 +97,19 @@ if echo "$PACK_OUTPUT" | grep -q "dist/hebring.css" && \
    echo "$PACK_OUTPUT" | grep -q "dist/hebring.min.css" && \
    echo "$PACK_OUTPUT" | grep -q "src/index.css" && \
    echo "$PACK_OUTPUT" | grep -q "package.json"; then
-  echo "✅ npm pack correctly includes expected distribution files"
+  echo "npm pack correctly includes expected distribution files"
 else
-  echo "❌ ERROR: npm pack is missing expected files"
+  echo "ERROR: npm pack is missing expected files"
   echo "$PACK_OUTPUT"
   ((ERRORS++))
 fi
 
 # 8. No runtime JavaScript dependency
 if ls "$DIST_DIR"/*.js >/dev/null 2>&1; then
-  echo "❌ ERROR: Found JavaScript files in dist directory"
+  echo "ERROR: Found JavaScript files in dist directory"
   ((ERRORS++))
 else
-  echo "✅ No JavaScript files in dist directory"
+  echo "No JavaScript files in dist directory"
 fi
 
 # 9. Build Repeatability
@@ -119,18 +119,18 @@ npm run build >/dev/null 2>&1
 NEW_HASH=$(shasum -a 256 "$MIN_CSS_FILE" | awk '{print $1}')
 
 if [ "$ORIGINAL_HASH" = "$NEW_HASH" ]; then
-  echo "✅ Build is repeatable (hash matches)"
+  echo "Build is repeatable (hash matches)"
 else
-  echo "❌ ERROR: Build is non-deterministic (hash mismatch)"
+  echo "ERROR: Build is non-deterministic (hash mismatch)"
   echo "Original: $ORIGINAL_HASH"
   echo "New:      $NEW_HASH"
   ((ERRORS++))
 fi
 
 if [ $ERRORS -eq 0 ]; then
-  echo "🎉 All Build & Distribution tests passed!"
+  echo "All Build & Distribution tests passed!"
   exit 0
 else
-  echo "❌ $ERRORS Build & Distribution test(s) failed."
+  echo "$ERRORS Build & Distribution test(s) failed."
   exit 1
 fi
