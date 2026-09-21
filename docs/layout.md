@@ -119,7 +119,7 @@ A page wrapper (`hb-container`), holding a vertical rhythm (`hb-stack`), contain
     <p>Page description text.</p>
     
     <div class="hb-cluster">
-      <button class="hb-button hb-button--primary">Primary Action</button>
+      <button class="hb-button">Primary Action</button>
       <button class="hb-button hb-button--secondary">Secondary Action</button>
     </div>
   </section>

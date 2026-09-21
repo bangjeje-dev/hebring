@@ -145,7 +145,7 @@ Maps to the 4px base primitive scale (`0`, `1`, `2`, `3`, `4`, `5`, `6`, `8`, `1
 - **Height**: `.hb-h-auto`, `.hb-h-full` (100%)
 
 ### Typography
-- **Font Size**: `.hb-text-xs`, `.hb-text-sm`, `.hb-text-md`, `.hb-text-lg`, `.hb-text-xl`, `.hb-text-2xl`, `.hb-text-3xl`, `.hb-text-4xl`, `.hb-text-5xl`, `.hb-text-6xl`
+- **Font Size**: `.hb-text-xs`, `.hb-text-sm`, `.hb-text-base`, `.hb-text-lg`, `.hb-text-xl`, `.hb-text-2xl`, `.hb-text-3xl`, `.hb-text-4xl`, `.hb-text-5xl`, `.hb-text-6xl`
 - **Text Alignment**: `.hb-text-start`, `.hb-text-center`, `.hb-text-end`
 - **Font Weight**: `.hb-font-normal`, `.hb-font-medium`, `.hb-font-semibold`, `.hb-font-bold`
 

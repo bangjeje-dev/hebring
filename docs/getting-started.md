@@ -66,11 +66,11 @@ Here is a minimal HTML example using HEBRING's layout and component classes:
     <!-- Stack layout handles vertical spacing -->
     <div class="hb-stack">
       <h1 class="hb-text-xl">Welcome to HEBRING</h1>
-      <p class="hb-text-md">A predictable CSS framework for modern web interfaces.</p>
+      <p class="hb-text-base">A predictable CSS framework for modern web interfaces.</p>
       
       <!-- Cluster layout groups items horizontally -->
       <div class="hb-cluster">
-        <button class="hb-button hb-button--primary">Get Started</button>
+        <button class="hb-button">Get Started</button>
         <button class="hb-button hb-button--secondary">Documentation</button>
       </div>
     </div>
