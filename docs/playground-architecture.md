@@ -63,4 +63,4 @@ Playground testing will validate:
 - Security constraints (e.g., `<script>` execution blocked) are upheld.
 
 ## 17. Future Expansion
-Once the minimal prototype is proven, the Playground may expand to include a utility class auto-completer, interactive token explorers, and deeper integration with the `@hebring/themes` ecosystem, provided all expansion adheres to the dependency invariants.
+Once the minimal prototype is proven, the Playground may expand to include a utility class auto-completer, interactive token explorers, and deeper integration with alternative ecosystem themes, provided all expansion adheres to the dependency invariants.

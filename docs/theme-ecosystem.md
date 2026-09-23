@@ -4,8 +4,8 @@
 The HEBRING Theme Ecosystem exists to allow developers to rapidly and safely apply distinct visual identities to HEBRING Core and UI components without forking the framework. Themes exist as an independent Ecosystem layer; they extend HEBRING's presentation but never modify the Core engine or require structural overrides.
 
 ## 2. Core Theme vs Ecosystem Theme
-- **Core Theme Capability**: The intrinsic ability of HEBRING to support themes via its primitive and semantic token architecture (e.g., the built-in dark mode mapping via `[data-theme="dark"]`).
-- **Ecosystem-Distributed Theme**: An external, self-contained CSS asset that selectively maps semantic tokens to new values to create a cohesive new aesthetic, distributed independently from Core.
+- **Core Theme Capability**: HEBRING Core contains primitive tokens, semantic tokens, and the built-in default theme. The current Core import of the built-in theme (`src/tokens/themes/index.css`) is intentional and valid.
+- **Ecosystem-Distributed Theme**: An alternative, optional CSS asset that selectively maps semantic tokens to new values to create a cohesive new aesthetic, distributed independently from Core.
 
 ## 3. Theme Contract
 A valid HEBRING theme must operate exclusively by overriding semantic CSS custom properties defined in `:root` or `[data-theme]`. It must not introduce arbitrary classes (like `.bg-red`), override component-level CSS (like `.hb-button { ... }`), or modify HTML structure.
@@ -62,9 +62,8 @@ Future HEBRING UI components (and existing ones like Card, Badge, Alert) will co
 HEBRING Icons automatically support the theme ecosystem via the `currentColor` SVG property. Icons inherit the surrounding text color (controlled by the theme's semantic tokens) and never contain theme-specific color definitions.
 
 ## 13. Theme Package Boundary
-Ecosystem themes belong to a conceptual `@hebring/themes` package boundary.
-For now, they may exist as source files (e.g., `src/themes/`), but structurally, they represent an optional consumer dependency rather than a Core requirement.
-`@hebring/themes` → optional dependency of Consumer (never imported by `@hebring/core`).
+HEBRING is distributed as a single npm package. Conceptually, ecosystem themes belong to a distinct internal ecosystem boundary.
+For now, they may exist as source files (e.g., `src/themes/`), but structurally, alternative themes represent an optional consumer dependency rather than a Core requirement.
 
 ## 14. Built-in vs Community Themes
 - **Built-in Themes**: Officially maintained themes (like the default light/dark) guaranteeing exact contrast ratios and long-term support.

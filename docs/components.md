@@ -33,7 +33,7 @@ HEBRING components adhere to the following principles:
 
 HEBRING intentionally maintains a minimal component footprint, focusing on essential patterns that are difficult to construct correctly from utilities alone.
 
-Currently, the following components exist:
+Currently, the following Core components exist:
 - **Button** (`.hb-button`)
 - **Card** (`.hb-card`)
 - **Badge** (`.hb-badge`)

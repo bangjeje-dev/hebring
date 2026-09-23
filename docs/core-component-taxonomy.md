@@ -15,8 +15,8 @@ A Core Component in HEBRING is a pure CSS implementation of a universal, foundat
 - **Core Component**: A cohesive abstraction combining many properties, pseudo-classes, and token mappings to form a recognizable UI pattern. Utilities can override component styles safely due to cascade layer rules.
 
 ## 5. Core Component vs Ecosystem UI Component
-- **HEBRING Core Component**: Pure CSS and HTML. Operates without a JavaScript runtime. Represents universal web primitives (buttons, inputs, tables).
-- **HEBRING Ecosystem UI Component**: Higher-level compositions or interactive widgets (Modals, DatePickers, Accordions) that inherently require JavaScript logic, complex DOM manipulation, or framework-specific wrappers (React, Vue, etc.). Ecosystem components consume Core Components and Layouts.
+- **HEBRING Core Component**: Pure CSS and HTML. Operates without a JavaScript runtime. Represents universal web primitives (e.g., buttons, inputs, tables, cards, badges, alerts).
+- **HEBRING Ecosystem UI Component**: Future higher-level conceptual compositions or interactive widgets (Modals, DatePickers, Accordions) that inherently require JavaScript logic, complex DOM manipulation, or framework-specific wrappers (React, Vue, etc.). Ecosystem components consume Core Components and Layouts.
 
 ## 6. Core Component Categories
 Core Components are organized into functional categories:

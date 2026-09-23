@@ -4,9 +4,9 @@
 HEBRING UI exists as a higher-level composition layer built on top of HEBRING Core. While Core provides the universal, framework-agnostic building blocks (buttons, inputs, layout primitives), HEBRING UI solves complex, domain-specific, or highly interactive UI challenges (modals, datepickers, complex navigation). By separating UI from Core, the Core remains exceptionally lightweight, predictable, and maintainable, while UI can iterate rapidly on complex patterns.
 
 ## 2. Core vs UI Boundary
-- **HEBRING Core**: Pure CSS. Represents fundamental HTML elements (e.g., `.hb-button`, `.hb-input`). Has no knowledge of complex state management beyond native pseudo-classes and simple `.is-*` toggles.
-- **HEBRING UI**: Compositions of multiple Core primitives and HTML structures. May represent complex widgets that inherently require JavaScript for logic, focus trapping, or dynamic rendering (e.g., a Combobox or Modal). 
-- *Example*: `.hb-button` belongs in Core. A `Dialog` containing a form, backdrop, and action buttons belongs in HEBRING UI.
+- **HEBRING Core**: Pure CSS. Represents universal HTML patterns, including components like `.hb-button`, `.hb-card`, `.hb-badge`, and `.hb-alert`. Has no knowledge of complex state management beyond native pseudo-classes and simple `.is-*` toggles.
+- **HEBRING UI**: Conceptual future ecosystem layer for complex interactive widgets (Modals, DatePickers, Accordions) that inherently require JavaScript logic, focus trapping, or dynamic rendering. 
+- *Example*: `.hb-card` belongs in Core. A complex interactive `Combobox` belongs in HEBRING UI.
 
 ## 3. UI Component Definition
 A HEBRING UI component is a cohesive, reusable pattern that composes HEBRING Core components, Layout primitives, and Utilities to solve a specific user interface requirement. It dictates the anatomy of how these lower-level pieces fit together.
@@ -23,10 +23,11 @@ A UI component (like an Alert Dialog) will compose a layout primitive (`.hb-stac
 - **UI CSS → External Framework Runtime**: FORBIDDEN (The pure CSS output of HEBRING UI must not depend on React/Vue. Framework adapters are a separate ecosystem concern).
 
 ## 6. Package Architecture
-Conceptually, the ecosystem will split into distinct boundaries:
-- `@hebring/core`: The pure CSS foundation (current repository state).
-- `@hebring/ui`: The higher-level UI component CSS and structural definitions.
-*(Note: These packages do not exist yet. This serves as the blueprint for future package extraction).*
+HEBRING is distributed as a single npm package: `hebring`.
+Conceptually, the ecosystem is split into distinct internal layers:
+- Core: The pure CSS foundation.
+- Ecosystem UI: The future higher-level UI component structure definitions.
+*(Note: There is no `@hebring/core` or `@hebring/ui` package. These names refer purely to conceptual internal boundaries).*
 
 ## 7. CSS Architecture
 HEBRING UI CSS fits seamlessly into the existing cascade architecture:
@@ -85,7 +86,7 @@ Promoting a UI component to Core requires strict justification:
 1. It must be universally applicable to almost all web projects.
 2. It must be achievable with 100% pure CSS and native HTML semantics.
 3. It must not rely on complex internal DOM structures.
-If these criteria are met, a UI component may be refactored and moved to `@hebring/core`.
+If these criteria are met, a UI component may be refactored and moved to Core.
 
 ## 18. Ecosystem Boundary
 HEBRING UI is a sibling to other Ecosystem packages. It does not own them.

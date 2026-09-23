@@ -68,8 +68,8 @@ There is no proprietary marketplace or payment system.
 Templates declare their compatibility with HEBRING Core versions in their `README.md`. Because HEBRING relies on stable CSS classes, templates remain largely backwards compatible, but major breaking changes to Core layout primitives will require template version bumps.
 
 ## 16. Dependencies
-Templates have exactly one mandatory dependency: `@hebring/core` (specifically `dist/hebring.css`).
-Dependencies on `@hebring/themes` or `@hebring/icons` are strictly optional.
+Templates have exactly one mandatory dependency: the `hebring` single npm package (specifically `dist/hebring.css`).
+Dependencies on alternative ecosystem themes or icons are strictly optional.
 
 ## 17. Customization
 Developers customize templates by editing the raw HTML, swapping HEBRING utility classes, or overriding semantic tokens. No proprietary template language (like Liquid or Twig) is required to parse or modify a template.
