@@ -14,6 +14,7 @@
   --hb-color-surface: var(--hb-color-neutral-900);
   --hb-color-surface-raised: var(--hb-color-neutral-800);
   --hb-color-surface-muted: var(--hb-color-neutral-950);
+  --hb-color-surface-active: var(--hb-color-neutral-800);
 
   /* Text Roles */
   --hb-color-text: var(--hb-color-neutral-50);
@@ -44,6 +45,8 @@
 
   /* Status Roles - Danger */
   --hb-color-danger: var(--hb-color-red-500);
+  --hb-color-danger-hover: var(--hb-color-red-400);
+  --hb-color-danger-active: var(--hb-color-red-600);
   --hb-color-danger-subtle: var(--hb-color-red-950);
   --hb-color-on-danger: var(--hb-color-white);
 

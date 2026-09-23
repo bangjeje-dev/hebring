@@ -36,7 +36,7 @@
 
   .hb-alert--warning {
     --hb-alert-bg: var(--hb-color-warning-subtle);
-    --hb-alert-text: var(--hb-color-warning-600, var(--hb-color-warning));
+    --hb-alert-text: var(--hb-color-warning);
     --hb-alert-border: var(--hb-color-warning);
   }
 

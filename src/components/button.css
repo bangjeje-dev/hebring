@@ -88,7 +88,7 @@
     --hb-button-border: var(--hb-color-border-strong);
     --hb-button-hover-bg: var(--hb-color-surface-muted);
     --hb-button-hover-border: var(--hb-color-border-strong);
-    --hb-button-active-bg: var(--hb-color-neutral-200); /* primitive fallback for active surface */
+    --hb-button-active-bg: var(--hb-color-surface-active);
     --hb-button-active-border: var(--hb-color-border-strong);
   }
 
@@ -96,10 +96,10 @@
     --hb-button-bg: var(--hb-color-danger);
     --hb-button-text: var(--hb-color-on-danger);
     --hb-button-border: var(--hb-color-danger);
-    --hb-button-hover-bg: var(--hb-color-red-700); /* primitive fallback */
-    --hb-button-hover-border: var(--hb-color-red-700);
-    --hb-button-active-bg: var(--hb-color-red-800);
-    --hb-button-active-border: var(--hb-color-red-800);
+    --hb-button-hover-bg: var(--hb-color-danger-hover);
+    --hb-button-hover-border: var(--hb-color-danger-hover);
+    --hb-button-active-bg: var(--hb-color-danger-active);
+    --hb-button-active-border: var(--hb-color-danger-active);
   }
 
   /*

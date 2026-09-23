@@ -37,7 +37,7 @@
 
   .hb-badge--warning {
     --hb-badge-bg: var(--hb-color-warning-subtle);
-    --hb-badge-text: var(--hb-color-warning-600, var(--hb-color-warning));
+    --hb-badge-text: var(--hb-color-warning);
   }
 
   .hb-badge--danger {

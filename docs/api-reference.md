@@ -123,6 +123,29 @@ HEBRING intentionally minimizes its component API.
 
 *Supported on `<button>` and `<a>` elements.*
 
+### Card (`.hb-card`)
+**Base**: `.hb-card`
+**Elements**:
+- `.hb-card__header`
+- `.hb-card__body`
+- `.hb-card__footer`
+
+### Badge (`.hb-badge`)
+**Base**: `.hb-badge`
+**Modifiers**:
+- `.hb-badge--primary`
+- `.hb-badge--success`
+- `.hb-badge--warning`
+- `.hb-badge--danger`
+
+### Alert (`.hb-alert`)
+**Base**: `.hb-alert`
+**Modifiers**:
+- `.hb-alert--info`
+- `.hb-alert--success`
+- `.hb-alert--warning`
+- `.hb-alert--danger`
+
 ---
 
 ## 6. Utility API

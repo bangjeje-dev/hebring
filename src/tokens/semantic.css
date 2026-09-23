@@ -18,6 +18,7 @@
   --hb-color-surface: var(--hb-color-white);
   --hb-color-surface-raised: var(--hb-color-white);
   --hb-color-surface-muted: var(--hb-color-neutral-100);
+  --hb-color-surface-active: var(--hb-color-neutral-200);
 
   /* ==================================================
      3. TEXT ROLES
@@ -58,6 +59,8 @@
 
   /* Danger */
   --hb-color-danger: var(--hb-color-red-600);
+  --hb-color-danger-hover: var(--hb-color-red-700);
+  --hb-color-danger-active: var(--hb-color-red-800);
   --hb-color-danger-subtle: var(--hb-color-red-50);
   --hb-color-on-danger: var(--hb-color-white);
 
