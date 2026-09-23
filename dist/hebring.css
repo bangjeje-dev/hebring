@@ -289,7 +289,7 @@
     --hb-button-border: var(--hb-color-border-strong);
     --hb-button-hover-bg: var(--hb-color-surface-muted);
     --hb-button-hover-border: var(--hb-color-border-strong);
-    --hb-button-active-bg: var(--hb-color-neutral-200);
+    --hb-button-active-bg: var(--hb-color-surface-active);
     --hb-button-active-border: var(--hb-color-border-strong);
   }
 
@@ -297,10 +297,10 @@
     --hb-button-bg: var(--hb-color-danger);
     --hb-button-text: var(--hb-color-on-danger);
     --hb-button-border: var(--hb-color-danger);
-    --hb-button-hover-bg: var(--hb-color-red-700);
-    --hb-button-hover-border: var(--hb-color-red-700);
-    --hb-button-active-bg: var(--hb-color-red-800);
-    --hb-button-active-border: var(--hb-color-red-800);
+    --hb-button-hover-bg: var(--hb-color-danger-hover);
+    --hb-button-hover-border: var(--hb-color-danger-hover);
+    --hb-button-active-bg: var(--hb-color-danger-active);
+    --hb-button-active-border: var(--hb-color-danger-active);
   }
 
   .hb-button--sm {
@@ -385,7 +385,7 @@
 
   .hb-badge--warning {
     --hb-badge-bg: var(--hb-color-warning-subtle);
-    --hb-badge-text: var(--hb-color-warning-600, var(--hb-color-warning));
+    --hb-badge-text: var(--hb-color-warning);
   }
 
   .hb-badge--danger {
@@ -426,7 +426,7 @@
 
   .hb-alert--warning {
     --hb-alert-bg: var(--hb-color-warning-subtle);
-    --hb-alert-text: var(--hb-color-warning-600, var(--hb-color-warning));
+    --hb-alert-text: var(--hb-color-warning);
     --hb-alert-border: var(--hb-color-warning);
   }
 
@@ -2109,6 +2109,7 @@
   --hb-color-surface: var(--hb-color-white);
   --hb-color-surface-raised: var(--hb-color-white);
   --hb-color-surface-muted: var(--hb-color-neutral-100);
+  --hb-color-surface-active: var(--hb-color-neutral-200);
   --hb-color-text: var(--hb-color-neutral-900);
   --hb-color-text-muted: var(--hb-color-neutral-600);
   --hb-color-text-subtle: var(--hb-color-neutral-500);
@@ -2127,6 +2128,8 @@
   --hb-color-warning-subtle: var(--hb-color-yellow-50);
   --hb-color-on-warning: var(--hb-color-black);
   --hb-color-danger: var(--hb-color-red-600);
+  --hb-color-danger-hover: var(--hb-color-red-700);
+  --hb-color-danger-active: var(--hb-color-red-800);
   --hb-color-danger-subtle: var(--hb-color-red-50);
   --hb-color-on-danger: var(--hb-color-white);
   --hb-color-info: var(--hb-color-blue-600);
@@ -2144,6 +2147,7 @@
   --hb-color-surface: var(--hb-color-neutral-900);
   --hb-color-surface-raised: var(--hb-color-neutral-800);
   --hb-color-surface-muted: var(--hb-color-neutral-950);
+  --hb-color-surface-active: var(--hb-color-neutral-800);
   --hb-color-text: var(--hb-color-neutral-50);
   --hb-color-text-muted: var(--hb-color-neutral-400);
   --hb-color-text-subtle: var(--hb-color-neutral-500);
@@ -2162,6 +2166,8 @@
   --hb-color-warning-subtle: var(--hb-color-yellow-950);
   --hb-color-on-warning: var(--hb-color-black);
   --hb-color-danger: var(--hb-color-red-500);
+  --hb-color-danger-hover: var(--hb-color-red-400);
+  --hb-color-danger-active: var(--hb-color-red-600);
   --hb-color-danger-subtle: var(--hb-color-red-950);
   --hb-color-on-danger: var(--hb-color-white);
   --hb-color-info: var(--hb-color-blue-500);
