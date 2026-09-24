@@ -38,6 +38,7 @@ Currently, the following Core components exist:
 - **Card** (`.hb-card`)
 - **Badge** (`.hb-badge`)
 - **Alert** (`.hb-alert`)
+- **Forms** (`.hb-input`, `.hb-select`, `.hb-textarea`, `.hb-checkbox`, `.hb-radio`, `.hb-label`)
 *Note: HEBRING is a CSS foundation, not an exhaustive UI toolkit. It does not ship with complex interactive widgets like accordions or modals that inherently require JavaScript.*
 
 ---
@@ -210,3 +211,42 @@ Alerts provide contextual color variants using subtle backgrounds and bordered e
 - Use `role="alert"` for important and time-sensitive feedback.
 - Do not rely on color alone; ensure the text explicitly states the meaning or include an explicit icon in the HTML.
 - Colors mapped directly to semantic tokens to guarantee contrast ratios.
+
+---
+
+## 9. Forms
+
+HEBRING provides styled, semantic form controls. Form elements use global semantic tokens to map border, background, and text colors. 
+
+### Supported Controls
+- `.hb-label`: Associated `<label>` text.
+- `.hb-input`: Text-like `<input>` fields (text, email, password, number).
+- `.hb-select`: Native `<select>` drop-downs (includes custom unstyled SVG arrow).
+- `.hb-textarea`: Multi-line text input.
+- `.hb-checkbox`: Native checkbox inputs with custom SVG checkmark when checked.
+- `.hb-radio`: Native radio inputs with custom SVG circle when checked.
+
+### States
+Form controls automatically handle all native CSS states correctly:
+- `:hover`: Adjusted border color (`--hb-color-primary-hover`).
+- `:focus-visible`: Accessible focus ring outline via `box-shadow` and `border-color`.
+- `:disabled`: Muted appearance and `not-allowed` cursor. Checkboxes/radios adjust checked state styling accordingly.
+- `:checked`: Primary background and custom SVG representation.
+- `:invalid`: Danger-colored border and focus ring.
+- `.is-invalid` or `[aria-invalid="true"]`: Force invalid state presentation via JavaScript or ARIA attributes.
+
+### Example
+```html
+<div class="hb-stack">
+  <div>
+    <label for="email" class="hb-label">Email Address</label>
+    <input type="email" id="email" class="hb-input" placeholder="you@example.com">
+  </div>
+  <div>
+    <label class="hb-label">
+      <input type="checkbox" class="hb-checkbox">
+      Subscribe to newsletter
+    </label>
+  </div>
+</div>
+```

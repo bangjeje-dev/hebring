@@ -11,3 +11,8 @@
 @import "./sizing.css";
 @import "./typography.css";
 @import "./alignment.css";
+@import "./grid.css";
+@import "./flex.css";
+@import "./color.css";
+@import "./border.css";
+@import "./accessibility.css";

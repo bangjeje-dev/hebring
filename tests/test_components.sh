@@ -117,6 +117,19 @@ check_grep "$SRC_COMPONENTS/alert.css" "var\(--hb-color-surface-muted\)" "Alert:
 check_grep "$SRC_COMPONENTS/alert.css" "@layer components" "Alert: exists in correct CSS layer"
 check_not_grep "$SRC_COMPONENTS/alert.css" "\.is-|\.has-" "Alert: no JavaScript dependency"
 
+# 13. Form Tests
+check_grep "$SRC_COMPONENTS/form.css" "\.hb-label" "Form: hb-label exists"
+check_grep "$SRC_COMPONENTS/form.css" "\.hb-input" "Form: hb-input exists"
+check_grep "$SRC_COMPONENTS/form.css" "\.hb-select" "Form: hb-select exists"
+check_grep "$SRC_COMPONENTS/form.css" "\.hb-textarea" "Form: hb-textarea exists"
+check_grep "$SRC_COMPONENTS/form.css" "\.hb-checkbox" "Form: hb-checkbox exists"
+check_grep "$SRC_COMPONENTS/form.css" "\.hb-radio" "Form: hb-radio exists"
+check_grep "$SRC_COMPONENTS/form.css" ":focus-visible" "Form: :focus-visible states handled"
+check_grep "$SRC_COMPONENTS/form.css" ":invalid" "Form: :invalid state handled"
+check_grep "$SRC_COMPONENTS/form.css" "\[aria-invalid=\"true\"\]" "Form: aria-invalid handled"
+check_grep "$SRC_COMPONENTS/form.css" ":disabled" "Form: :disabled state handled"
+check_grep "$SRC_COMPONENTS/form.css" "\.is-invalid" "Form: .is-invalid utility class handled"
+
 if [ $ERRORS -eq 0 ]; then
   echo "All Component tests passed!"
   exit 0

@@ -44,7 +44,16 @@
   --hb-color-on-primary: var(--hb-color-white);
 
   /* ==================================================
-     6. STATUS ROLES
+     6. SECONDARY ROLES
+     ================================================== */
+  --hb-color-secondary: var(--hb-color-neutral-600);
+  --hb-color-secondary-hover: var(--hb-color-neutral-700);
+  --hb-color-secondary-active: var(--hb-color-neutral-800);
+  --hb-color-secondary-subtle: var(--hb-color-neutral-100);
+  --hb-color-on-secondary: var(--hb-color-white);
+
+  /* ==================================================
+     7. STATUS ROLES
      ================================================== */
 
   /* Success */
@@ -70,12 +79,12 @@
   --hb-color-on-info: var(--hb-color-white);
 
   /* ==================================================
-     7. FOCUS INDICATOR
+     8. FOCUS INDICATOR
      ================================================== */
   --hb-color-focus: var(--hb-color-blue-600);
 
   /* ==================================================
-     8. SEMANTIC TYPOGRAPHY
+     9. SEMANTIC TYPOGRAPHY
      ================================================== */
   --hb-font-family-body: var(--hb-font-family-sans);
   --hb-font-family-heading: var(--hb-font-family-sans);

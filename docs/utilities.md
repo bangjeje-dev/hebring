@@ -46,7 +46,11 @@ HEBRING currently provides utilities in five categories:
 - **Display**: Block, inline, none, etc., and visibility.
 - **Sizing**: Specific width and height constraints.
 - **Typography**: Font sizes, weights, and text alignment.
-- **Alignment**: Flex/grid child item alignment (self-alignment).
+- **Alignment**: Flex/grid container items alignment and child item self-alignment.
+- **Grid / Flex**: Layout context configuration (columns, direction).
+- **Color**: Semantic background and text colors.
+- **Border**: Border width, style, color, and border radius.
+- **Accessibility**: Screen reader helpers.
 
 ## 5. Spacing Utilities
 
@@ -116,15 +120,61 @@ Handles text styling using the design token scale.
 
 ## 9. Alignment Utilities
 
-Handles self-alignment for flex and grid children. These exist independently from layout primitives because layout primitives dictate the container's structural behavior, whereas alignment utilities let an individual child deviate from that structure.
+Handles alignment for flex and grid contexts. Container alignment configures all items, while self-alignment lets an individual child deviate.
 
-**Align Self:**
+**Align Items (Container):**
+- `.hb-items-start`, `.hb-items-center`, `.hb-items-end`, `.hb-items-stretch`
+
+**Justify Content (Container):**
+- `.hb-justify-start`, `.hb-justify-center`, `.hb-justify-end`, `.hb-justify-between`, `.hb-justify-around`, `.hb-justify-evenly`
+
+**Align Self (Child):**
 - `.hb-self-auto`, `.hb-self-start`, `.hb-self-center`, `.hb-self-end`, `.hb-self-stretch`
 
-**Justify Self:**
+**Justify Self (Child):**
 - `.hb-justify-self-auto`, `.hb-justify-self-start`, `.hb-justify-self-center`, `.hb-justify-self-end`, `.hb-justify-self-stretch`
 
-## 10. Responsive Utilities
+## 10. Grid and Flex Configuration
+
+Provides utilities for configuring the behavior of grid and flex contexts. Note that you must still use `.hb-grid` or `.hb-flex` to establish the display context.
+
+**Grid Columns:**
+- `.hb-grid-cols-1` through `.hb-grid-cols-12`
+
+**Flex Direction:**
+- `.hb-flex-row`, `.hb-flex-column`
+
+## 11. Color Utilities
+
+Single-purpose color mapping utilities utilizing semantic tokens. Primitive palette names (like `blue`) are strictly forbidden.
+
+**Background Color:**
+- `.hb-bg-primary`, `.hb-bg-secondary`, `.hb-bg-success`, `.hb-bg-warning`, `.hb-bg-danger`, `.hb-bg-surface`, `.hb-bg-surface-muted`
+
+**Text Color:**
+- `.hb-text-primary`, `.hb-text-secondary`, `.hb-text-success`, `.hb-text-warning`, `.hb-text-danger`, `.hb-text-muted`
+
+## 12. Border Utilities
+
+Utilities for applying borders and border radius using semantic tokens.
+
+**Border Dimensions & Style:**
+- `.hb-border` (1px width), `.hb-border-0`
+- `.hb-border-solid`, `.hb-border-dashed`, `.hb-border-dotted`
+
+**Border Color:**
+- `.hb-border-default` (Uses `--hb-color-border`)
+- `.hb-border-primary`, `.hb-border-success`, `.hb-border-warning`, `.hb-border-danger`
+
+**Border Radius:**
+- `.hb-rounded`, `.hb-rounded-sm`, `.hb-rounded-md`, `.hb-rounded-lg`, `.hb-rounded-full`
+
+## 13. Accessibility Utilities
+
+**Screen Reader Only:**
+- `.hb-sr-only` (Visually hides content while remaining accessible to screen readers)
+
+## 14. Responsive Utilities
 
 HEBRING supports responsive behavior for *meaningful* utilities using a mobile-first, min-width architecture without JavaScript viewport detection.
 
@@ -143,14 +193,15 @@ Responsive utilities are cumulative. Applying a style at `sm` automatically pers
 - Sizing (e.g., `.hb-w-full`, `.hb-w-auto-lg`)
 - Typography font-size (e.g., `.hb-text-sm`, `.hb-text-lg-md`)
 - Typography text alignment (e.g., `.hb-text-center`, `.hb-text-start-sm`)
-- Alignment (e.g., `.hb-self-center`, `.hb-self-start-lg`)
+- Item & Container Alignment (e.g., `.hb-items-center-md`, `.hb-self-start-lg`)
+- Grid Columns & Flex Direction (e.g., `.hb-grid-cols-2-md`, `.hb-flex-column-sm`)
 
 **What is intentionally excluded:**
 - **No responsive spacing**: Classes like `hb-p-4-md` do not exist.
 - **No responsive font-weight**: Font-weight does not typically need to change across viewports.
 - **No `@layer responsive`**: Responsive utilities are embedded natively at the bottom of the standard `utilities` cascade layer to prevent specificity conflicts.
 
-## 11. Composition
+## 15. Composition
 
 Utilities can be combined powerfully when needed, though they often work best when tweaking existing Layouts.
 

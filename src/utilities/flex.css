@@ -1,0 +1,28 @@
+/**
+ * HEBRING — Flex Utilities
+ *
+ * Single-purpose utilities for configuring CSS Flexbox layouts.
+ */
+
+@layer utilities {
+  .hb-flex-row { flex-direction: row; }
+  .hb-flex-column { flex-direction: column; }
+
+  /* RESPONSIVE FLEX DIRECTION (sm) */
+  @media (min-width: 640px) {
+    .hb-flex-row-sm { flex-direction: row; }
+    .hb-flex-column-sm { flex-direction: column; }
+  }
+
+  /* RESPONSIVE FLEX DIRECTION (md) */
+  @media (min-width: 768px) {
+    .hb-flex-row-md { flex-direction: row; }
+    .hb-flex-column-md { flex-direction: column; }
+  }
+
+  /* RESPONSIVE FLEX DIRECTION (lg) */
+  @media (min-width: 1024px) {
+    .hb-flex-row-lg { flex-direction: row; }
+    .hb-flex-column-lg { flex-direction: column; }
+  }
+}

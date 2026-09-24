@@ -11,6 +11,11 @@ UTILITY_FILES=(
   "sizing"
   "typography"
   "alignment"
+  "grid"
+  "flex"
+  "color"
+  "border"
+  "accessibility"
 )
 
 if [ ! -f "$DIST_CSS" ]; then
@@ -71,7 +76,31 @@ check_not_grep "$SRC_UTILS/typography.css" "\.hb-font-bold-(sm|md|lg)" "Typograp
 # 5. Alignment Utilities
 check_grep "$SRC_UTILS/alignment.css" "\.hb-self-center" "Alignment: hb-self-center exists"
 check_grep "$SRC_UTILS/alignment.css" "\.hb-justify-self-center" "Alignment: hb-justify-self-center exists"
-check_not_grep "$SRC_UTILS/alignment.css" "\.hb-items-center|\.hb-justify-center" "Alignment: layout aliases like items-center are forbidden"
+check_grep "$SRC_UTILS/alignment.css" "\.hb-items-center" "Alignment: hb-items-center exists"
+check_grep "$SRC_UTILS/alignment.css" "\.hb-justify-center" "Alignment: hb-justify-center exists"
+
+# Grid Utilities
+check_grep "$SRC_UTILS/grid.css" "\.hb-grid-cols-12" "Grid: hb-grid-cols-12 exists"
+check_grep "$SRC_UTILS/grid.css" "\.hb-grid-cols-12-lg" "Grid: responsive grid cols exists"
+
+# Flex Utilities
+check_grep "$SRC_UTILS/flex.css" "\.hb-flex-row" "Flex: hb-flex-row exists"
+check_grep "$SRC_UTILS/flex.css" "\.hb-flex-column-md" "Flex: responsive flex direction exists"
+
+# Color Utilities
+check_grep "$SRC_UTILS/color.css" "\.hb-bg-primary" "Color: hb-bg-primary exists"
+check_grep "$SRC_UTILS/color.css" "\.hb-text-success" "Color: hb-text-success exists"
+check_not_grep "$SRC_UTILS/color.css" "\.hb-bg-blue" "Color: no primitive tokens exposed"
+
+# Border Utilities
+check_grep "$SRC_UTILS/border.css" "\.hb-border" "Border: hb-border exists"
+check_grep "$SRC_UTILS/border.css" "\.hb-border-solid" "Border: hb-border-solid exists"
+check_grep "$SRC_UTILS/border.css" "\.hb-rounded-full" "Border: hb-rounded-full exists"
+check_grep "$SRC_UTILS/border.css" "\.hb-border-primary" "Border: hb-border-primary exists"
+
+# Accessibility Utilities
+check_grep "$SRC_UTILS/accessibility.css" "\.hb-sr-only" "Accessibility: hb-sr-only exists"
+
 
 # 6. Responsive Boundary
 check_grep "$DIST_CSS" "@media.*640px" "Responsive: sm breakpoint exists and uses min-width"

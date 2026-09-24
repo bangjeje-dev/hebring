@@ -1,0 +1,30 @@
+/**
+ * HEBRING — Border Utilities
+ *
+ * Single-purpose utilities for border styles and radius.
+ */
+
+@layer utilities {
+  /* BORDER WIDTH */
+  .hb-border { border-width: 1px; }
+  .hb-border-0 { border-width: 0; }
+
+  /* BORDER STYLE */
+  .hb-border-solid { border-style: solid; }
+  .hb-border-dashed { border-style: dashed; }
+  .hb-border-dotted { border-style: dotted; }
+
+  /* BORDER COLOR */
+  .hb-border-default { border-color: var(--hb-color-border); }
+  .hb-border-primary { border-color: var(--hb-color-primary); }
+  .hb-border-success { border-color: var(--hb-color-success); }
+  .hb-border-warning { border-color: var(--hb-color-warning); }
+  .hb-border-danger { border-color: var(--hb-color-danger); }
+
+  /* BORDER RADIUS */
+  .hb-rounded { border-radius: var(--hb-radius-md); }
+  .hb-rounded-sm { border-radius: var(--hb-radius-sm); }
+  .hb-rounded-md { border-radius: var(--hb-radius-md); }
+  .hb-rounded-lg { border-radius: var(--hb-radius-lg); }
+  .hb-rounded-full { border-radius: var(--hb-radius-full); }
+}

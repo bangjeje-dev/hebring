@@ -59,6 +59,7 @@ Contextual, intent-based design mappings referencing primitive tokens. These are
 | **Text** | `--hb-color-text`, `--hb-color-text-muted`, `--hb-color-text-subtle`, `--hb-color-text-disabled` |
 | **Border** | `--hb-color-border`, `--hb-color-border-strong` |
 | **Primary** | `--hb-color-primary`, `--hb-color-primary-hover`, `--hb-color-primary-active`, `--hb-color-primary-subtle`, `--hb-color-on-primary` |
+| **Secondary** | `--hb-color-secondary`, `--hb-color-secondary-hover`, `--hb-color-secondary-active`, `--hb-color-secondary-subtle`, `--hb-color-on-secondary` |
 | **Success** | `--hb-color-success`, `--hb-color-success-subtle`, `--hb-color-on-success` |
 | **Warning** | `--hb-color-warning`, `--hb-color-warning-subtle`, `--hb-color-on-warning` |
 | **Danger** | `--hb-color-danger`, `--hb-color-danger-subtle`, `--hb-color-on-danger` |
@@ -80,6 +81,7 @@ HEBRING normalizes browser defaults via the `@layer reset` and `@layer base` CSS
 - **SVG Behavior**: Default inline display, inheriting current color.
 - **Typography Defaults**: Body inherits semantic typography variables (sans font family, medium size, regular weight, text color).
 - **Form Inheritance**: Inputs and buttons inherit font family from their container.
+- **Reduced Motion**: Disables animation and transition durations globally if `prefers-reduced-motion: reduce` is active.
 
 *Note: Foundation provides baseline behaviors, not utility classes.*
 
@@ -146,6 +148,12 @@ HEBRING intentionally minimizes its component API.
 - `.hb-alert--warning`
 - `.hb-alert--danger`
 
+### Forms
+- **Elements**: `.hb-label`, `.hb-input`, `.hb-select`, `.hb-textarea`, `.hb-checkbox`, `.hb-radio`
+- **Native States**: `:hover`, `:focus-visible`, `:active`, `:disabled`, `:checked`, `:invalid`
+- **CSS Classes/Attributes**: `.is-invalid`, `[aria-invalid="true"]`
+
+
 ---
 
 ## 6. Utility API
@@ -172,9 +180,30 @@ Maps to the 4px base primitive scale (`0`, `1`, `2`, `3`, `4`, `5`, `6`, `8`, `1
 - **Text Alignment**: `.hb-text-start`, `.hb-text-center`, `.hb-text-end`
 - **Font Weight**: `.hb-font-normal`, `.hb-font-medium`, `.hb-font-semibold`, `.hb-font-bold`
 
-### Alignment (Flex/Grid Child)
-- **Align Self**: `.hb-self-auto`, `.hb-self-start`, `.hb-self-center`, `.hb-self-end`, `.hb-self-stretch`
-- **Justify Self**: `.hb-justify-self-auto`, `.hb-justify-self-start`, `.hb-justify-self-center`, `.hb-justify-self-end`, `.hb-justify-self-stretch`
+### Alignment (Flex/Grid Container & Child)
+- **Align Items (Container)**: `.hb-items-start`, `.hb-items-center`, `.hb-items-end`, `.hb-items-stretch`
+- **Justify Content (Container)**: `.hb-justify-start`, `.hb-justify-center`, `.hb-justify-end`, `.hb-justify-between`, `.hb-justify-around`, `.hb-justify-evenly`
+- **Align Self (Child)**: `.hb-self-auto`, `.hb-self-start`, `.hb-self-center`, `.hb-self-end`, `.hb-self-stretch`
+- **Justify Self (Child)**: `.hb-justify-self-auto`, `.hb-justify-self-start`, `.hb-justify-self-center`, `.hb-justify-self-end`, `.hb-justify-self-stretch`
+
+### Grid Configuration
+- **Columns**: `.hb-grid-cols-1` through `.hb-grid-cols-12`
+
+### Flex Configuration
+- **Direction**: `.hb-flex-row`, `.hb-flex-column`
+
+### Color
+- **Background**: `.hb-bg-primary`, `.hb-bg-secondary`, `.hb-bg-success`, `.hb-bg-warning`, `.hb-bg-danger`, `.hb-bg-surface`, `.hb-bg-surface-muted`
+- **Text**: `.hb-text-primary`, `.hb-text-secondary`, `.hb-text-success`, `.hb-text-warning`, `.hb-text-danger`, `.hb-text-muted`
+
+### Border
+- **Width**: `.hb-border`, `.hb-border-0`
+- **Style**: `.hb-border-solid`, `.hb-border-dashed`, `.hb-border-dotted`
+- **Color**: `.hb-border-default`, `.hb-border-primary`, `.hb-border-success`, `.hb-border-warning`, `.hb-border-danger`
+- **Radius**: `.hb-rounded`, `.hb-rounded-sm`, `.hb-rounded-md`, `.hb-rounded-lg`, `.hb-rounded-full`
+
+### Accessibility
+- **Screen Reader Only**: `.hb-sr-only`
 
 ---
 
@@ -191,9 +220,11 @@ HEBRING provides a minimal responsive enhancement API.
 | **Display / Visibility** | ✅ Yes | `.hb-{utility}-{breakpoint}` (e.g., `.hb-block-sm`) |
 | **Sizing** | ✅ Yes | `.hb-{utility}-{breakpoint}` (e.g., `.hb-w-full-lg`) |
 | **Typography Size/Alignment**| ✅ Yes | `.hb-{utility}-{breakpoint}` (e.g., `.hb-text-center-md`) |
-| **Item Alignment** | ✅ Yes | `.hb-{utility}-{breakpoint}` (e.g., `.hb-self-start-md`) |
+| **Item/Container Alignment** | ✅ Yes | `.hb-{utility}-{breakpoint}` (e.g., `.hb-items-center-md`) |
+| **Grid / Flex Config** | ✅ Yes | `.hb-{utility}-{breakpoint}` (e.g., `.hb-grid-cols-2-md`, `.hb-flex-column-sm`) |
 | **Spacing** | ❌ No | - |
 | **Typography Weight** | ❌ No | - |
+| **Color / Border / Radius** | ❌ No | - |
 
 ---
 

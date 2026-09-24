@@ -1,0 +1,176 @@
+/**
+ * HEBRING — Form Components
+ *
+ * CSS-only form controls using semantic tokens.
+ */
+
+@layer components {
+  .hb-label {
+    display: inline-block;
+    font-family: var(--hb-font-family-body);
+    font-size: var(--hb-font-size-sm);
+    font-weight: var(--hb-font-weight-medium);
+    color: var(--hb-color-text);
+    margin-bottom: var(--hb-space-1);
+  }
+
+  .hb-input,
+  .hb-select,
+  .hb-textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--hb-font-family-body);
+    font-size: var(--hb-font-size-md);
+    line-height: var(--hb-line-height-normal);
+    color: var(--hb-color-text);
+    background-color: var(--hb-color-surface);
+    border: 1px solid var(--hb-color-border-strong);
+    border-radius: var(--hb-radius-md);
+    padding: var(--hb-space-2) var(--hb-space-3);
+    transition: border-color var(--hb-duration-fast) var(--hb-ease-standard),
+                box-shadow var(--hb-duration-fast) var(--hb-ease-standard);
+  }
+
+  .hb-textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .hb-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right var(--hb-space-2) center;
+    background-repeat: no-repeat;
+    background-size: 1.25em 1.25em;
+    padding-right: var(--hb-space-8);
+  }
+
+  .hb-input:hover,
+  .hb-select:hover,
+  .hb-textarea:hover {
+    border-color: var(--hb-color-primary-hover);
+  }
+
+  .hb-input:focus-visible,
+  .hb-select:focus-visible,
+  .hb-textarea:focus-visible {
+    outline: none;
+    border-color: var(--hb-color-primary);
+    box-shadow: 0 0 0 1px var(--hb-color-primary);
+  }
+
+  .hb-input:disabled,
+  .hb-select:disabled,
+  .hb-textarea:disabled {
+    background-color: var(--hb-color-surface-muted);
+    color: var(--hb-color-text-disabled);
+    cursor: not-allowed;
+    border-color: var(--hb-color-border);
+  }
+
+  .hb-input:invalid,
+  .hb-select:invalid,
+  .hb-textarea:invalid,
+  .hb-input.is-invalid,
+  .hb-select.is-invalid,
+  .hb-textarea.is-invalid,
+  .hb-input[aria-invalid="true"],
+  .hb-select[aria-invalid="true"],
+  .hb-textarea[aria-invalid="true"] {
+    border-color: var(--hb-color-danger);
+  }
+
+  .hb-input:invalid:focus-visible,
+  .hb-select:invalid:focus-visible,
+  .hb-textarea:invalid:focus-visible,
+  .hb-input.is-invalid:focus-visible,
+  .hb-select.is-invalid:focus-visible,
+  .hb-textarea.is-invalid:focus-visible,
+  .hb-input[aria-invalid="true"]:focus-visible,
+  .hb-select[aria-invalid="true"]:focus-visible,
+  .hb-textarea[aria-invalid="true"]:focus-visible {
+    box-shadow: 0 0 0 1px var(--hb-color-danger);
+  }
+
+  /* CHECKBOX & RADIO */
+  .hb-checkbox,
+  .hb-radio {
+    appearance: none;
+    display: inline-block;
+    vertical-align: middle;
+    width: 1em;
+    height: 1em;
+    font-size: var(--hb-font-size-lg);
+    background-color: var(--hb-color-surface);
+    border: 1px solid var(--hb-color-border-strong);
+    transition: background-color var(--hb-duration-fast) var(--hb-ease-standard),
+                border-color var(--hb-duration-fast) var(--hb-ease-standard),
+                box-shadow var(--hb-duration-fast) var(--hb-ease-standard);
+  }
+
+  .hb-checkbox {
+    border-radius: var(--hb-radius-sm);
+  }
+
+  .hb-radio {
+    border-radius: var(--hb-radius-full);
+  }
+
+  .hb-checkbox:hover,
+  .hb-radio:hover {
+    border-color: var(--hb-color-primary-hover);
+  }
+
+  .hb-checkbox:focus-visible,
+  .hb-radio:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--hb-color-background), 0 0 0 4px var(--hb-color-focus);
+  }
+
+  .hb-checkbox:checked,
+  .hb-radio:checked {
+    background-color: var(--hb-color-primary);
+    border-color: var(--hb-color-primary);
+  }
+
+  .hb-checkbox:checked {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .hb-radio:checked {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .hb-checkbox:disabled,
+  .hb-radio:disabled {
+    background-color: var(--hb-color-surface-muted);
+    border-color: var(--hb-color-border);
+    cursor: not-allowed;
+  }
+
+  .hb-checkbox:disabled:checked {
+    background-color: var(--hb-color-neutral-400);
+    border-color: var(--hb-color-neutral-400);
+  }
+
+  .hb-radio:disabled:checked {
+    background-color: var(--hb-color-neutral-400);
+    border-color: var(--hb-color-neutral-400);
+  }
+
+  .hb-checkbox:invalid,
+  .hb-radio:invalid,
+  .hb-checkbox.is-invalid,
+  .hb-radio.is-invalid,
+  .hb-checkbox[aria-invalid="true"],
+  .hb-radio[aria-invalid="true"] {
+    border-color: var(--hb-color-danger);
+  }
+}

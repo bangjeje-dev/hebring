@@ -1,0 +1,24 @@
+/**
+ * HEBRING — Color Utilities
+ *
+ * Single-purpose utilities for background and text colors using semantic tokens.
+ */
+
+@layer utilities {
+  /* BACKGROUND COLOR */
+  .hb-bg-primary { background-color: var(--hb-color-primary); }
+  .hb-bg-secondary { background-color: var(--hb-color-secondary); }
+  .hb-bg-success { background-color: var(--hb-color-success); }
+  .hb-bg-warning { background-color: var(--hb-color-warning); }
+  .hb-bg-danger { background-color: var(--hb-color-danger); }
+  .hb-bg-surface { background-color: var(--hb-color-surface); }
+  .hb-bg-surface-muted { background-color: var(--hb-color-surface-muted); }
+
+  /* TEXT COLOR */
+  .hb-text-primary { color: var(--hb-color-primary); }
+  .hb-text-secondary { color: var(--hb-color-secondary); }
+  .hb-text-success { color: var(--hb-color-success); }
+  .hb-text-warning { color: var(--hb-color-warning); }
+  .hb-text-danger { color: var(--hb-color-danger); }
+  .hb-text-muted { color: var(--hb-color-text-muted); }
+}
