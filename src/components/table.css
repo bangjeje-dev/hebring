@@ -1,0 +1,28 @@
+/**
+ * HEBRING — Table Component
+ *
+ * CSS-only table component for Data Display.
+ */
+
+@layer components {
+  .hb-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-family: var(--hb-font-family-body);
+    font-size: var(--hb-font-size-md);
+    color: var(--hb-color-text);
+  }
+
+  .hb-table th,
+  .hb-table td {
+    padding: var(--hb-space-3) var(--hb-space-4);
+    border-bottom: 1px solid var(--hb-color-border);
+  }
+
+  .hb-table th {
+    font-weight: var(--hb-font-weight-semibold);
+    background-color: var(--hb-color-surface-muted);
+    color: var(--hb-color-text-muted);
+  }
+}

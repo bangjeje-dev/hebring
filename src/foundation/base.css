@@ -203,5 +203,47 @@
   fieldset {
     min-width: 0;
   }
-}
 
+  /* ==================================================
+     11. DIVIDERS (HR)
+     ================================================== */
+  hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+    border: 0;
+    border-top: 1px solid var(--hb-color-border);
+    margin-top: var(--hb-space-4);
+    margin-bottom: var(--hb-space-4);
+  }
+
+  /* ==================================================
+     12. DESCRIPTION LISTS
+     ================================================== */
+  dl {
+    margin-top: 0;
+    margin-bottom: var(--hb-space-4);
+  }
+
+  dt {
+    font-weight: var(--hb-font-weight-semibold);
+  }
+
+  dd {
+    margin-left: 0;
+    margin-bottom: var(--hb-space-2);
+  }
+
+  /* ==================================================
+     13. FIGURES & MEDIA
+     ================================================== */
+  figure {
+    margin: 0 0 var(--hb-space-4) 0;
+  }
+
+  figcaption {
+    font-size: var(--hb-font-size-sm);
+    color: var(--hb-color-text-muted);
+    margin-top: var(--hb-space-2);
+  }
+}

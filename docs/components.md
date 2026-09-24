@@ -220,6 +220,7 @@ HEBRING provides styled, semantic form controls. Form elements use global semant
 
 ### Supported Controls
 - `.hb-label`: Associated `<label>` text.
+- `.hb-help-text`: Semantic supporting text below inputs.
 - `.hb-input`: Text-like `<input>` fields (text, email, password, number).
 - `.hb-select`: Native `<select>` drop-downs (includes custom unstyled SVG arrow).
 - `.hb-textarea`: Multi-line text input.
@@ -231,8 +232,10 @@ Form controls automatically handle all native CSS states correctly:
 - `:hover`: Adjusted border color (`--hb-color-primary-hover`).
 - `:focus-visible`: Accessible focus ring outline via `box-shadow` and `border-color`.
 - `:disabled`: Muted appearance and `not-allowed` cursor. Checkboxes/radios adjust checked state styling accordingly.
+- `[aria-disabled="true"]`: Provides visual parity with `:disabled` when native disabled attributes are insufficient. (Note: does not block interaction, consumer must manage event blocking).
+- `:read-only` or `[readonly]`: Distinct muted background appearance while preserving interaction capabilities.
 - `:checked`: Primary background and custom SVG representation.
-- `:invalid`: Danger-colored border and focus ring.
+- `:invalid`: Danger-colored border and focus ring. Includes a structural, non-color visual indicator (thickened left border or dashed border) to satisfy WCAG color-only indicator rules.
 - `.is-invalid` or `[aria-invalid="true"]`: Force invalid state presentation via JavaScript or ARIA attributes.
 
 ### Example
@@ -240,7 +243,8 @@ Form controls automatically handle all native CSS states correctly:
 <div class="hb-stack">
   <div>
     <label for="email" class="hb-label">Email Address</label>
-    <input type="email" id="email" class="hb-input" placeholder="you@example.com">
+    <input type="email" id="email" class="hb-input" aria-describedby="email-help" placeholder="you@example.com">
+    <p id="email-help" class="hb-help-text">We'll never share your email with anyone else.</p>
   </div>
   <div>
     <label class="hb-label">
@@ -248,5 +252,56 @@ Form controls automatically handle all native CSS states correctly:
       Subscribe to newsletter
     </label>
   </div>
+</div>
+```
+
+---
+
+## 10. Table
+
+The `.hb-table` component provides a foundational styling abstraction for data display tables. It relies on standard semantic HTML tables.
+
+### Features
+- Native semantic `<table>` support
+- Padded headers (`<th>`) and cells (`<td>`)
+- Border separators for rows
+- Muted semantic background for headers
+
+### HTML Example
+```html
+<table class="hb-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Alice</td>
+      <td>Admin</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+---
+
+## 11. Avatar
+
+The `.hb-avatar` component is a small presentational element for displaying user images, initials, or icons in a circular frame.
+
+### Variants
+- `.hb-avatar` (Default size)
+- `.hb-avatar--sm` (Small)
+- `.hb-avatar--lg` (Large)
+
+### HTML Example
+```html
+<div class="hb-avatar hb-avatar--lg">
+  <img src="avatar.jpg" alt="User Profile">
+</div>
+<div class="hb-avatar">
+  <span>JD</span>
 </div>
 ```

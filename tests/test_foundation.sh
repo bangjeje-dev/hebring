@@ -69,7 +69,15 @@ check_not_grep "$DIST_CSS" "@layer foundation" "No @layer foundation exists"
 check_not_grep "$SRC_RESET" "@layer responsive" "No @layer responsive inside Reset"
 check_not_grep "$SRC_BASE" "@layer responsive" "No @layer responsive inside Base"
 
-# 6. Token Usage Restrictions
+# 6. Additional Content Foundations
+check_grep "$SRC_BASE" "^ *hr *\{" "Divider hr is defined"
+check_grep "$SRC_BASE" "^ *dl *\{" "Description list dl is defined"
+check_grep "$SRC_BASE" "^ *dt *\{" "Description list dt is defined"
+check_grep "$SRC_BASE" "^ *dd *\{" "Description list dd is defined"
+check_grep "$SRC_BASE" "^ *figure *\{" "Figure is defined"
+check_grep "$SRC_BASE" "^ *figcaption *\{" "Figcaption is defined"
+
+# 7. Token Usage Restrictions
 check_not_grep "$SRC_BASE" "#[0-9a-fA-F]" "Base layer contains no hardcoded hex colors"
 
 if [ $ERRORS -eq 0 ]; then

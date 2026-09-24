@@ -149,9 +149,13 @@ HEBRING intentionally minimizes its component API.
 - `.hb-alert--danger`
 
 ### Forms
-- **Elements**: `.hb-label`, `.hb-input`, `.hb-select`, `.hb-textarea`, `.hb-checkbox`, `.hb-radio`
-- **Native States**: `:hover`, `:focus-visible`, `:active`, `:disabled`, `:checked`, `:invalid`
-- **CSS Classes/Attributes**: `.is-invalid`, `[aria-invalid="true"]`
+- **Elements**: `.hb-label`, `.hb-help-text`, `.hb-input`, `.hb-select`, `.hb-textarea`, `.hb-checkbox`, `.hb-radio`
+- **Native States**: `:hover`, `:focus-visible`, `:active`, `:disabled`, `:checked`, `:invalid`, `:read-only`
+- **CSS Classes/Attributes**: `.is-invalid`, `[aria-invalid="true"]`, `[aria-disabled="true"]`
+
+### Data Display
+- **Table**: `.hb-table`
+- **Avatar**: `.hb-avatar`, `.hb-avatar--sm`, `.hb-avatar--lg`
 
 
 ---

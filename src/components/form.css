@@ -15,6 +15,15 @@
     margin-bottom: var(--hb-space-1);
   }
 
+  .hb-help-text {
+    display: block;
+    margin: 0;
+    margin-top: var(--hb-space-1);
+    font-family: var(--hb-font-family-body);
+    font-size: var(--hb-font-size-sm);
+    color: var(--hb-color-text-muted);
+  }
+
   .hb-input,
   .hb-select,
   .hb-textarea {
@@ -63,11 +72,22 @@
 
   .hb-input:disabled,
   .hb-select:disabled,
-  .hb-textarea:disabled {
+  .hb-textarea:disabled,
+  .hb-input[aria-disabled="true"],
+  .hb-select[aria-disabled="true"],
+  .hb-textarea[aria-disabled="true"] {
     background-color: var(--hb-color-surface-muted);
     color: var(--hb-color-text-disabled);
     cursor: not-allowed;
     border-color: var(--hb-color-border);
+  }
+
+  .hb-input:read-only,
+  .hb-textarea:read-only,
+  .hb-input[readonly],
+  .hb-textarea[readonly] {
+    background-color: var(--hb-color-surface-muted);
+    color: var(--hb-color-text-muted);
   }
 
   .hb-input:invalid,
@@ -80,6 +100,7 @@
   .hb-select[aria-invalid="true"],
   .hb-textarea[aria-invalid="true"] {
     border-color: var(--hb-color-danger);
+    border-left-width: var(--hb-space-1);
   }
 
   .hb-input:invalid:focus-visible,
@@ -167,18 +188,22 @@
 
   
   .hb-checkbox:disabled,
-  .hb-radio:disabled {
+  .hb-radio:disabled,
+  .hb-checkbox[aria-disabled="true"],
+  .hb-radio[aria-disabled="true"] {
     background-color: var(--hb-color-surface-muted);
     border-color: var(--hb-color-border);
     cursor: not-allowed;
   }
 
-  .hb-checkbox:disabled:checked {
+  .hb-checkbox:disabled:checked,
+  .hb-checkbox[aria-disabled="true"]:checked {
     background-color: var(--hb-color-text-disabled);
     border-color: var(--hb-color-text-disabled);
   }
 
-  .hb-radio:disabled:checked {
+  .hb-radio:disabled:checked,
+  .hb-radio[aria-disabled="true"]:checked {
     background-color: var(--hb-color-text-disabled);
     border-color: var(--hb-color-text-disabled);
   }
@@ -190,5 +215,6 @@
   .hb-checkbox[aria-invalid="true"],
   .hb-radio[aria-invalid="true"] {
     border-color: var(--hb-color-danger);
+    border-style: dashed;
   }
 }

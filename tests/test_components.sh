@@ -118,7 +118,8 @@ check_grep "$SRC_COMPONENTS/alert.css" "@layer components" "Alert: exists in cor
 check_not_grep "$SRC_COMPONENTS/alert.css" "\.is-|\.has-" "Alert: no JavaScript dependency"
 
 # 13. Form Tests
-check_grep "$SRC_COMPONENTS/form.css" "\.hb-label" "Form: hb-label exists"
+  check_grep "$SRC_COMPONENTS/form.css" "\.hb-label" "Form: hb-label exists"
+check_grep "$SRC_COMPONENTS/form.css" "\.hb-help-text" "Form: hb-help-text exists"
 check_grep "$SRC_COMPONENTS/form.css" "\.hb-input" "Form: hb-input exists"
 check_grep "$SRC_COMPONENTS/form.css" "\.hb-select" "Form: hb-select exists"
 check_grep "$SRC_COMPONENTS/form.css" "\.hb-textarea" "Form: hb-textarea exists"
@@ -127,10 +128,28 @@ check_grep "$SRC_COMPONENTS/form.css" "\.hb-radio" "Form: hb-radio exists"
 check_grep "$SRC_COMPONENTS/form.css" ":focus-visible" "Form: :focus-visible states handled"
 check_grep "$SRC_COMPONENTS/form.css" ":invalid" "Form: :invalid state handled"
 check_grep "$SRC_COMPONENTS/form.css" "\[aria-invalid=\"true\"\]" "Form: aria-invalid handled"
+check_grep "$SRC_COMPONENTS/form.css" "border-left-width:|border-style:\s*dashed" "Form: invalid state has non-color indicator"
 check_grep "$SRC_COMPONENTS/form.css" ":disabled" "Form: :disabled state handled"
+check_grep "$SRC_COMPONENTS/form.css" "\[aria-disabled=\"true\"\]" "Form: aria-disabled state handled"
+check_grep "$SRC_COMPONENTS/form.css" ":read-only" "Form: :read-only state handled"
 check_grep "$SRC_COMPONENTS/form.css" "\.is-invalid" "Form: .is-invalid utility class handled"
 check_not_grep "$SRC_COMPONENTS/form.css" "data:image/svg\+xml" "Form: does not use hardcoded SVG data URIs"
 check_not_grep "$SRC_COMPONENTS/form.css" "stroke=|fill=|#[0-9a-fA-F]{3,6}\b|rgb\(|rgba\(" "Form: does not use hardcoded color literals"
+
+# 14. Table Tests
+check_grep "$SRC_COMPONENTS/table.css" "^\s*\.hb-table\s*\{" "Table: class exists"
+check_grep "$SRC_COMPONENTS/table.css" "\.hb-table th" "Table: header element styled"
+check_grep "$SRC_COMPONENTS/table.css" "\.hb-table td" "Table: cell element styled"
+check_grep "$SRC_COMPONENTS/table.css" "var\(--hb-color-surface-muted\)" "Table: uses semantic tokens"
+check_not_grep "$SRC_COMPONENTS/table.css" "\.is-|\.has-" "Table: no JavaScript dependency"
+
+# 15. Avatar Tests
+check_grep "$SRC_COMPONENTS/avatar.css" "^\s*\.hb-avatar\s*\{" "Avatar: class exists"
+check_grep "$SRC_COMPONENTS/avatar.css" "img" "Avatar: image element styled"
+check_grep "$SRC_COMPONENTS/avatar.css" "\.hb-avatar--sm" "Avatar: small variant exists"
+check_grep "$SRC_COMPONENTS/avatar.css" "\.hb-avatar--lg" "Avatar: large variant exists"
+check_grep "$SRC_COMPONENTS/avatar.css" "var\(--hb-color-surface-muted\)" "Avatar: fallback background styled"
+check_not_grep "$SRC_COMPONENTS/avatar.css" "\.is-|\.has-" "Avatar: no JavaScript dependency"
 
 if [ $ERRORS -eq 0 ]; then
   echo "All Component tests passed!"
