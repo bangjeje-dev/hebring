@@ -71,6 +71,7 @@ check_not_grep "$SEMANTIC" "--primary:" "Semantic naming: no raw --primary (must
 # 4. Theme Boundary
 check_grep "$THEMES" "\[data-theme=\"dark\"\]" "Theme boundary: Dark theme uses [data-theme=\"dark\"] selector"
 check_grep "$THEMES" "--hb-color-background: var\(--hb-color-neutral-950\);" "Theme boundary: Dark theme overrides semantic background token"
+check_grep "$THEMES" "--hb-color-secondary: var\(--hb-color-neutral-500\);" "Theme boundary: Dark theme overrides semantic secondary token"
 check_not_grep "$THEMES" "--hb-color-white:" "Theme boundary: Dark theme does NOT redefine primitive tokens"
 check_not_grep "$THEMES" "@layer themes" "Theme boundary: No @layer themes used"
 check_not_grep "$THEMES" "data-theme=\"light\"" "Theme boundary: No built-in light theme selector"

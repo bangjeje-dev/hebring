@@ -129,6 +129,8 @@ check_grep "$SRC_COMPONENTS/form.css" ":invalid" "Form: :invalid state handled"
 check_grep "$SRC_COMPONENTS/form.css" "\[aria-invalid=\"true\"\]" "Form: aria-invalid handled"
 check_grep "$SRC_COMPONENTS/form.css" ":disabled" "Form: :disabled state handled"
 check_grep "$SRC_COMPONENTS/form.css" "\.is-invalid" "Form: .is-invalid utility class handled"
+check_not_grep "$SRC_COMPONENTS/form.css" "data:image/svg\+xml" "Form: does not use hardcoded SVG data URIs"
+check_not_grep "$SRC_COMPONENTS/form.css" "stroke=|fill=|#[0-9a-fA-F]{3,6}\b|rgb\(|rgba\(" "Form: does not use hardcoded color literals"
 
 if [ $ERRORS -eq 0 ]; then
   echo "All Component tests passed!"

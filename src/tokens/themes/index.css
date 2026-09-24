@@ -26,6 +26,13 @@
   --hb-color-border: var(--hb-color-neutral-800);
   --hb-color-border-strong: var(--hb-color-neutral-700);
 
+  /* Secondary Roles */
+  --hb-color-secondary: var(--hb-color-neutral-500);
+  --hb-color-secondary-hover: var(--hb-color-neutral-400);
+  --hb-color-secondary-active: var(--hb-color-neutral-600);
+  --hb-color-secondary-subtle: var(--hb-color-neutral-900);
+  --hb-color-on-secondary: var(--hb-color-white);
+
   /* Primary Roles */
   --hb-color-primary: var(--hb-color-blue-500);
   --hb-color-primary-hover: var(--hb-color-blue-400);
