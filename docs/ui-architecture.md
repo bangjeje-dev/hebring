@@ -519,5 +519,34 @@ Tabs are an independent interaction pattern. They are NOT a variation of Menu, P
   - Implementing automatic activation (focusing a tab automatically activates its panel).
 - **Consumer Responsibility**: Generating unique IDs mapping tabs to panels.
 
-## 33. Definition of Done
+## 33. Combobox Foundation & Accessibility
+Combobox is an independent input-driven selection primitive. It is distinct from Select (no search), Menu (no input filtering), and Command Menu (which may compose this).
+
+### Canonical Markup
+```html
+<div class="hb-combobox">
+  <input class="hb-combobox__input hb-input" role="combobox" aria-expanded="false" aria-controls="combo-listbox" aria-autocomplete="list" type="text" placeholder="Search...">
+  <div id="combo-listbox" class="hb-popover hb-combobox__listbox" popover role="listbox">
+    <div role="option" id="combo-opt-1" class="hb-combobox__option" aria-selected="false">Apple</div>
+    <div role="option" id="combo-opt-2" class="hb-combobox__option" aria-disabled="true">Disabled Fruit</div>
+    <div class="hb-combobox__empty">No results found</div>
+  </div>
+</div>
+```
+
+### Combobox Model & Contract
+- Combobox uses a text input to filter and list options.
+- Options use `[aria-selected="true"]` for visual highlight / active state, NOT `.is-highlighted`.
+- The Popover API acts as the floating surface for the Listbox.
+- Focus always remains in the `input`. The `input` manages `aria-activedescendant`.
+- Do not place `role="combobox"` on the wrapper. Only on the `input`.
+- Combobox options must use `role="option"`, not `role="menuitem"`.
+
+### Responsibilities
+- **Browser Responsibility**: Providing text input capabilities and Popover lifecycle.
+- **CSS Responsibility**: Styling input, popup, and options purely relying on native elements, popover state, and semantic ARIA attributes.
+- **Adapter Responsibility**: Managing popover visibility (via `.showPopover()`), handling keyboard navigation (Arrow Up/Down/Home/End), selecting items (Enter/Click), and syncing `aria-expanded` and `aria-activedescendant`.
+- **Consumer Responsibility**: Providing matching option labels, IDs, and handling logic data binding (e.g. form submission).
+
+## 34. Definition of Done
 Phase 47 is complete when this UI Architecture Specification is updated and implemented correctly.

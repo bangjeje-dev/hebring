@@ -376,4 +376,27 @@ fi
 
 pass "Accordion architecture respects pure native constraints"
 
+# 22. Combobox Validation
+if [ ! -f "$UI_DIR/combobox.css" ]; then
+  fail "combobox.css is missing"
+fi
+
+if grep -q '\.is-open' "$UI_DIR/combobox.css" || grep -q '\.is-active' "$UI_DIR/combobox.css" || grep -q '\.is-selected' "$UI_DIR/combobox.css" || grep -q '\.is-highlighted' "$UI_DIR/combobox.css"; then
+  fail "Combobox CSS must not use custom state classes"
+fi
+
+if grep -q 'role="menu"' "$UI_DIR/combobox.css" || grep -q 'role="menuitem"' "$UI_DIR/combobox.css"; then
+  fail "Combobox CSS must not use menu semantics"
+fi
+
+if ! grep -q 'role="combobox"' "$ROOT_DIR/examples/playground/index.html" || ! grep -q 'role="listbox"' "$ROOT_DIR/examples/playground/index.html" || ! grep -q 'role="option"' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing combobox semantic roles"
+fi
+
+if ! grep -q 'COMBOBOX ADAPTER' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing COMBOBOX ADAPTER"
+fi
+
+pass "Combobox architecture respects pure native constraints"
+
 echo "All Ecosystem UI tests passed!"

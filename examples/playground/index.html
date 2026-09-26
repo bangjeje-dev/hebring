@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="../../ecosystem/ui/menu.css">
   <link rel="stylesheet" href="../../ecosystem/ui/tooltip.css">
   <link rel="stylesheet" href="../../ecosystem/ui/tabs.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/combobox.css">
 
   <style>
     /* Playground-specific minimal styles */
@@ -402,6 +403,43 @@
           </div>
         </div>
       </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Combobox (Single Select)</h3>
+        <label for="combo-input" class="hb-text-base">Choose a fruit</label>
+        <div class="hb-combobox" id="demo-combobox" style="margin-top: 0.5rem; max-width: 300px;">
+          <input
+            type="text"
+            id="combo-input"
+            class="hb-input hb-combobox__input"
+            role="combobox"
+            aria-expanded="false"
+            aria-controls="combo-listbox"
+            aria-autocomplete="list"
+            autocomplete="off"
+            placeholder="Search fruits..."
+            style="width: 100%; box-sizing: border-box;"
+          >
+          <div
+            id="combo-listbox"
+            class="hb-popover hb-combobox__listbox"
+            popover="auto"
+            role="listbox"
+            style="width: 100%; box-sizing: border-box; margin-top: 4px;"
+          >
+            <div role="option" id="combo-opt-1" class="hb-combobox__option" aria-selected="false">Apple</div>
+            <div role="option" id="combo-opt-2" class="hb-combobox__option" aria-selected="false">Apricot</div>
+            <div role="option" id="combo-opt-3" class="hb-combobox__option" aria-selected="false">Banana</div>
+            <div role="option" id="combo-opt-4" class="hb-combobox__option" aria-selected="false">Blueberry</div>
+            <div role="option" id="combo-opt-5" class="hb-combobox__option" aria-selected="false">Cherry</div>
+            <div role="option" id="combo-opt-6" class="hb-combobox__option" aria-selected="false">Grape</div>
+            <div role="option" id="combo-opt-7" class="hb-combobox__option" aria-selected="false">Orange</div>
+            <div role="option" id="combo-opt-8" class="hb-combobox__option" aria-selected="false">Strawberry</div>
+            <div role="option" id="combo-opt-9" class="hb-combobox__option" aria-disabled="true">Rotten Tomato (Disabled)</div>
+            <div id="combo-empty" class="hb-combobox__empty">No results found</div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -777,6 +815,173 @@
               });
             }
           });
+        });
+      }
+
+      // --- COMBOBOX ADAPTER (Phase 49) ---
+      const comboInput = document.getElementById('combo-input');
+      const comboListbox = document.getElementById('combo-listbox');
+
+      if (comboInput && comboListbox) {
+        const comboOptions = Array.from(comboListbox.querySelectorAll('.hb-combobox__option'));
+        const emptyState = document.getElementById('combo-empty');
+        let activeIndex = -1;
+
+        const updateExpandedState = () => {
+          // aria-expanded syncs with Popover API state
+          // Note: using comboListbox.matches(':popover-open') is best, but polyfill or browser variance might exist.
+          const isOpen = comboListbox.matches(':popover-open');
+          comboInput.setAttribute('aria-expanded', isOpen.toString());
+        };
+
+        const getVisibleEnabledOptions = () => {
+          return comboOptions.filter(opt =>
+            opt.style.display !== 'none' && opt.getAttribute('aria-disabled') !== 'true'
+          );
+        };
+
+        const setActiveOption = (index) => {
+          const visibleOpts = getVisibleEnabledOptions();
+
+          // Clear current active
+          visibleOpts.forEach(opt => opt.setAttribute('aria-selected', 'false'));
+          comboInput.removeAttribute('aria-activedescendant');
+
+          if (index >= 0 && index < visibleOpts.length) {
+            activeIndex = index;
+            const activeOpt = visibleOpts[activeIndex];
+            activeOpt.setAttribute('aria-selected', 'true');
+            comboInput.setAttribute('aria-activedescendant', activeOpt.id);
+            // Optional: scroll into view
+            activeOpt.scrollIntoView({ block: 'nearest' });
+          } else {
+            activeIndex = -1;
+          }
+        };
+
+        const filterOptions = (query) => {
+          const lowerQuery = query.toLowerCase();
+          let hasVisible = false;
+
+          comboOptions.forEach(opt => {
+            const text = opt.textContent.toLowerCase();
+            if (text.includes(lowerQuery)) {
+              opt.style.display = 'flex';
+              if (opt.getAttribute('aria-disabled') !== 'true') hasVisible = true;
+            } else {
+              opt.style.display = 'none';
+              opt.setAttribute('aria-selected', 'false');
+            }
+          });
+
+          if (hasVisible) {
+            emptyState.style.display = 'none';
+          } else {
+            emptyState.style.display = 'block';
+          }
+
+          setActiveOption(-1); // reset active index on filter
+        };
+
+        const openCombobox = () => {
+          try {
+            comboListbox.showPopover();
+          } catch (e) {} // ignore if already open
+          updateExpandedState();
+        };
+
+        const closeCombobox = () => {
+          try {
+            comboListbox.hidePopover();
+          } catch (e) {} // ignore if already closed
+          updateExpandedState();
+        };
+
+        const selectActiveOption = () => {
+          const visibleOpts = getVisibleEnabledOptions();
+          if (activeIndex >= 0 && activeIndex < visibleOpts.length) {
+            const activeOpt = visibleOpts[activeIndex];
+            comboInput.value = activeOpt.textContent;
+            closeCombobox();
+            // Don't blur input, keep focus
+          }
+        };
+
+        // Listen for popover toggle events to sync aria-expanded
+        comboListbox.addEventListener('toggle', () => {
+          updateExpandedState();
+          if (!comboListbox.matches(':popover-open')) {
+            setActiveOption(-1);
+          }
+        });
+
+        // Input events
+        comboInput.addEventListener('input', (e) => {
+          filterOptions(e.target.value);
+          openCombobox();
+        });
+
+        comboInput.addEventListener('keydown', (e) => {
+          const visibleOpts = getVisibleEnabledOptions();
+          const isOpen = comboListbox.matches(':popover-open');
+
+          switch(e.key) {
+            case 'ArrowDown':
+              e.preventDefault();
+              if (!isOpen) {
+                openCombobox();
+              }
+              setActiveOption(activeIndex < visibleOpts.length - 1 ? activeIndex + 1 : 0);
+              break;
+            case 'ArrowUp':
+              e.preventDefault();
+              if (!isOpen) {
+                openCombobox();
+              }
+              setActiveOption(activeIndex > 0 ? activeIndex - 1 : visibleOpts.length - 1);
+              break;
+            case 'Home':
+              if (isOpen) {
+                e.preventDefault();
+                setActiveOption(0);
+              }
+              break;
+            case 'End':
+              if (isOpen) {
+                e.preventDefault();
+                setActiveOption(visibleOpts.length - 1);
+              }
+              break;
+            case 'Enter':
+              if (isOpen) {
+                e.preventDefault();
+                selectActiveOption();
+              }
+              break;
+            case 'Escape':
+              // Popover closes naturally on Escape, just ensure state sync
+              if (isOpen) {
+                // native popover might handle this, but we'll ensure
+                closeCombobox();
+              }
+              break;
+          }
+        });
+
+        comboInput.addEventListener('focus', () => {
+          // Optional: open on focus if desired, or let typing/arrows do it.
+          // Spec says "typing opens listbox, ArrowDown opens listbox"
+          // We will open it if they click input and it has no value.
+        });
+
+        // Click options
+        comboListbox.addEventListener('click', (e) => {
+          const option = e.target.closest('.hb-combobox__option');
+          if (option && option.getAttribute('aria-disabled') !== 'true') {
+            comboInput.value = option.textContent;
+            closeCombobox();
+            comboInput.focus();
+          }
         });
       }
     });
