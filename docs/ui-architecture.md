@@ -623,5 +623,43 @@ Toast represents transient, non-blocking feedback. It is distinct from Dialog (w
 - **Adapter Responsibility**: Demonstrating dynamic creation, insertion, timeout (auto-dismiss), hover pause/resume logic, explicit dismissal (closing), and DOM removal.
 - **Consumer Responsibility**: Integrating Toasts with their actual application event lifecycle, state management, and notification queuing if required. HEBRING provides the CSS surface, not a notification manager library.
 
-## 36. Definition of Done
-Phase 51 is complete when this UI Architecture Specification is updated and implemented correctly.
+## 36. Alert Dialog Foundation
+Alert Dialog is a specialized confirmation-oriented modal interaction for actions requiring explicit user acknowledgment or decision (e.g., destructive actions).
+
+### Canonical Markup
+```html
+<dialog class="hb-modal" aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-desc" role="alertdialog">
+  <div class="hb-modal__header">
+    <h2 class="hb-modal__title" id="alert-dialog-title">Delete Project?</h2>
+  </div>
+  <div class="hb-modal__body" id="alert-dialog-desc">
+    <p>Are you sure you want to delete this project? This action cannot be undone.</p>
+  </div>
+  <div class="hb-modal__footer">
+    <button class="hb-button hb-button--secondary">Cancel</button>
+    <button class="hb-button hb-button--danger">Delete</button>
+  </div>
+</dialog>
+```
+
+### Architectural Contract
+- **CSS Reuse**: Alert Dialog does not require a dedicated CSS implementation. It strictly reuses `.hb-modal` structural primitives (`hb-modal__header`, `hb-modal__body`, `hb-modal__footer`).
+- **State Model**: State is tied to the native `<dialog>` element's `[open]` attribute, just like standard Modal.
+- **Escape Behavior**: Native browser Esc dismissal is implicitly supported via `<dialog>`.
+- **Backdrop Behavior**: Backdrop clicks should not automatically dismiss the alert dialog. This requires explicit user acknowledgment.
+- **Async Actions**: Loading spinners, network requests, and async lifecycles are the responsibility of the consumer application layer, not HEBRING.
+
+### Semantic / ARIA Model
+- Uses `role="alertdialog"` to convey urgency and explicit confirmation semantics to assistive technology.
+- Explicitly demands an accessible name via `aria-labelledby` directly referencing the title element.
+- Employs `aria-describedby` referencing the body content to provide critical contextual feedback.
+- For destructive actions, the "Cancel" action should receive initial focus to prevent accidental irreversible damage.
+
+### Responsibilities
+- **Browser Responsibility**: Providing `<dialog>` top layer, focus trapping, Escape handling, and `::backdrop` overlay.
+- **CSS Responsibility**: Supplying standard `.hb-modal` surface styles, layout, and visual component semantics (like `.hb-button--danger` for destructive contexts).
+- **Adapter Responsibility**: Managing `showModal()`, `close()`, initial focus shifting (e.g. defaulting to Cancel), and restoring focus to the original trigger upon dialog dismissal.
+- **Consumer Responsibility**: Orchestrating actual backend deletions, network async behavior, button states while loading, and final contextual logic routing.
+
+## 37. Definition of Done
+Phase 52 is complete when this UI Architecture Specification is updated and implemented correctly.

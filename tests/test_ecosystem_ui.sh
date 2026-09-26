@@ -453,4 +453,23 @@ fi
 
 pass "Toast architecture respects transient non-blocking constraints"
 
+# 25. Alert Dialog Validation
+if ! grep -q 'role="alertdialog"' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing alertdialog role"
+fi
+
+if ! grep -q 'ALERT DIALOG ADAPTER' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing ALERT DIALOG ADAPTER"
+fi
+
+if ! grep -q 'aria-labelledby' "$ROOT_DIR/examples/playground/index.html" || ! grep -q 'aria-describedby' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground Alert Dialog is missing accessible name/description associations"
+fi
+
+if [ -f "$UI_DIR/alert-dialog.css" ]; then
+  fail "alert-dialog.css should not exist; reuse modal.css instead"
+fi
+
+pass "Alert Dialog architecture properly reuses Modal foundation natively"
+
 echo "All Ecosystem UI tests passed!"

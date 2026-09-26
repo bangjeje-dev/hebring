@@ -172,6 +172,28 @@
       </div>
 
       <div style="margin-bottom: 2rem;">
+        <h3>Alert Dialog (Native Dialog)</h3>
+        <p style="color: var(--hb-color-text-subtle); margin-bottom: 1rem;">
+          Specialized modal interaction for destructive or important decisions. Reuses Modal CSS foundation natively.
+        </p>
+        <button class="hb-button hb-button--danger" id="open-demo-alert-dialog">Delete Project</button>
+        <span id="alert-dialog-result" style="margin-left: 1rem; color: var(--hb-color-text-subtle); font-size: 0.875rem;"></span>
+
+        <dialog class="hb-modal" aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-desc" id="demo-alert-dialog" role="alertdialog">
+          <div class="hb-modal__header">
+            <h2 class="hb-modal__title" id="alert-dialog-title">Delete Project?</h2>
+          </div>
+          <div class="hb-modal__body" id="alert-dialog-desc">
+            <p>Are you sure you want to delete this project? This action cannot be undone and all data will be permanently lost.</p>
+          </div>
+          <div class="hb-modal__footer">
+            <button class="hb-button hb-button--secondary" id="alert-dialog-cancel">Cancel</button>
+            <button class="hb-button hb-button--danger" id="alert-dialog-confirm">Delete permanently</button>
+          </div>
+        </dialog>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
         <h3>Drawer (Native Dialog)</h3>
         <button class="hb-button" id="open-demo-drawer">Open Native Drawer</button>
 
@@ -559,6 +581,36 @@
           modal.close();
         }
       });
+
+      // --- ALERT DIALOG ADAPTER (Phase 52) ---
+      const alertDialog = document.getElementById('demo-alert-dialog');
+      const openAlertDialogBtn = document.getElementById('open-demo-alert-dialog');
+      const alertDialogCancelBtn = document.getElementById('alert-dialog-cancel');
+      const alertDialogConfirmBtn = document.getElementById('alert-dialog-confirm');
+      const alertDialogResult = document.getElementById('alert-dialog-result');
+
+      let alertDialogTrigger = null;
+
+      if (alertDialog && openAlertDialogBtn && alertDialogCancelBtn && alertDialogConfirmBtn) {
+        openAlertDialogBtn.addEventListener('click', () => {
+          alertDialogTrigger = document.activeElement;
+          alertDialog.showModal();
+          alertDialogResult.textContent = '';
+          // Focus cancel by default for destructive actions
+          alertDialogCancelBtn.focus();
+        });
+
+        const closeAlertDialog = (action) => {
+          alertDialog.close();
+          alertDialogResult.textContent = action ? `Action: ${action}` : '';
+          if (alertDialogTrigger) {
+            alertDialogTrigger.focus();
+          }
+        };
+
+        alertDialogCancelBtn.addEventListener('click', () => closeAlertDialog('Cancelled'));
+        alertDialogConfirmBtn.addEventListener('click', () => closeAlertDialog('Deleted'));
+      }
 
       // --- DRAWER ADAPTER ---
       const drawer = document.getElementById('demo-drawer');
