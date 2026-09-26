@@ -347,5 +347,36 @@ The Menu Foundation provides the semantic and visual presentation for a collecti
 - **Adapter Responsibility**: Keyboard navigation (Arrow Up/Down, Home, End), focus trapping, roving tabindex, and opening/closing when composed into a Dropdown Menu.
 - **Consumer Responsibility**: Accessible labels and application action execution.
 
-## 29. Definition of Done
-Phase 43 is complete when this UI Architecture Specification is updated and implemented correctly.
+## 29. Tooltip Foundation DOM Contract & Accessibility
+The Tooltip Foundation provides semantic and visual presentation for non-interactive descriptive text associated with another element. It is NOT an interactive Popover and must not contain interactive elements.
+
+### Canonical Markup
+```html
+<button aria-describedby="tooltip-id">Action</button>
+
+<div id="tooltip-id" class="hb-tooltip" role="tooltip">
+  Concise descriptive text.
+</div>
+```
+
+### Required Structure
+- `.hb-tooltip`: The tooltip surface.
+- `aria-describedby`: Explicitly links the trigger to the tooltip.
+- `role="tooltip"`: Enforces the correct accessibility semantics on the surface.
+
+### Placement Modifiers (Progressive Enhancement)
+- `.hb-tooltip--top`, `.hb-tooltip--bottom`, `.hb-tooltip--start`, `.hb-tooltip--end`
+- These rely exclusively on CSS Anchor Positioning (`position-area`) as a progressive enhancement. Browsers without support require an adapter (like Floating UI) to handle positioning coordinates. No DOM wrapper is required.
+
+### Interactive Boundary
+Tooltip content MUST remain non-interactive. Do not place buttons, links, or form fields inside a tooltip. If interaction is required, use a `Popover`, `Dialog`, or `Dropdown Menu` instead.
+
+### Accessibility Contract
+- **Browser Responsibility**: Exposing the `aria-describedby` relationship to screen readers.
+- **HEBRING CSS**: Visual hierarchy, contrast, compact surface styling.
+- **DOM Contract**: `aria-describedby` and `role="tooltip"` represent the core relationship.
+- **Adapter Responsibility**: Hover intent delays, pointer enter/leave logic, focus handling, show/hide lifecycle, and dynamic coordinate positioning for fallback placement.
+- **Consumer Responsibility**: Providing the accessible text, maintaining the ID reference, and ensuring the trigger itself is focusable.
+
+## 30. Definition of Done
+Phase 44 is complete when this UI Architecture Specification is updated and implemented correctly.

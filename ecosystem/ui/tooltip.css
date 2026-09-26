@@ -1,0 +1,42 @@
+.hb-tooltip {
+  display: inline-block;
+  max-width: 16rem;
+  padding: 0.25rem 0.5rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--hb-color-surface);
+  background-color: var(--hb-color-text);
+  border-radius: var(--hb-radius-sm, 0.25rem);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  word-wrap: break-word;
+  white-space: normal;
+  pointer-events: none; /* Tooltips are non-interactive */
+}
+
+/* 
+  Progressive Enhancement: CSS Anchor Positioning
+  These modifiers provide native positioning without DOM wrappers or JavaScript.
+  Browsers without support must rely on the adapter for dynamic placement coordinates.
+*/
+@supports (position-area: top) {
+  .hb-tooltip--top {
+    position: absolute;
+    position-area: top;
+  }
+  
+  .hb-tooltip--bottom {
+    position: absolute;
+    position-area: bottom;
+  }
+  
+  .hb-tooltip--start {
+    position: absolute;
+    position-area: left;
+  }
+  
+  .hb-tooltip--end {
+    position: absolute;
+    position-area: right;
+  }
+}

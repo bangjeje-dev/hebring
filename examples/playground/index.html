@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../../ecosystem/ui/stepper.css">
   <link rel="stylesheet" href="../../ecosystem/ui/popover.css">
   <link rel="stylesheet" href="../../ecosystem/ui/menu.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/tooltip.css">
 
   <style>
     /* Playground-specific minimal styles */
@@ -287,6 +288,23 @@
           <button class="hb-menu__item" role="menuitem" disabled>
             Delete Account
           </button>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Tooltip Foundation (Static)</h3>
+        <!--
+          This is purely a visual demonstration of the Tooltip surface.
+          It does not implement hover/focus JS interaction.
+        -->
+        <div style="display: flex; gap: 1rem; align-items: center; position: relative;">
+          <button id="tooltip-trigger" class="hb-button" aria-describedby="tooltip-id" style="anchor-name: --tooltip-anchor;">
+            Hover Action
+          </button>
+
+          <div id="tooltip-id" class="hb-tooltip hb-tooltip--top" role="tooltip" style="position-anchor: --tooltip-anchor;">
+            Provides additional non-interactive context.
+          </div>
         </div>
       </div>
     </section>

@@ -264,4 +264,20 @@ else
   fail "menu.css is missing"
 fi
 
+# 17. Tooltip Reference Specifics
+if [ -f "$UI_DIR/tooltip.css" ]; then
+  if ! grep -q "\.hb-tooltip" "$UI_DIR/tooltip.css"; then
+    fail "tooltip.css is missing .hb-tooltip"
+  fi
+  if grep -q "\.is-open" "$UI_DIR/tooltip.css" || grep -q "\.is-visible" "$UI_DIR/tooltip.css"; then
+    fail "tooltip.css contains unauthorized state logic"
+  fi
+  if grep -q "popover" "$UI_DIR/tooltip.css"; then
+    fail "tooltip.css must not depend on popover logic"
+  fi
+  pass "Tooltip CSS respects pure non-interactive foundation"
+else
+  fail "tooltip.css is missing"
+fi
+
 echo "All Ecosystem UI tests passed!"
