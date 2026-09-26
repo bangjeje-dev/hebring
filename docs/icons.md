@@ -70,8 +70,7 @@ HEBRING Icons remain entirely optional.
 HEBRING Core and UI components (Cards, Badges, Alerts) NEVER import, bundle, or require icons internally. If a consumer wishes to place an icon inside an Alert, they compose the SVG inside the Alert markup themselves.
 
 ## 12. Package Boundary
-Currently, icons are distributed alongside the source in the `src/icons` directory of the core repository.
-In the future, they may be published as an independent icon package or distributed modularly. They represent the Ecosystem layer and will never become a structural dependency of Core.
+Icons are an Ecosystem capability. They are distributed in the `ecosystem/icons` directory, completely decoupled from the HEBRING Core source (`src/`). They represent the Ecosystem layer and will never become a structural dependency of Core.
 
 ## 13. Contribution Rules
 New icons must be authored originally. Copying path data or source code from Lucide, Heroicons, or Material Icons is strictly prohibited to maintain the original HEBRING identity and avoid licensing conflicts.

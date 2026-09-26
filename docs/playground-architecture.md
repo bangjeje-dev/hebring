@@ -36,7 +36,7 @@ The Playground must load the exact distribution artifacts (`dist/hebring.css`). 
 Themes are natively driven by CSS custom properties bound to data attributes. The Playground will implement a UI toggle (e.g., a "Light / Dark" button) that simply toggles `data-theme="dark"` on the preview container or iframe. No JavaScript-based CSS styling engines are permitted.
 
 ## 10. Icon Handling
-The Playground will demonstrate icons by providing raw SVG snippets (referencing `src/icons`) that developers can paste into the editor. The icons will correctly inherit `currentColor` from the surrounding HEBRING utility or component classes. The Playground will not force icons to be a Core dependency.
+The Playground will demonstrate icons by providing raw SVG snippets (referencing `ecosystem/icons`) that developers can paste into the editor. The icons will correctly inherit `currentColor` from the surrounding HEBRING utility or component classes. The Playground will not force icons to be a Core dependency.
 
 ## 11. Responsive Preview
 To validate HEBRING's fluid and responsive design, the Playground will offer a responsive preview mechanism. The preferred approach is providing predefined viewport size toggles (Mobile, Tablet, Desktop) that resize the preview container/iframe using CSS width transitions, avoiding the need for a complex JavaScript browser emulator.

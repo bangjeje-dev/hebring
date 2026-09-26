@@ -4,7 +4,7 @@
 set -e
 
 # Configuration
-SRC_ICONS="src/icons"
+SRC_ICONS="ecosystem/icons"
 ERRORS=0
 
 echo "Running Icon Tests..."

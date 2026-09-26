@@ -28,7 +28,7 @@ HEBRING/
 As of Phase 30, the `ecosystem/` directories act purely as architectural boundaries and contain no implementation. They are tracked via `.gitkeep` files. They await future phases for actual implementations.
 
 ## 5. Existing Icon Location
-The existing icons remain in their legacy location at `src/icons/`. Moving them to `ecosystem/icons/` is an optional future migration, but they are architecturally treated as an ecosystem artifact because they do not compile into the main `dist/hebring.css` bundle.
+The icons are distributed in `ecosystem/icons/`. They are architecturally treated as an ecosystem artifact because they do not compile into the main `dist/hebring.css` bundle.
 
 ## 6. Existing Playground Location
 The existing Playground application remains at `examples/playground/`. It is a separate consumer application that exists outside the HEBRING Core dependencies.
