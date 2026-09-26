@@ -127,5 +127,36 @@ Future UI components will be documented with a standardized structure:
 - **Accessibility**: Keyboard interactions and ARIA roles.
 - **Composition**: Examples of composing with Layout primitives.
 
-## 21. Definition of Done
+## 21. Modal DOM Contract & Accessibility
+The Ecosystem UI Modal expects the native `<dialog>` element as its foundation.
+
+### Canonical Markup
+```html
+<dialog class="hb-modal" aria-labelledby="modal-title" id="demo-modal">
+  <div class="hb-modal__header">
+    <h2 class="hb-modal__title" id="modal-title">Modal Title</h2>
+    <button class="hb-button hb-button--sm" data-modal-close>Close</button>
+  </div>
+  <div class="hb-modal__body">
+    <p>Modal content goes here.</p>
+  </div>
+  <div class="hb-modal__footer">
+    <button class="hb-button hb-button--secondary" data-modal-close>Cancel</button>
+    <button class="hb-button">Confirm</button>
+  </div>
+</dialog>
+```
+
+### Required Structure
+- `<dialog class="hb-modal">`: The canonical modal primitive. Uses native `[open]` and `::backdrop`.
+
+### Optional Structure
+- `.hb-modal__header`, `.hb-modal__title`, `.hb-modal__body`, `.hb-modal__footer`: Optional semantic layout blocks.
+
+### Accessibility Contract
+- **Browser Responsibility**: Providing `[open]` state, top-layer rendering, `::backdrop`, and native Escape key handling when opened via `showModal()`.
+- **Adapter Responsibility**: Triggering `.showModal()` and `.close()`, locking body scroll (if desired), and handling click-outside-to-close behavior.
+- **Consumer Responsibility**: Providing correct `aria-labelledby` or `aria-describedby` connecting to internal content, and providing an accessible close button.
+
+## 22. Definition of Done
 Phase 15 is complete when this UI Architecture Specification is written, validated against the Core taxonomy and accessibility foundations, and committed to the repository, formally defining how HEBRING UI will operate in the future.

@@ -7,6 +7,7 @@
 
   <!-- Load HEBRING framework core -->
   <link rel="stylesheet" href="../../src/index.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/modal.css">
 
   <style>
     /* Playground-specific minimal styles */
@@ -131,6 +132,73 @@
         </div>
       </div>
     </section>
+    <section style="margin-top: 2rem;">
+      <h2>Ecosystem UI (Phase 37)</h2>
+      <div style="margin-bottom: 2rem;">
+        <h3>Modal (Native Dialog)</h3>
+        <p style="color: var(--hb-color-text-subtle); margin-bottom: 1rem;">
+          This proves the architecture: Core → UI CSS → DOM Contract → Reference Adapter.
+        </p>
+        <button class="hb-button" id="open-demo-modal">Open Native Modal</button>
+
+        <!-- Canonical Modal Markup -->
+        <dialog class="hb-modal" aria-labelledby="demo-modal-title" aria-describedby="demo-modal-desc" id="demo-modal">
+          <div class="hb-modal__header">
+            <h2 class="hb-modal__title" id="demo-modal-title">Ecosystem UI Modal</h2>
+            <!-- Native formmethod="dialog" is a native option, but we demonstrate manual close for the adapter -->
+            <button class="hb-button hb-button--secondary hb-button--sm" data-modal-close aria-label="Close modal">X</button>
+          </div>
+          <div class="hb-modal__body" id="demo-modal-desc">
+            <p>This modal leverages the native <code>&lt;dialog&gt;</code> element.</p>
+            <p>The <strong>[open]</strong> state, <strong>::backdrop</strong>, focus trapping, and Escape key handling are provided directly by the browser's top-layer mechanics through <code>showModal()</code>.</p>
+          </div>
+          <div class="hb-modal__footer">
+            <button class="hb-button hb-button--secondary" data-modal-close>Cancel</button>
+            <button class="hb-button" data-modal-close>Confirm</button>
+          </div>
+        </dialog>
+      </div>
+    </section>
   </main>
+
+  <script>
+    /**
+     * REFERENCE VANILLA JS ADAPTER (Phase 37)
+     * This exists ONLY in the playground to prove the contract.
+     * It is NOT part of HEBRING Core or Ecosystem UI CSS.
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('demo-modal');
+      const openBtn = document.getElementById('open-demo-modal');
+      const closeBtns = modal.querySelectorAll('[data-modal-close]');
+
+      // Open adapter
+      openBtn.addEventListener('click', () => {
+        // showModal() handles the top-layer, focus trapping, and Escape key
+        modal.showModal();
+      });
+
+      // Close adapter
+      closeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          modal.close();
+        });
+      });
+
+      // Outside click adapter
+      modal.addEventListener('click', (event) => {
+        const rect = modal.getBoundingClientRect();
+        const isInDialog = (
+          rect.top <= event.clientY &&
+          event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX &&
+          event.clientX <= rect.left + rect.width
+        );
+        if (!isInDialog) {
+          modal.close();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
