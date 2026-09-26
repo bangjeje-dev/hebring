@@ -45,11 +45,31 @@ Tailwind-like utility salad or arbitrary one-off names are forbidden.
 ## 9. Variants
 Variants alter the visual intent or physical dimensions of a UI component. They are exposed purely through CSS modifier classes (`--primary`, `--lg`, `--compact`). UI components should map these variants to local implementation tokens internally, keeping the CSS output DRY.
 
-## 10. States
-UI components strictly inherit the Phase 14 Interaction States.
-- Native: `:hover`, `:focus-visible`, `:disabled`, `:checked`.
-- JS Hooks: `.is-loading`, `.is-active`, `.is-invalid`, `.is-selected`, `.is-expanded`.
-UI components do not invent arbitrary state classes; they use the established conventions.
+## 10. Ecosystem UI State Convention
+HEBRING Ecosystem UI follows a strict state fallback pattern to manage visibility and complex states:
+
+**1. NATIVE STATE FIRST**
+If the native HTML element provides an appropriate state, use that native state.
+*Example: Native `<dialog>` visibility:*
+```css
+dialog.hb-modal[open] { ... }
+dialog.hb-modal:not([open]) { ... }
+```
+
+**2. GENERIC DATA-STATE**
+For generic Ecosystem UI components that do not have an equivalent native state, use the generic `data-state` attribute.
+*Example: Dropdown or Popover visibility:*
+```css
+.hb-dropdown[data-state="open"] { ... }
+.hb-dropdown[data-state="closed"] { ... }
+```
+
+**3. CONSUMER/FRAMEWORK BEHAVIOR**
+- CSS *consumes* state. It does not create state.
+- JavaScript/framework adapters *own* the state transitions (e.g., toggling the `open` attribute or `data-state`).
+- Accessibility attributes (e.g., `aria-expanded="true"`, `aria-selected="true"`) remain the semantic accessibility state. They should not be replaced by `data-state` when the ARIA attribute itself is the authoritative source of truth for the state.
+
+*Note: The `.is-*` classes (`.is-loading`, `.is-active`) remain valid as generic application hooks defined in Core, but `.is-open` is NOT the canonical HEBRING Ecosystem UI visibility state contract.*
 
 ## 11. Composition vs Configuration
 HEBRING UI prefers HTML composition over massive CSS configuration objects.

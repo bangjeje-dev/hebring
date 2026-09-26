@@ -123,4 +123,36 @@ if ! grep -q "\"./ui/\*\": \"./ecosystem/ui/\*\"" package.json; then
 fi
 pass "package.json contains ./ui/* export"
 
+# 9. Modal Reference Specifics
+if [ -f "$UI_DIR/modal.css" ]; then
+  if ! grep -q "dialog.hb-modal" "$UI_DIR/modal.css"; then
+    fail "modal.css is missing native dialog reference (dialog.hb-modal)"
+  fi
+  if ! grep -q "dialog.hb-modal\[open\]" "$UI_DIR/modal.css"; then
+    fail "modal.css is missing [open] state"
+  fi
+  if ! grep -q "dialog.hb-modal::backdrop" "$UI_DIR/modal.css"; then
+    fail "modal.css is missing ::backdrop"
+  fi
+  if grep -q "\.is-open" "$UI_DIR/modal.css"; then
+    fail "modal.css should not use .is-open"
+  fi
+  if grep -q "data-state=\"open\"" "$UI_DIR/modal.css"; then
+    fail "modal.css should not use data-state=\"open\" for native dialog"
+  fi
+  if grep -q "100vw" "$UI_DIR/modal.css"; then
+    fail "modal.css should not assume 100vw overlay"
+  fi
+  if grep -q "100vh" "$UI_DIR/modal.css"; then
+    fail "modal.css should not assume 100vh overlay"
+  fi
+  if grep -q "z-index: 50" "$UI_DIR/modal.css"; then
+    fail "modal.css should not hardcode z-index: 50"
+  fi
+  if grep -q "position: fixed" "$UI_DIR/modal.css"; then
+    fail "modal.css should not hardcode position: fixed on the dialog itself"
+  fi
+  pass "Modal CSS respects native state and dialog layout"
+fi
+
 echo "All Ecosystem UI tests passed!"
