@@ -1,0 +1,37 @@
+ol.hb-stepper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ol.hb-stepper.hb-stepper--vertical {
+  flex-direction: column;
+}
+
+.hb-stepper__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1 1 0;
+  color: var(--hb-color-text-subtle);
+  font-size: 0.875rem;
+}
+
+ol.hb-stepper.hb-stepper--vertical .hb-stepper__item {
+  flex: none;
+}
+
+/* Optional visual modifier for completed steps */
+.hb-stepper__item--completed {
+  color: var(--hb-color-primary);
+}
+
+/* Authoritative semantic state for current step */
+.hb-stepper__item[aria-current="step"] {
+  color: var(--hb-color-text-strong);
+  font-weight: 600;
+}

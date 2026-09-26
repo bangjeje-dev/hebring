@@ -197,4 +197,46 @@ else
   fail "breadcrumbs.css is missing"
 fi
 
+# 13. Pagination Reference Specifics
+if [ -f "$UI_DIR/pagination.css" ]; then
+  if ! grep -q "nav.hb-pagination" "$UI_DIR/pagination.css"; then
+    fail "pagination.css is missing nav reference (nav.hb-pagination)"
+  fi
+  if ! grep -q "\.hb-pagination__link\[aria-current=\"page\"\]" "$UI_DIR/pagination.css"; then
+    fail "pagination.css is missing aria-current=\"page\" reference"
+  fi
+  pass "Pagination CSS respects semantic structure"
+else
+  fail "pagination.css is missing"
+fi
+
+# 14. Stepper Reference Specifics
+if [ -f "$UI_DIR/stepper.css" ]; then
+  if ! grep -q "ol.hb-stepper" "$UI_DIR/stepper.css"; then
+    fail "stepper.css is missing ol reference (ol.hb-stepper)"
+  fi
+  if ! grep -q "\.hb-stepper__item\[aria-current=\"step\"\]" "$UI_DIR/stepper.css"; then
+    fail "stepper.css is missing aria-current=\"step\" reference"
+  fi
+  pass "Stepper CSS respects semantic structure"
+else
+  fail "stepper.css is missing"
+fi
+
+# 15. Popover Reference Specifics
+if [ -f "$UI_DIR/popover.css" ]; then
+  if ! grep -q "\.hb-popover" "$UI_DIR/popover.css"; then
+    fail "popover.css is missing .hb-popover"
+  fi
+  if ! grep -q ":popover-open" "$UI_DIR/popover.css"; then
+    fail "popover.css is missing :popover-open state"
+  fi
+  if grep -q "\.is-open" "$UI_DIR/popover.css" || grep -q "\.is-visible" "$UI_DIR/popover.css"; then
+    fail "popover.css uses fake state system instead of native popover state"
+  fi
+  pass "Popover CSS respects native Popover API"
+else
+  fail "popover.css is missing"
+fi
+
 echo "All Ecosystem UI tests passed!"

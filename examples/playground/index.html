@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="../../ecosystem/ui/accordion.css">
   <link rel="stylesheet" href="../../ecosystem/ui/drawer.css">
   <link rel="stylesheet" href="../../ecosystem/ui/breadcrumbs.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/pagination.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/stepper.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/popover.css">
 
   <style>
     /* Playground-specific minimal styles */
@@ -209,6 +212,59 @@
             <li class="hb-breadcrumbs__item" aria-current="page">HEBRING UI</li>
           </ol>
         </nav>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Pagination</h3>
+        <nav class="hb-pagination" aria-label="Pagination">
+          <ul class="hb-pagination__list">
+            <li class="hb-pagination__item">
+              <a class="hb-pagination__link" href="#" aria-disabled="true">Prev</a>
+            </li>
+            <li class="hb-pagination__item">
+              <a class="hb-pagination__link" href="#">1</a>
+            </li>
+            <li class="hb-pagination__item">
+              <a class="hb-pagination__link" href="#" aria-current="page">2</a>
+            </li>
+            <li class="hb-pagination__item">
+              <a class="hb-pagination__link" href="#">3</a>
+            </li>
+            <li class="hb-pagination__item">
+              <a class="hb-pagination__link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Stepper</h3>
+        <ol class="hb-stepper">
+          <li class="hb-stepper__item hb-stepper__item--completed">
+            <strong>Account</strong>
+            <span>Completed</span>
+          </li>
+          <li class="hb-stepper__item" aria-current="step">
+            <strong>Profile</strong>
+            <span>In progress</span>
+          </li>
+          <li class="hb-stepper__item">
+            <strong>Review</strong>
+            <span>Upcoming</span>
+          </li>
+        </ol>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Popover (Native)</h3>
+        <!-- Note: Anchor positioning requires browser support and typically inline styles or specific setup if dynamic.
+             Here we show the native trigger. -->
+        <button class="hb-button" popovertarget="demo-popover" style="anchor-name: --demo-anchor;">Open Popover</button>
+
+        <div id="demo-popover" class="hb-popover" popover style="position-anchor: --demo-anchor;">
+          <p style="margin-top: 0;">This popover is driven entirely by the browser's native Popover API.</p>
+          <p style="margin-bottom: 0; color: var(--hb-color-text-subtle);">Click outside or press Escape to close.</p>
+        </div>
       </div>
     </section>
   </main>

@@ -237,5 +237,86 @@ Breadcrumbs provide semantic structural navigation without JavaScript behavior.
 - **Adapter Responsibility**: None required.
 - **Consumer Responsibility**: Constructing the proper list structure and correctly setting `aria-current="page"` on the final item.
 
-## 25. Definition of Done
-Phase 15 is complete when this UI Architecture Specification is written, validated against the Core taxonomy and accessibility foundations, and committed to the repository, formally defining how HEBRING UI will operate in the future.
+## 25. Pagination DOM Contract & Accessibility
+Pagination provides semantic structural navigation for multi-page datasets or content. It strictly owns presentation, not logic.
+
+### Canonical Markup
+```html
+<nav class="hb-pagination" aria-label="Pagination">
+  <ul class="hb-pagination__list">
+    <li class="hb-pagination__item">
+      <a class="hb-pagination__link" href="/page/1">1</a>
+    </li>
+    <li class="hb-pagination__item">
+      <a class="hb-pagination__link" href="/page/2" aria-current="page">2</a>
+    </li>
+  </ul>
+</nav>
+```
+
+### Required Structure
+- `<nav class="hb-pagination">`: Canonical root. Should have `aria-label="Pagination"`.
+- `<ul class="hb-pagination__list">`: List wrapper.
+- `.hb-pagination__link`: The interactive page element (link or button).
+
+### Accessibility Contract
+- **Browser Responsibility**: Standard link/button navigation and focus.
+- **Adapter/Consumer Responsibility**: Calculating pages, URLs, and setting `aria-current="page"` precisely on the active page. Applying `aria-disabled="true"` to unavailable links.
+
+## 26. Stepper DOM Contract & Accessibility
+The Stepper provides visual and semantic representation of progress through steps. It is a "Progress Stepper", not an interactive wizard controller.
+
+### Canonical Markup
+```html
+<ol class="hb-stepper">
+  <li class="hb-stepper__item hb-stepper__item--completed">
+    Step 1: Account
+  </li>
+  <li class="hb-stepper__item" aria-current="step">
+    Step 2: Profile
+  </li>
+  <li class="hb-stepper__item">
+    Step 3: Confirm
+  </li>
+</ol>
+```
+
+### Required Structure
+- `<ol class="hb-stepper">`: The ordered list root. Can optionally use `.hb-stepper--vertical`.
+- `<li class="hb-stepper__item">`: The individual step wrapper.
+
+### Accessibility Contract
+- **Browser Responsibility**: Native list numbering and semantics.
+- **Adapter/Consumer Responsibility**: Managing application state, setting `aria-current="step"` on the active step, and navigating between steps.
+
+## 27. Popover DOM Contract & Accessibility
+Popover is a fundamental interaction primitive using the native HTML Popover API. It serves as the foundation for future compositions like Dropdown Menu.
+
+### Canonical Markup
+```html
+<button popovertarget="my-popover">Open Popover</button>
+
+<div id="my-popover" class="hb-popover" popover>
+  <p>Popover content</p>
+</div>
+```
+
+### Required Structure
+- `[popovertarget]`: The trigger button.
+- `<div class="hb-popover" popover>`: The popover surface.
+
+### State & Animation
+- State is exclusively controlled by the browser using the `:popover-open` pseudo-class. No JavaScript classes are required or permitted.
+- Entry/Exit animations use modern CSS features (`@starting-style`, `allow-discrete`) as progressive enhancements.
+
+### Positioning
+- CSS Anchor Positioning (`anchor-name`, `position-anchor`, `position-area`) is supported as a progressive enhancement.
+- If unsupported, popovers fallback to centered or baseline margins depending on the flow. Complex fallback positioning belongs to the adapter.
+
+### Accessibility Contract
+- **Browser Responsibility**: Top-layer management, light-dismiss, Escape key handling, and `:popover-open` state.
+- **Adapter Responsibility**: None for a generic popover. Compositions (like menus) will add keyboard focus management.
+- **Consumer Responsibility**: Providing trigger relationships and appropriate fallback positioning logic for older browsers.
+
+## 28. Definition of Done
+Phase 41 is complete when this UI Architecture Specification is updated and implemented correctly.
