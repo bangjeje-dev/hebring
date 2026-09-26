@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="../../ecosystem/ui/tooltip.css">
   <link rel="stylesheet" href="../../ecosystem/ui/tabs.css">
   <link rel="stylesheet" href="../../ecosystem/ui/combobox.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/command-menu.css">
 
   <style>
     /* Playground-specific minimal styles */
@@ -439,6 +440,67 @@
             <div id="combo-empty" class="hb-combobox__empty">No results found</div>
           </div>
         </div>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Command Menu</h3>
+        <button class="hb-button" id="open-demo-cmd">Open Command Menu (⌘K)</button>
+
+        <dialog class="hb-modal hb-command-menu__dialog" aria-label="Command Menu" id="demo-cmd">
+          <div class="hb-command-menu">
+            <input
+              type="text"
+              id="cmd-input"
+              class="hb-command-menu__input"
+              role="combobox"
+              aria-expanded="true"
+              aria-controls="cmd-listbox"
+              aria-autocomplete="list"
+              autocomplete="off"
+              placeholder="Type a command or search..."
+            >
+            <div id="cmd-listbox" class="hb-command-menu__list" role="listbox">
+              <div class="hb-command-menu__group" role="group" aria-label="Recent">
+                <div class="hb-command-menu__group-label" aria-hidden="true">Recent</div>
+                <div role="option" id="cmd-opt-1" class="hb-command-menu__item" aria-selected="false">
+                  <span>Open Project</span>
+                  <kbd style="font-family: monospace; font-size: 0.75rem; color: var(--hb-color-text-muted);">⌘P</kbd>
+                </div>
+                <div role="option" id="cmd-opt-2" class="hb-command-menu__item" aria-selected="false">
+                  <span>Open File</span>
+                  <kbd style="font-family: monospace; font-size: 0.75rem; color: var(--hb-color-text-muted);">⌘O</kbd>
+                </div>
+              </div>
+
+              <div class="hb-command-menu__group" role="group" aria-label="Navigation">
+                <div class="hb-command-menu__group-label" aria-hidden="true">Navigation</div>
+                <div role="option" id="cmd-opt-3" class="hb-command-menu__item" aria-selected="false">
+                  <span>Go to Dashboard</span>
+                </div>
+                <div role="option" id="cmd-opt-4" class="hb-command-menu__item" aria-selected="false">
+                  <span>Settings</span>
+                  <kbd style="font-family: monospace; font-size: 0.75rem; color: var(--hb-color-text-muted);">⌘,</kbd>
+                </div>
+              </div>
+
+              <div class="hb-command-menu__group" role="group" aria-label="Support">
+                <div class="hb-command-menu__group-label" aria-hidden="true">Support</div>
+                <div role="option" id="cmd-opt-5" class="hb-command-menu__item" aria-selected="false">
+                  <span>Help</span>
+                </div>
+                <div role="option" id="cmd-opt-6" class="hb-command-menu__item" aria-selected="false">
+                  <span>Documentation</span>
+                </div>
+                <div role="option" id="cmd-opt-7" class="hb-command-menu__item" aria-disabled="true">
+                  <span>Contact Support (Unavailable)</span>
+                </div>
+              </div>
+
+              <div id="cmd-empty" class="hb-command-menu__empty">No commands found</div>
+            </div>
+          </div>
+        </dialog>
+        <div id="cmd-output" style="margin-top: 1rem; color: var(--hb-color-text-success);"></div>
       </div>
     </section>
   </main>
@@ -981,6 +1043,183 @@
             comboInput.value = option.textContent;
             closeCombobox();
             comboInput.focus();
+          }
+        });
+      }
+
+      // --- COMMAND MENU ADAPTER (Phase 50) ---
+      const cmdDialog = document.getElementById('demo-cmd');
+      const openCmdBtn = document.getElementById('open-demo-cmd');
+      const cmdInput = document.getElementById('cmd-input');
+      const cmdListbox = document.getElementById('cmd-listbox');
+      const cmdOutput = document.getElementById('cmd-output');
+
+      if (cmdDialog && cmdInput && cmdListbox) {
+        const cmdOptions = Array.from(cmdListbox.querySelectorAll('.hb-command-menu__item'));
+        const cmdGroups = Array.from(cmdListbox.querySelectorAll('.hb-command-menu__group'));
+        const cmdEmpty = document.getElementById('cmd-empty');
+        let cmdActiveIndex = -1;
+
+        const openCommandMenu = () => {
+          cmdDialog.showModal();
+          cmdInput.value = '';
+          filterCmdOptions('');
+          cmdInput.focus();
+        };
+
+        const closeCommandMenu = () => {
+          cmdDialog.close();
+          openCmdBtn.focus();
+        };
+
+        openCmdBtn.addEventListener('click', openCommandMenu);
+
+        // Optional global shortcut demo (⌘K / Ctrl+K)
+        document.addEventListener('keydown', (e) => {
+          if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            if (cmdDialog.open) {
+              closeCommandMenu();
+            } else {
+              openCommandMenu();
+            }
+          }
+        });
+
+        // Outside click to close
+        cmdDialog.addEventListener('click', (event) => {
+          const rect = cmdDialog.getBoundingClientRect();
+          const isInDialog = (
+            rect.top <= event.clientY &&
+            event.clientY <= rect.top + rect.height &&
+            rect.left <= event.clientX &&
+            event.clientX <= rect.left + rect.width
+          );
+          if (!isInDialog) {
+            closeCommandMenu();
+          }
+        });
+
+        const getVisibleEnabledCmds = () => {
+          return cmdOptions.filter(opt =>
+            opt.style.display !== 'none' && opt.getAttribute('aria-disabled') !== 'true'
+          );
+        };
+
+        const setCmdActiveOption = (index) => {
+          const visibleOpts = getVisibleEnabledCmds();
+
+          visibleOpts.forEach(opt => opt.setAttribute('aria-selected', 'false'));
+          cmdInput.removeAttribute('aria-activedescendant');
+
+          if (index >= 0 && index < visibleOpts.length) {
+            cmdActiveIndex = index;
+            const activeOpt = visibleOpts[cmdActiveIndex];
+            activeOpt.setAttribute('aria-selected', 'true');
+            cmdInput.setAttribute('aria-activedescendant', activeOpt.id);
+            activeOpt.scrollIntoView({ block: 'nearest' });
+          } else {
+            cmdActiveIndex = -1;
+          }
+        };
+
+        const filterCmdOptions = (query) => {
+          const lowerQuery = query.toLowerCase();
+          let hasAnyVisible = false;
+
+          cmdGroups.forEach(group => {
+            const items = Array.from(group.querySelectorAll('.hb-command-menu__item'));
+            let hasVisibleInGroup = false;
+
+            items.forEach(opt => {
+              // Search primarily the text span, or whole textContent
+              const text = opt.textContent.toLowerCase();
+              if (text.includes(lowerQuery)) {
+                opt.style.display = 'flex';
+                if (opt.getAttribute('aria-disabled') !== 'true') {
+                  hasAnyVisible = true;
+                }
+                hasVisibleInGroup = true;
+              } else {
+                opt.style.display = 'none';
+                opt.setAttribute('aria-selected', 'false');
+              }
+            });
+
+            // Hide the entire group if no items match
+            if (hasVisibleInGroup) {
+              group.style.display = 'block';
+            } else {
+              group.style.display = 'none';
+            }
+          });
+
+          if (hasAnyVisible) {
+            cmdEmpty.style.display = 'none';
+          } else {
+            cmdEmpty.style.display = 'block';
+          }
+
+          // Reset active item to the first one available after filtering
+          setCmdActiveOption(hasAnyVisible ? 0 : -1);
+        };
+
+        cmdInput.addEventListener('input', (e) => {
+          filterCmdOptions(e.target.value);
+        });
+
+        const executeCommand = (option) => {
+          if (!option || option.getAttribute('aria-disabled') === 'true') return;
+          const cmdName = option.querySelector('span') ? option.querySelector('span').textContent : option.textContent;
+          cmdOutput.textContent = `Executed: ${cmdName}`;
+          closeCommandMenu();
+
+          // clear output after a while
+          setTimeout(() => {
+            if (cmdOutput.textContent === `Executed: ${cmdName}`) {
+              cmdOutput.textContent = '';
+            }
+          }, 3000);
+        };
+
+        cmdInput.addEventListener('keydown', (e) => {
+          const visibleOpts = getVisibleEnabledCmds();
+
+          switch(e.key) {
+            case 'ArrowDown':
+              e.preventDefault();
+              setCmdActiveOption(cmdActiveIndex < visibleOpts.length - 1 ? cmdActiveIndex + 1 : 0);
+              break;
+            case 'ArrowUp':
+              e.preventDefault();
+              setCmdActiveOption(cmdActiveIndex > 0 ? cmdActiveIndex - 1 : visibleOpts.length - 1);
+              break;
+            case 'Home':
+              e.preventDefault();
+              setCmdActiveOption(0);
+              break;
+            case 'End':
+              e.preventDefault();
+              setCmdActiveOption(visibleOpts.length - 1);
+              break;
+            case 'Enter':
+              e.preventDefault();
+              if (cmdActiveIndex >= 0 && cmdActiveIndex < visibleOpts.length) {
+                executeCommand(visibleOpts[cmdActiveIndex]);
+              }
+              break;
+            case 'Escape':
+              // Dialog handles escape natively, but let's ensure we return focus correctly
+              e.preventDefault();
+              closeCommandMenu();
+              break;
+          }
+        });
+
+        cmdListbox.addEventListener('click', (e) => {
+          const option = e.target.closest('.hb-command-menu__item');
+          if (option) {
+            executeCommand(option);
           }
         });
       }

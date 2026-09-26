@@ -548,5 +548,37 @@ Combobox is an independent input-driven selection primitive. It is distinct from
 - **Adapter Responsibility**: Managing popover visibility (via `.showPopover()`), handling keyboard navigation (Arrow Up/Down/Home/End), selecting items (Enter/Click), and syncing `aria-expanded` and `aria-activedescendant`.
 - **Consumer Responsibility**: Providing matching option labels, IDs, and handling logic data binding (e.g. form submission).
 
-## 34. Definition of Done
-Phase 47 is complete when this UI Architecture Specification is updated and implemented correctly.
+## 34. Command Menu Foundation & Accessibility
+Command Menu is an application command discovery interface. It is a higher-level ecosystem composition built on top of Dialog and Combobox interaction models.
+
+### Canonical Markup
+```html
+<dialog class="hb-modal hb-command-menu__dialog" aria-label="Command Menu">
+  <div class="hb-command-menu">
+    <input type="text" class="hb-command-menu__input" role="combobox" aria-expanded="true" aria-controls="cmd-listbox" aria-autocomplete="list" placeholder="Search...">
+    <div id="cmd-listbox" class="hb-command-menu__list" role="listbox">
+      <div class="hb-command-menu__group" role="group" aria-label="Navigation">
+        <div class="hb-command-menu__group-label" aria-hidden="true">Navigation</div>
+        <div role="option" class="hb-command-menu__item" aria-selected="false">Dashboard</div>
+      </div>
+    </div>
+  </div>
+</dialog>
+```
+
+### Architectural Contract
+- **Not a Menu**: It does not use Menu or Dropdown/Context Menu semantics. It uses Listbox semantics because it is driven by a search/filter input.
+- **Composition**: It composes `dialog` (for the modal popup) and a Combobox-like input model (for filtering and arrow navigation).
+- **Focus Model**: Focus remains strictly on the input field. `aria-activedescendant` is used to track the currently active item.
+- **Execution**: The input handles Enter to execute the active command.
+- **Disabled Commands**: Represented with `aria-disabled="true"`, preventing selection and execution.
+- **Shortcut Presentation**: Command shortcuts (e.g., `⌘K`) are purely visual metadata. No global shortcut engine or history macros are included in this foundation.
+
+### Responsibilities
+- **Browser Responsibility**: Managing the modal lifecycle (via `<dialog>` and `showModal()`) and input typing.
+- **CSS Responsibility**: Styling the surface, input, groups, and items without relying on custom `.is-*` state classes.
+- **Adapter Responsibility**: Managing simple substring filtering, keyboard navigation (Arrow Up/Down, Home/End, Enter, Escape), syncing `aria-activedescendant` on the input, and executing commands safely within the playground environment.
+- **Consumer Responsibility**: Supplying the actual command definitions and the execution logic (e.g., routing) within an application context.
+
+## 35. Definition of Done
+Phase 50 is complete when this UI Architecture Specification is updated and implemented correctly.

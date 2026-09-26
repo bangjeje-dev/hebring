@@ -399,4 +399,31 @@ fi
 
 pass "Combobox architecture respects pure native constraints"
 
+# 23. Command Menu Validation
+if [ ! -f "$UI_DIR/command-menu.css" ]; then
+  fail "command-menu.css is missing"
+fi
+
+if grep -q '\.is-open' "$UI_DIR/command-menu.css" || grep -q '\.is-active' "$UI_DIR/command-menu.css" || grep -q '\.is-selected' "$UI_DIR/command-menu.css" || grep -q '\.is-highlighted' "$UI_DIR/command-menu.css"; then
+  fail "Command Menu CSS must not use custom state classes"
+fi
+
+if grep -q 'role="menu"' "$UI_DIR/command-menu.css" || grep -q 'role="menuitem"' "$UI_DIR/command-menu.css"; then
+  fail "Command Menu CSS must not use menu semantics"
+fi
+
+if ! grep -q 'role="combobox"' "$ROOT_DIR/examples/playground/index.html" || ! grep -q 'role="listbox"' "$ROOT_DIR/examples/playground/index.html" || ! grep -q 'role="option"' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing command menu semantic roles"
+fi
+
+if ! grep -q 'COMMAND MENU ADAPTER' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing COMMAND MENU ADAPTER"
+fi
+
+if ! grep -q 'hb-command-menu__dialog' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing hb-command-menu__dialog"
+fi
+
+pass "Command Menu architecture respects pure native constraints"
+
 echo "All Ecosystem UI tests passed!"
