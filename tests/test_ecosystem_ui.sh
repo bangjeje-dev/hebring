@@ -280,4 +280,27 @@ else
   fail "tooltip.css is missing"
 fi
 
+# 18. Dropdown Menu Composition
+if [ -f "$UI_DIR/dropdown.css" ] || [ -f "$UI_DIR/dropdown-menu.css" ]; then
+  fail "Dropdown Menu must be a composition, not a new CSS primitive file"
+fi
+
+if ! grep -q 'id="dropdown-trigger"' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing dropdown trigger"
+fi
+
+if ! grep -q 'popovertarget="demo-dropdown"' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground dropdown trigger missing popovertarget"
+fi
+
+if ! grep -q 'aria-haspopup="menu"' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground dropdown trigger missing aria-haspopup=\"menu\""
+fi
+
+if ! grep -q 'DROPDOWN MENU ADAPTER' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing DROPDOWN MENU ADAPTER"
+fi
+
+pass "Dropdown Menu composition respects pure architecture"
+
 echo "All Ecosystem UI tests passed!"

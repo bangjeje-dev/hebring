@@ -307,6 +307,26 @@
           </div>
         </div>
       </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Dropdown Menu (Composition)</h3>
+        <!--
+          Popover + Menu + Adapter
+        -->
+        <button id="dropdown-trigger" class="hb-button" type="button" popovertarget="demo-dropdown" aria-haspopup="menu" aria-expanded="false" style="anchor-name: --dropdown-anchor;">
+          Actions
+        </button>
+
+        <div id="demo-dropdown" class="hb-popover" popover style="position-anchor: --dropdown-anchor;">
+          <div class="hb-menu" role="menu">
+            <button class="hb-menu__item" role="menuitem" tabindex="0">Edit</button>
+            <button class="hb-menu__item" role="menuitem" tabindex="-1">Duplicate</button>
+            <button class="hb-menu__item" role="menuitem" tabindex="-1">Archive</button>
+            <hr class="hb-menu__separator" role="separator" />
+            <button class="hb-menu__item" role="menuitem" tabindex="-1" disabled>Delete</button>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -375,6 +395,108 @@
           drawer.close();
         }
       });
+
+      // --- DROPDOWN MENU ADAPTER (Phase 45) ---
+      const dropdownTrigger = document.getElementById('dropdown-trigger');
+      const dropdownPopover = document.getElementById('demo-dropdown');
+
+      if (dropdownTrigger && dropdownPopover) {
+        // Collect all enabled items
+        const menuItems = Array.from(dropdownPopover.querySelectorAll('.hb-menu__item:not([disabled]):not([aria-disabled="true"])'));
+        let typeaheadBuffer = '';
+        let typeaheadTimeout = null;
+
+        function updateTabIndex(activeIndex) {
+          menuItems.forEach((item, index) => {
+            item.setAttribute('tabindex', index === activeIndex ? '0' : '-1');
+          });
+        }
+
+        // Synchronize ARIA state
+        dropdownPopover.addEventListener('toggle', (e) => {
+          const isOpen = e.newState === 'open';
+          dropdownTrigger.setAttribute('aria-expanded', isOpen);
+
+          if (isOpen && menuItems.length > 0) {
+            // First item gets focus when menu opens natively
+            updateTabIndex(0);
+            menuItems[0].focus();
+          }
+        });
+
+        // Handle keyboard navigation within the menu
+        dropdownPopover.addEventListener('keydown', (e) => {
+          const currentIndex = menuItems.indexOf(document.activeElement);
+          if (currentIndex === -1) return;
+
+          let nextIndex = currentIndex;
+
+          switch (e.key) {
+            case 'ArrowDown':
+              e.preventDefault();
+              nextIndex = (currentIndex + 1) % menuItems.length;
+              break;
+            case 'ArrowUp':
+              e.preventDefault();
+              nextIndex = (currentIndex - 1 + menuItems.length) % menuItems.length;
+              break;
+            case 'Home':
+              e.preventDefault();
+              nextIndex = 0;
+              break;
+            case 'End':
+              e.preventDefault();
+              nextIndex = menuItems.length - 1;
+              break;
+            case 'Escape':
+              // Popover natively closes, but we must explicitly restore focus
+              dropdownTrigger.focus();
+              break;
+            case 'Tab':
+              // Follow standard menu behavior: close menu on tab away
+              dropdownPopover.hidePopover();
+              break;
+            default:
+              // Typeahead
+              if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
+                e.preventDefault();
+                typeaheadBuffer += e.key.toLowerCase();
+
+                if (typeaheadTimeout) clearTimeout(typeaheadTimeout);
+                typeaheadTimeout = setTimeout(() => { typeaheadBuffer = ''; }, 500);
+
+                const matchIndex = menuItems.findIndex(item =>
+                  item.textContent.trim().toLowerCase().startsWith(typeaheadBuffer)
+                );
+
+                if (matchIndex !== -1) {
+                  nextIndex = matchIndex;
+                }
+              }
+              break;
+          }
+
+          if (nextIndex !== currentIndex) {
+            updateTabIndex(nextIndex);
+            menuItems[nextIndex].focus();
+          }
+        });
+
+        // Handle menu item activation
+        menuItems.forEach(item => {
+          item.addEventListener('click', () => {
+            dropdownPopover.hidePopover();
+            dropdownTrigger.focus(); // Restore focus to trigger
+          });
+
+          item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              item.click(); // Standard click handles the close and restore
+            }
+          });
+        });
+      }
     });
   </script>
 </body>

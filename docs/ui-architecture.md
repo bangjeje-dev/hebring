@@ -5,7 +5,7 @@ HEBRING UI exists as a higher-level composition layer built on top of HEBRING Co
 
 ## 2. Core vs UI Boundary
 - **HEBRING Core**: Pure CSS. Represents universal HTML patterns, including components like `.hb-button`, `.hb-card`, `.hb-badge`, and `.hb-alert`. Has no knowledge of complex state management beyond native pseudo-classes and simple `.is-*` toggles.
-- **HEBRING UI**: Conceptual future ecosystem layer for complex interactive widgets (Modals, DatePickers, Accordions) that inherently require JavaScript logic, focus trapping, or dynamic rendering. 
+- **HEBRING UI**: Conceptual future ecosystem layer for complex interactive widgets (Modals, DatePickers, Accordions) that inherently require JavaScript logic, focus trapping, or dynamic rendering.
 - *Example*: `.hb-card` belongs in Core. A complex interactive `Combobox` belongs in HEBRING UI.
 
 ## 3. UI Component Definition
@@ -378,5 +378,46 @@ Tooltip content MUST remain non-interactive. Do not place buttons, links, or for
 - **Adapter Responsibility**: Hover intent delays, pointer enter/leave logic, focus handling, show/hide lifecycle, and dynamic coordinate positioning for fallback placement.
 - **Consumer Responsibility**: Providing the accessible text, maintaining the ID reference, and ensuring the trigger itself is focusable.
 
-## 30. Definition of Done
-Phase 44 is complete when this UI Architecture Specification is updated and implemented correctly.
+## 30. Dropdown Menu Composition & Accessibility
+The Dropdown Menu is NOT a separate CSS primitive. It is a composition of:
+`Popover` + `Menu Foundation` + `Reference Adapter` = `Dropdown Menu`
+
+### Canonical Markup
+```html
+<button
+  type="button"
+  popovertarget="dropdown-1"
+  aria-haspopup="menu"
+  aria-expanded="false"
+>
+  Actions
+</button>
+
+<div id="dropdown-1" class="hb-popover" popover>
+  <div class="hb-menu" role="menu">
+    <button class="hb-menu__item" role="menuitem" tabindex="0">Edit</button>
+    <button class="hb-menu__item" role="menuitem" tabindex="-1">Duplicate</button>
+    <hr class="hb-menu__separator" role="separator" />
+    <button class="hb-menu__item" role="menuitem" tabindex="-1" disabled>Delete</button>
+  </div>
+</div>
+```
+
+### Required Structure
+- Trigger: `<button popovertarget="id" aria-haspopup="menu" aria-expanded="false">`.
+- Surface: `<div id="id" class="hb-popover" popover>`.
+- Menu: `<div class="hb-menu" role="menu">` wrapping `.hb-menu__item` elements with `role="menuitem"`.
+
+### Accessibility & Interaction Contract
+- **Browser Responsibility**: Top-layer promotion, native `popover` light-dismiss, and `:popover-open` CSS synchronization.
+- **HEBRING CSS**: Visual hierarchy, surface presentation, focus states, and native popover transitions (`@starting-style`).
+- **Adapter Responsibility**:
+  - Syncing `aria-expanded` on the trigger based on the popover state.
+  - Managing a roving `tabindex` (`0` for the active item, `-1` for others).
+  - Handling keyboard navigation within the menu (ArrowUp, ArrowDown, Home, End).
+  - Trapping typeahead character searches to move focus.
+  - Restoring focus to the trigger on Escape or menu activation.
+- **Consumer Responsibility**: Application action logic and routing.
+
+## 31. Definition of Done
+Phase 45 is complete when this UI Architecture Specification is updated and implemented correctly.
