@@ -155,4 +155,46 @@ if [ -f "$UI_DIR/modal.css" ]; then
   pass "Modal CSS respects native state and dialog layout"
 fi
 
+# 10. Drawer Reference Specifics
+if [ -f "$UI_DIR/drawer.css" ]; then
+  if ! grep -q "dialog.hb-drawer" "$UI_DIR/drawer.css"; then
+    fail "drawer.css is missing native dialog reference (dialog.hb-drawer)"
+  fi
+  if ! grep -q "dialog.hb-drawer\[open\]" "$UI_DIR/drawer.css"; then
+    fail "drawer.css is missing [open] state"
+  fi
+  if ! grep -q "dialog.hb-drawer::backdrop" "$UI_DIR/drawer.css"; then
+    fail "drawer.css is missing ::backdrop"
+  fi
+  pass "Drawer CSS respects native state and dialog layout"
+else
+  fail "drawer.css is missing"
+fi
+
+# 11. Accordion Reference Specifics
+if [ -f "$UI_DIR/accordion.css" ]; then
+  if ! grep -q "details.hb-accordion" "$UI_DIR/accordion.css"; then
+    fail "accordion.css is missing native details reference (details.hb-accordion)"
+  fi
+  if ! grep -q "\.hb-accordion__trigger" "$UI_DIR/accordion.css"; then
+    fail "accordion.css is missing trigger reference (.hb-accordion__trigger)"
+  fi
+  pass "Accordion CSS respects native state and details layout"
+else
+  fail "accordion.css is missing"
+fi
+
+# 12. Breadcrumbs Reference Specifics
+if [ -f "$UI_DIR/breadcrumbs.css" ]; then
+  if ! grep -q "nav.hb-breadcrumbs" "$UI_DIR/breadcrumbs.css"; then
+    fail "breadcrumbs.css is missing nav reference (nav.hb-breadcrumbs)"
+  fi
+  if ! grep -q "\.hb-breadcrumbs__list" "$UI_DIR/breadcrumbs.css"; then
+    fail "breadcrumbs.css is missing list reference (.hb-breadcrumbs__list)"
+  fi
+  pass "Breadcrumbs CSS respects semantic structure"
+else
+  fail "breadcrumbs.css is missing"
+fi
+
 echo "All Ecosystem UI tests passed!"

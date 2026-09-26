@@ -8,6 +8,9 @@
   <!-- Load HEBRING framework core -->
   <link rel="stylesheet" href="../../src/index.css">
   <link rel="stylesheet" href="../../ecosystem/ui/modal.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/accordion.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/drawer.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/breadcrumbs.css">
 
   <style>
     /* Playground-specific minimal styles */
@@ -158,6 +161,55 @@
           </div>
         </dialog>
       </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Drawer (Native Dialog)</h3>
+        <button class="hb-button" id="open-demo-drawer">Open Native Drawer</button>
+
+        <dialog class="hb-drawer" aria-labelledby="demo-drawer-title" id="demo-drawer">
+          <div class="hb-drawer__header">
+            <h2 class="hb-drawer__title" id="demo-drawer-title">Drawer Menu</h2>
+            <button class="hb-button hb-button--secondary hb-button--sm" data-drawer-close aria-label="Close drawer">X</button>
+          </div>
+          <div class="hb-drawer__content">
+            <p>This drawer also uses the native <code>&lt;dialog&gt;</code> element.</p>
+          </div>
+          <div class="hb-drawer__footer">
+            <button class="hb-button" data-drawer-close>Done</button>
+          </div>
+        </dialog>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Accordion (Native Details)</h3>
+        <details class="hb-accordion">
+          <summary class="hb-accordion__trigger">
+            First Section
+          </summary>
+          <div class="hb-accordion__content">
+            <p>This is the content of the first section. No JS required.</p>
+          </div>
+        </details>
+        <details class="hb-accordion">
+          <summary class="hb-accordion__trigger">
+            Second Section
+          </summary>
+          <div class="hb-accordion__content">
+            <p>This is the content of the second section.</p>
+          </div>
+        </details>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Breadcrumbs</h3>
+        <nav class="hb-breadcrumbs" aria-label="Breadcrumb">
+          <ol class="hb-breadcrumbs__list">
+            <li class="hb-breadcrumbs__item"><a href="#">Home</a></li>
+            <li class="hb-breadcrumbs__item"><a href="#">Products</a></li>
+            <li class="hb-breadcrumbs__item" aria-current="page">HEBRING UI</li>
+          </ol>
+        </nav>
+      </div>
     </section>
   </main>
 
@@ -196,6 +248,34 @@
         );
         if (!isInDialog) {
           modal.close();
+        }
+      });
+
+      // --- DRAWER ADAPTER ---
+      const drawer = document.getElementById('demo-drawer');
+      const openDrawerBtn = document.getElementById('open-demo-drawer');
+      const closeDrawerBtns = drawer.querySelectorAll('[data-drawer-close]');
+
+      openDrawerBtn.addEventListener('click', () => {
+        drawer.showModal();
+      });
+
+      closeDrawerBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          drawer.close();
+        });
+      });
+
+      drawer.addEventListener('click', (event) => {
+        const rect = drawer.getBoundingClientRect();
+        const isInDialog = (
+          rect.top <= event.clientY &&
+          event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX &&
+          event.clientX <= rect.left + rect.width
+        );
+        if (!isInDialog) {
+          drawer.close();
         }
       });
     });

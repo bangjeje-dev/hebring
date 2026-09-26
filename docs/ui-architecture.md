@@ -158,5 +158,84 @@ The Ecosystem UI Modal expects the native `<dialog>` element as its foundation.
 - **Adapter Responsibility**: Triggering `.showModal()` and `.close()`, locking body scroll (if desired), and handling click-outside-to-close behavior.
 - **Consumer Responsibility**: Providing correct `aria-labelledby` or `aria-describedby` connecting to internal content, and providing an accessible close button.
 
-## 22. Definition of Done
+## 22. Drawer DOM Contract & Accessibility
+The Ecosystem UI Drawer is built upon the same native `<dialog>` foundation as Modal, providing off-canvas sliding behavior.
+
+### Canonical Markup
+```html
+<dialog class="hb-drawer" aria-labelledby="drawer-title">
+  <div class="hb-drawer__header">
+    <h2 class="hb-drawer__title" id="drawer-title">Drawer Title</h2>
+    <button class="hb-button hb-button--sm" data-drawer-close>Close</button>
+  </div>
+  <div class="hb-drawer__content">
+    <p>Drawer content</p>
+  </div>
+</dialog>
+```
+
+### Required Structure
+- `<dialog class="hb-drawer">`: The canonical root. Uses native `[open]` and `::backdrop`.
+
+### Optional Structure
+- `.hb-drawer__header`, `.hb-drawer__title`, `.hb-drawer__content`, `.hb-drawer__footer`.
+
+### Accessibility Contract
+- Identical to Modal. The browser owns top-layer and `[open]` state. The adapter owns `showModal()` and click-outside logic.
+
+## 23. Accordion DOM Contract & Accessibility
+The Ecosystem UI Accordion relies strictly on the native `<details>` and `<summary>` elements.
+
+### Canonical Markup
+```html
+<details class="hb-accordion">
+  <summary class="hb-accordion__trigger">
+    Accordion Title
+  </summary>
+  <div class="hb-accordion__content">
+    Hidden content revealed upon open.
+  </div>
+</details>
+```
+
+### Required Structure
+- `<details class="hb-accordion">`: The canonical root. Must be the `<details>` tag to inherit native `[open]` state.
+- `<summary class="hb-accordion__trigger">`: The native disclosure trigger.
+
+### Optional Structure
+- `.hb-accordion__content`: A wrapper for the revealed content, mostly for padding control.
+
+### Accessibility Contract
+- **Browser Responsibility**: Toggling the `[open]` attribute, handling click/Space/Enter on `<summary>`, and conveying expanded state to screen readers.
+- **Adapter Responsibility**: None required for basic usage. Can optionally provide exclusive accordion behavior (closing siblings).
+- **Consumer Responsibility**: Providing semantic content within the accordion.
+
+## 24. Breadcrumbs DOM Contract & Accessibility
+Breadcrumbs provide semantic structural navigation without JavaScript behavior.
+
+### Canonical Markup
+```html
+<nav class="hb-breadcrumbs" aria-label="Breadcrumb">
+  <ol class="hb-breadcrumbs__list">
+    <li class="hb-breadcrumbs__item">
+      <a href="/">Home</a>
+    </li>
+    <li class="hb-breadcrumbs__item" aria-current="page">
+      Current Page
+    </li>
+  </ol>
+</nav>
+```
+
+### Required Structure
+- `<nav class="hb-breadcrumbs">`: The canonical root. Should have `aria-label="Breadcrumb"`.
+- `<ol class="hb-breadcrumbs__list">`: The ordered list container.
+- `<li class="hb-breadcrumbs__item">`: The individual items. CSS handles the visual separator `/` via `::after`.
+
+### Accessibility Contract
+- **Browser Responsibility**: Standard link navigation and focus.
+- **Adapter Responsibility**: None required.
+- **Consumer Responsibility**: Constructing the proper list structure and correctly setting `aria-current="page"` on the final item.
+
+## 25. Definition of Done
 Phase 15 is complete when this UI Architecture Specification is written, validated against the Core taxonomy and accessibility foundations, and committed to the repository, formally defining how HEBRING UI will operate in the future.
