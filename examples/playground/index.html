@@ -207,6 +207,28 @@
       </div>
 
       <div style="margin-bottom: 2rem;">
+        <h3>Accordion (Single-open enhancement)</h3>
+        <div class="hb-accordion-group" id="demo-single-accordion">
+          <details class="hb-accordion" name="demo-exclusive">
+            <summary class="hb-accordion__trigger">
+              Exclusive Section 1
+            </summary>
+            <div class="hb-accordion__content">
+              <p>Opening this section will close others in the group. Uses native <code>name</code> attribute with JS fallback.</p>
+            </div>
+          </details>
+          <details class="hb-accordion" name="demo-exclusive">
+            <summary class="hb-accordion__trigger">
+              Exclusive Section 2
+            </summary>
+            <div class="hb-accordion__content">
+              <p>This is the content of the second exclusive section.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
         <h3>Breadcrumbs</h3>
         <nav class="hb-breadcrumbs" aria-label="Breadcrumb">
           <ol class="hb-breadcrumbs__list">
@@ -736,6 +758,24 @@
         tabs.forEach(tab => {
           tab.addEventListener('click', () => {
             activateTab(tab);
+          });
+        });
+      }
+
+      // --- ACCORDION SINGLE-OPEN ADAPTER (Phase 48) ---
+      // Provides progressive enhancement for browsers lacking <details name="..."> support
+      const accordionGroup = document.getElementById('demo-single-accordion');
+      if (accordionGroup) {
+        const detailsElements = Array.from(accordionGroup.querySelectorAll('details'));
+        detailsElements.forEach(targetDetail => {
+          targetDetail.addEventListener('toggle', () => {
+            if (targetDetail.open) {
+              detailsElements.forEach(detail => {
+                if (detail !== targetDetail && detail.open) {
+                  detail.open = false;
+                }
+              });
+            }
           });
         });
       }

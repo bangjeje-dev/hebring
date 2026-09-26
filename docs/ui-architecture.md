@@ -183,14 +183,14 @@ The Ecosystem UI Drawer is built upon the same native `<dialog>` foundation as M
 ### Accessibility Contract
 - Identical to Modal. The browser owns top-layer and `[open]` state. The adapter owns `showModal()` and click-outside logic.
 
-## 23. Accordion DOM Contract & Accessibility
-The Ecosystem UI Accordion relies strictly on the native `<details>` and `<summary>` elements.
+## 23. Disclosure & Accordion DOM Contract & Accessibility
+The Ecosystem UI Disclosure relies strictly on the native `<details>` and `<summary>` elements. An **Accordion** is a collection of these Disclosures.
 
-### Canonical Markup
+### Canonical Disclosure Markup
 ```html
 <details class="hb-accordion">
   <summary class="hb-accordion__trigger">
-    Accordion Title
+    Disclosure Title
   </summary>
   <div class="hb-accordion__content">
     Hidden content revealed upon open.
@@ -198,17 +198,36 @@ The Ecosystem UI Accordion relies strictly on the native `<details>` and `<summa
 </details>
 ```
 
+### Canonical Accordion (Multiple-Open Baseline)
+A basic Accordion is just multiple Disclosures in a row. It requires no JavaScript and allows multiple panels to be open simultaneously natively.
+```html
+<div class="hb-accordion-group">
+  <details class="hb-accordion">...</details>
+  <details class="hb-accordion">...</details>
+</div>
+```
+
 ### Required Structure
 - `<details class="hb-accordion">`: The canonical root. Must be the `<details>` tag to inherit native `[open]` state.
-- `<summary class="hb-accordion__trigger">`: The native disclosure trigger.
+- `<summary class="hb-accordion__trigger">`: The native disclosure trigger. Cannot be replaced with a generic button.
 
 ### Optional Structure
 - `.hb-accordion__content`: A wrapper for the revealed content, mostly for padding control.
 
-### Accessibility Contract
-- **Browser Responsibility**: Toggling the `[open]` attribute, handling click/Space/Enter on `<summary>`, and conveying expanded state to screen readers.
-- **Adapter Responsibility**: None required for basic usage. Can optionally provide exclusive accordion behavior (closing siblings).
+### Single-Open Enhancement
+An optional single-open behavior (exclusive accordion) is supported natively in modern HTML via the `name` attribute on `<details>` elements.
+```html
+<details class="hb-accordion" name="my-accordion-group">...</details>
+<details class="hb-accordion" name="my-accordion-group">...</details>
+```
+
+### Accessibility & Interaction Contract
+- **Browser Responsibility**: Toggling the `[open]` attribute, handling click/Space/Enter on `<summary>`, focus management, and conveying expanded state to screen readers.
+- **CSS Responsibility**: Styling relying entirely on native elements and native `[open]` state. No `.is-open`, `.is-active`, or custom state classes.
+- **Adapter Responsibility**: None required for the multiple-open baseline or modern native single-open behavior. An optional reference adapter can provide a fallback for the single-open behavior in older browsers lacking `<details name>` support.
 - **Consumer Responsibility**: Providing semantic content within the accordion.
+
+Accordion does NOT require Popover, Menu, Tabs, or Tooltip semantics.
 
 ## 24. Breadcrumbs DOM Contract & Accessibility
 Breadcrumbs provide semantic structural navigation without JavaScript behavior.

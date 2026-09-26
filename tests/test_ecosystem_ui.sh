@@ -353,4 +353,27 @@ fi
 
 pass "Tabs architecture respects pure constraints"
 
+# 21. Accordion Validation
+if [ ! -f "$UI_DIR/accordion.css" ]; then
+  fail "accordion.css is missing"
+fi
+
+if grep -q '\.is-open' "$UI_DIR/accordion.css" || grep -q '\.is-active' "$UI_DIR/accordion.css" || grep -q 'data-state' "$UI_DIR/accordion.css"; then
+  fail "Accordion CSS must not use custom state classes"
+fi
+
+if ! grep -q 'details' "$UI_DIR/accordion.css" || ! grep -q 'summary' "$UI_DIR/accordion.css"; then
+  fail "Accordion CSS must target native details/summary elements"
+fi
+
+if ! grep -q 'name="demo-exclusive"' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing details name grouping for single-open accordion"
+fi
+
+if ! grep -q 'ACCORDION SINGLE-OPEN ADAPTER' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing ACCORDION SINGLE-OPEN ADAPTER"
+fi
+
+pass "Accordion architecture respects pure native constraints"
+
 echo "All Ecosystem UI tests passed!"
