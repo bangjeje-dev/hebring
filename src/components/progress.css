@@ -1,0 +1,43 @@
+/**
+ * HEBRING — Progress Component
+ *
+ * Base styling for native <progress> elements.
+ */
+
+@layer components {
+  .hb-progress {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: var(--hb-space-2);
+    border: none;
+    border-radius: var(--hb-radius-full);
+    background-color: var(--hb-color-surface-active);
+    color: var(--hb-color-primary); /* For Firefox */
+    overflow: hidden;
+  }
+
+  /* WebKit specific (Chrome, Safari, Edge) */
+  .hb-progress::-webkit-progress-bar {
+    background-color: var(--hb-color-surface-active);
+    border-radius: var(--hb-radius-full);
+  }
+
+  .hb-progress::-webkit-progress-value {
+    background-color: var(--hb-color-primary);
+    border-radius: var(--hb-radius-full);
+  }
+
+  /* Mozilla specific (Firefox) */
+  .hb-progress::-moz-progress-bar {
+    background-color: var(--hb-color-primary);
+    border-radius: var(--hb-radius-full);
+  }
+
+  /* Indeterminate state fallback where possible */
+  .hb-progress:not([value])::-webkit-progress-bar {
+    background-color: var(--hb-color-surface-active);
+    border-radius: var(--hb-radius-full);
+  }
+}

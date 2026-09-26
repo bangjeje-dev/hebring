@@ -151,6 +151,23 @@ check_grep "$SRC_COMPONENTS/avatar.css" "\.hb-avatar--lg" "Avatar: large variant
 check_grep "$SRC_COMPONENTS/avatar.css" "var\(--hb-color-surface-muted\)" "Avatar: fallback background styled"
 check_not_grep "$SRC_COMPONENTS/avatar.css" "\.is-|\.has-" "Avatar: no JavaScript dependency"
 
+# 15. Link Tests
+check_grep "$SRC_COMPONENTS/link.css" "^\s*\.hb-link\s*\{" "Link: base class exists"
+check_grep "$SRC_COMPONENTS/link.css" "\.hb-link:hover" "Link: hover state exists"
+check_grep "$SRC_COMPONENTS/link.css" "\.hb-link:active" "Link: active state exists"
+check_grep "$SRC_COMPONENTS/link.css" "\.hb-link:focus-visible" "Link: focus-visible state exists"
+check_grep "$SRC_COMPONENTS/link.css" "color:\s*var\(--hb-color-primary\)" "Link: uses semantic tokens"
+check_not_grep "$SRC_COMPONENTS/link.css" "#[0-9a-fA-F]" "Link: no hardcoded hex colors"
+check_not_grep "$SRC_COMPONENTS/link.css" "\.is-|\.has-" "Link: no JS behavior"
+
+# 16. Progress Tests
+check_grep "$SRC_COMPONENTS/progress.css" "^\s*\.hb-progress\s*\{" "Progress: base class exists"
+check_grep "$SRC_COMPONENTS/progress.css" "::-webkit-progress-bar" "Progress: webkit progress bar styled"
+check_grep "$SRC_COMPONENTS/progress.css" "::-moz-progress-bar" "Progress: mozilla progress bar styled"
+check_grep "$SRC_COMPONENTS/progress.css" "background-color:\s*var\(--hb-color" "Progress: uses semantic tokens"
+check_not_grep "$SRC_COMPONENTS/progress.css" "#[0-9a-fA-F]" "Progress: no hardcoded hex colors"
+check_not_grep "$SRC_COMPONENTS/progress.css" "\.is-|\.has-" "Progress: no JS behavior"
+
 if [ $ERRORS -eq 0 ]; then
   echo "All Component tests passed!"
   exit 0
@@ -158,3 +175,5 @@ else
   echo "$ERRORS Component test(s) failed."
   exit 1
 fi
+
+

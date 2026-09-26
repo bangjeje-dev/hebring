@@ -42,11 +42,15 @@
 
   /* Status Roles - Success */
   --hb-color-success: var(--hb-color-green-500);
+  --hb-color-success-hover: var(--hb-color-green-400);
+  --hb-color-success-active: var(--hb-color-green-600);
   --hb-color-success-subtle: var(--hb-color-green-950);
   --hb-color-on-success: var(--hb-color-black);
 
   /* Status Roles - Warning */
   --hb-color-warning: var(--hb-color-yellow-500);
+  --hb-color-warning-hover: var(--hb-color-yellow-400);
+  --hb-color-warning-active: var(--hb-color-yellow-600);
   --hb-color-warning-subtle: var(--hb-color-yellow-950);
   --hb-color-on-warning: var(--hb-color-black);
 
@@ -59,6 +63,8 @@
 
   /* Status Roles - Info */
   --hb-color-info: var(--hb-color-blue-500);
+  --hb-color-info-hover: var(--hb-color-blue-400);
+  --hb-color-info-active: var(--hb-color-blue-600);
   --hb-color-info-subtle: var(--hb-color-blue-950);
   --hb-color-on-info: var(--hb-color-white);
 

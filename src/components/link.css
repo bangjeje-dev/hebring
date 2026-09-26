@@ -1,0 +1,29 @@
+/**
+ * HEBRING — Link Component
+ *
+ * Base styling for actionable inline anchors.
+ */
+
+@layer components {
+  .hb-link {
+    color: var(--hb-color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    cursor: pointer;
+    transition: color var(--hb-duration-fast) var(--hb-ease-standard);
+  }
+
+  .hb-link:hover {
+    color: var(--hb-color-primary-hover);
+  }
+
+  .hb-link:active {
+    color: var(--hb-color-primary-active);
+  }
+
+  .hb-link:focus-visible {
+    outline: 2px solid var(--hb-color-focus);
+    outline-offset: 2px;
+    border-radius: var(--hb-radius-sm);
+  }
+}

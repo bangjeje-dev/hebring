@@ -683,6 +683,61 @@
     height: var(--hb-space-12);
     font-size: var(--hb-font-size-lg);
   }
+
+  .hb-link {
+    color: var(--hb-color-primary);
+    text-underline-offset: .15em;
+    cursor: pointer;
+    transition: color var(--hb-duration-fast) var(--hb-ease-standard);
+    text-decoration: underline;
+  }
+
+  .hb-link:hover {
+    color: var(--hb-color-primary-hover);
+  }
+
+  .hb-link:active {
+    color: var(--hb-color-primary-active);
+  }
+
+  .hb-link:focus-visible {
+    outline: 2px solid var(--hb-color-focus);
+    outline-offset: 2px;
+    border-radius: var(--hb-radius-sm);
+  }
+
+  .hb-progress {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: var(--hb-space-2);
+    border-radius: var(--hb-radius-full);
+    background-color: var(--hb-color-surface-active);
+    color: var(--hb-color-primary);
+    border: none;
+    overflow: hidden;
+  }
+
+  .hb-progress::-webkit-progress-bar {
+    background-color: var(--hb-color-surface-active);
+    border-radius: var(--hb-radius-full);
+  }
+
+  .hb-progress::-webkit-progress-value {
+    background-color: var(--hb-color-primary);
+    border-radius: var(--hb-radius-full);
+  }
+
+  .hb-progress::-moz-progress-bar {
+    background-color: var(--hb-color-primary);
+    border-radius: var(--hb-radius-full);
+  }
+
+  .hb-progress:not([value])::-webkit-progress-bar {
+    background-color: var(--hb-color-surface-active);
+    border-radius: var(--hb-radius-full);
+  }
 }
 
 @layer utilities {
@@ -2913,9 +2968,13 @@
   --hb-color-secondary-subtle: var(--hb-color-neutral-100);
   --hb-color-on-secondary: var(--hb-color-white);
   --hb-color-success: var(--hb-color-green-600);
+  --hb-color-success-hover: var(--hb-color-green-700);
+  --hb-color-success-active: var(--hb-color-green-800);
   --hb-color-success-subtle: var(--hb-color-green-50);
-  --hb-color-on-success: var(--hb-color-black);
+  --hb-color-on-success: var(--hb-color-white);
   --hb-color-warning: var(--hb-color-yellow-600);
+  --hb-color-warning-hover: var(--hb-color-yellow-700);
+  --hb-color-warning-active: var(--hb-color-yellow-800);
   --hb-color-warning-subtle: var(--hb-color-yellow-50);
   --hb-color-on-warning: var(--hb-color-black);
   --hb-color-danger: var(--hb-color-red-600);
@@ -2924,6 +2983,8 @@
   --hb-color-danger-subtle: var(--hb-color-red-50);
   --hb-color-on-danger: var(--hb-color-white);
   --hb-color-info: var(--hb-color-blue-600);
+  --hb-color-info-hover: var(--hb-color-blue-700);
+  --hb-color-info-active: var(--hb-color-blue-800);
   --hb-color-info-subtle: var(--hb-color-blue-50);
   --hb-color-on-info: var(--hb-color-white);
   --hb-color-focus: var(--hb-color-blue-600);
@@ -2956,9 +3017,13 @@
   --hb-color-primary-subtle: var(--hb-color-blue-950);
   --hb-color-on-primary: var(--hb-color-white);
   --hb-color-success: var(--hb-color-green-500);
+  --hb-color-success-hover: var(--hb-color-green-400);
+  --hb-color-success-active: var(--hb-color-green-600);
   --hb-color-success-subtle: var(--hb-color-green-950);
   --hb-color-on-success: var(--hb-color-black);
   --hb-color-warning: var(--hb-color-yellow-500);
+  --hb-color-warning-hover: var(--hb-color-yellow-400);
+  --hb-color-warning-active: var(--hb-color-yellow-600);
   --hb-color-warning-subtle: var(--hb-color-yellow-950);
   --hb-color-on-warning: var(--hb-color-black);
   --hb-color-danger: var(--hb-color-red-500);
@@ -2967,6 +3032,8 @@
   --hb-color-danger-subtle: var(--hb-color-red-950);
   --hb-color-on-danger: var(--hb-color-white);
   --hb-color-info: var(--hb-color-blue-500);
+  --hb-color-info-hover: var(--hb-color-blue-400);
+  --hb-color-info-active: var(--hb-color-blue-600);
   --hb-color-info-subtle: var(--hb-color-blue-950);
   --hb-color-on-info: var(--hb-color-white);
   --hb-color-focus: var(--hb-color-blue-500);

@@ -39,6 +39,10 @@ Currently, the following Core components exist:
 - **Badge** (`.hb-badge`)
 - **Alert** (`.hb-alert`)
 - **Forms** (`.hb-input`, `.hb-select`, `.hb-textarea`, `.hb-checkbox`, `.hb-radio`, `.hb-label`)
+- **Table** (`.hb-table`)
+- **Avatar** (`.hb-avatar`)
+- **Link** (`.hb-link`)
+- **Progress** (`.hb-progress`)
 *Note: HEBRING is a CSS foundation, not an exhaustive UI toolkit. It does not ship with complex interactive widgets like accordions or modals that inherently require JavaScript.*
 
 ---
@@ -304,4 +308,33 @@ The `.hb-avatar` component is a small presentational element for displaying user
 <div class="hb-avatar">
   <span>JD</span>
 </div>
+```
+
+---
+
+## 12. Link
+
+The `.hb-link` component provides standardized styling for actionable text elements (like standard anchor tags). It remains a native `<a>` tag and provides no routing behavior.
+
+### HTML Example
+```html
+<a href="#" class="hb-link">Read more</a>
+```
+
+---
+
+## 13. Progress
+
+The `.hb-progress` component provides foundational styling for the native `<progress>` HTML element. It remains a native `<progress>` element and provides no JS state management.
+
+### Features
+- Native semantic `<progress>` support
+- Determinate and indeterminate states automatically handled by the browser
+- Themed to match the framework's primary colors
+
+### HTML Example
+```html
+<progress class="hb-progress" value="60" max="100">
+  60%
+</progress>
 ```

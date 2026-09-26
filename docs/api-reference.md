@@ -156,6 +156,8 @@ HEBRING intentionally minimizes its component API.
 ### Data Display
 - **Table**: `.hb-table`
 - **Avatar**: `.hb-avatar`, `.hb-avatar--sm`, `.hb-avatar--lg`
+- **Link**: `.hb-link`
+- **Progress**: `.hb-progress`
 
 
 ---
