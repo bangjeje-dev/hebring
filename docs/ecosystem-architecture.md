@@ -37,11 +37,12 @@ The existing Playground application remains at `examples/playground/`. It is a s
 The HEBRING Core build compiles exclusively from `src/index.css`. This entry point explicitly imports only files within the `src/` directory. This guarantees that no Ecosystem code can accidentally leak into the Core CSS bundle (`dist/hebring.css`).
 
 ## 8. Current Package Export Policy
-The HEBRING npm package remains a single distribution. Currently, it exposes only the Core entry points:
+The HEBRING npm package remains a single distribution. It exposes Core entry points as well as Ecosystem distribution boundaries:
 - `./css`
 - `./min`
-
-Ecosystem exports (e.g., `./themes/*`, `./ui/*`, `./icons/*`) are purposefully omitted until there are actual distributable artifacts implemented in those boundaries. Furthermore, the `ecosystem/` folder is currently omitted from the `package.json` files distribution to avoid publishing empty directories.
+- `./icons/*`
+- `./themes/*`
+- `./ui/*`
 
 ## 9. Future Expansion Rules
 - Any new component requiring JavaScript must be implemented in `ecosystem/ui/`.

@@ -393,6 +393,51 @@ else
 fi
 
 # ============================================================
+# 15. Verify package exports resolve Ecosystem UI
+# ============================================================
+echo ""
+echo "Step 15: Verifying Ecosystem UI package exports resolve via Node..."
+
+cat > "$CONSUMER_DIR/test-ui.js" <<'EOF'
+import fs from 'fs';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+try {
+  const uiCssPath = require.resolve('hebring/ui/modal.css');
+  
+  if (!fs.existsSync(uiCssPath)) {
+    console.error("FAIL: modal.css resolves but file is missing at", uiCssPath);
+    process.exit(1);
+  }
+  
+  const cssContent = fs.readFileSync(uiCssPath, 'utf8');
+  if (!cssContent.includes('.hb-modal')) {
+    console.error("FAIL: modal.css content is invalid");
+    process.exit(1);
+  }
+  
+  if (!uiCssPath.includes('node_modules')) {
+    console.error("FAIL: path leakage detected", uiCssPath);
+    process.exit(1);
+  }
+
+  process.exit(0);
+} catch (e) {
+  console.error("FAIL:", e.message);
+  process.exit(1);
+}
+EOF
+
+if (cd "$CONSUMER_DIR" && node test-ui.js >/dev/null 2>&1); then
+  pass "Node can resolve hebring/ui/modal.css"
+  pass "UI CSS resolves to a valid asset without source leakage"
+else
+  fail "Node failed to resolve UI exports (or contents are invalid)"
+  (cd "$CONSUMER_DIR" && node test-ui.js)
+fi
+
+# ============================================================
 # Summary
 # ============================================================
 echo ""

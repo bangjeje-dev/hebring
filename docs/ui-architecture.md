@@ -25,8 +25,9 @@ A UI component (like an Alert Dialog) will compose a layout primitive (`.hb-stac
 ## 6. Package Architecture
 HEBRING is distributed as a single npm package: `hebring`.
 Conceptually, the ecosystem is split into distinct internal layers:
-- Core: The pure CSS foundation.
-- Ecosystem UI: The future higher-level UI component structure definitions.
+- Core: The pure CSS foundation (bundled in `dist/hebring.css`).
+- Ecosystem UI: Optional framework-neutral CSS assets distributed unbundled via the `"./ui/*"` package export (e.g. `hebring/ui/modal.css`).
+Interactive behavior is not provided by this CSS asset. Framework adapters / consumers own state and interaction logic. Core does not import Ecosystem UI.
 *(Note: There is no `@hebring/core` or `@hebring/ui` package. These names refer purely to conceptual internal boundaries).*
 
 ## 7. CSS Architecture
