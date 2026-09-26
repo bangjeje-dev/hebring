@@ -63,7 +63,7 @@ HEBRING Icons automatically support the theme ecosystem via the `currentColor` S
 
 ## 13. Theme Package Boundary
 HEBRING is distributed as a single npm package. Conceptually, ecosystem themes belong to a distinct internal ecosystem boundary.
-For now, they may exist as source files (e.g., `src/themes/`), but structurally, alternative themes represent an optional consumer dependency rather than a Core requirement.
+For now, they may exist as source files (e.g., `ecosystem/themes/`), but structurally, alternative themes represent an optional consumer dependency rather than a Core requirement.
 
 ## 14. Built-in vs Community Themes
 - **Built-in Themes**: Officially maintained themes (like the default light/dark) guaranteeing exact contrast ratios and long-term support.

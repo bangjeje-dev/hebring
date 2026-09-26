@@ -348,6 +348,51 @@ else
 fi
 
 # ============================================================
+# 14. Verify package exports resolve Ecosystem Themes
+# ============================================================
+echo ""
+echo "Step 14: Verifying Theme package exports resolve via Node..."
+
+cat > "$CONSUMER_DIR/test-themes.js" <<'EOF'
+import fs from 'fs';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+try {
+  const themeCssPath = require.resolve('hebring/themes/ocean.css');
+  
+  if (!fs.existsSync(themeCssPath)) {
+    console.error("FAIL: ocean.css resolves but file is missing at", themeCssPath);
+    process.exit(1);
+  }
+  
+  const cssContent = fs.readFileSync(themeCssPath, 'utf8');
+  if (!cssContent.includes('[data-theme="ocean"]')) {
+    console.error("FAIL: ocean.css content is invalid");
+    process.exit(1);
+  }
+  
+  if (!themeCssPath.includes('node_modules')) {
+    console.error("FAIL: path leakage detected", themeCssPath);
+    process.exit(1);
+  }
+
+  process.exit(0);
+} catch (e) {
+  console.error("FAIL:", e.message);
+  process.exit(1);
+}
+EOF
+
+if (cd "$CONSUMER_DIR" && node test-themes.js >/dev/null 2>&1); then
+  pass "Node can resolve hebring/themes/ocean.css"
+  pass "Theme CSS resolves to a valid asset without source leakage"
+else
+  fail "Node failed to resolve Theme exports (or contents are invalid)"
+  (cd "$CONSUMER_DIR" && node test-themes.js)
+fi
+
+# ============================================================
 # Summary
 # ============================================================
 echo ""

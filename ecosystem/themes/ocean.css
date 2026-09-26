@@ -1,0 +1,37 @@
+/**
+ * HEBRING — Reference Ecosystem Theme (Ocean)
+ *
+ * A coherent visual mapping using existing semantic tokens.
+ */
+
+[data-theme="ocean"] {
+  /* Background Roles */
+  --hb-color-background: var(--hb-color-blue-950);
+  --hb-color-background-subtle: var(--hb-color-blue-900);
+
+  /* Surface Roles */
+  --hb-color-surface: var(--hb-color-blue-900);
+  --hb-color-surface-raised: var(--hb-color-blue-800);
+  --hb-color-surface-muted: var(--hb-color-blue-950);
+  --hb-color-surface-active: var(--hb-color-blue-800);
+
+  /* Text Roles */
+  --hb-color-text: var(--hb-color-blue-50);
+  --hb-color-text-muted: var(--hb-color-blue-200);
+  --hb-color-text-subtle: var(--hb-color-blue-300);
+  --hb-color-text-disabled: var(--hb-color-blue-400);
+
+  /* Border Roles */
+  --hb-color-border: var(--hb-color-blue-800);
+  --hb-color-border-strong: var(--hb-color-blue-700);
+
+  /* Primary Roles */
+  --hb-color-primary: var(--hb-color-blue-400);
+  --hb-color-primary-hover: var(--hb-color-blue-300);
+  --hb-color-primary-active: var(--hb-color-blue-500);
+  --hb-color-primary-subtle: var(--hb-color-blue-900);
+  --hb-color-on-primary: var(--hb-color-blue-950);
+
+  /* Focus Indicator */
+  --hb-color-focus: var(--hb-color-blue-400);
+}

@@ -126,3 +126,30 @@ By hooking into HEBRING's semantic token layer, your custom theme automatically 
 - **No JavaScript**: HEBRING does not ship with a JavaScript runtime to manage theme switching.
 - **No Component Tokens in Themes**: Themes should only override global *semantic* tokens (like `--hb-color-primary`). Themes should **never** override local *component* tokens (like `--hb-button-bg`). If a theme overrides semantic tokens correctly, the components will adapt automatically.
 - **No Cascade Breakage**: Avoid using `!important` inside custom themes. Custom property inheritance handles the specificity perfectly.
+
+## 8. Using Ecosystem Themes
+
+HEBRING ships with optional alternative themes as part of its Ecosystem. These themes are distributed within the same `hebring` npm package but are not included in the Core build (`dist/hebring.css`).
+
+To use an Ecosystem Theme (for example, `ocean`), import the CSS asset into your project:
+
+**Bundler/Vite Example:**
+```javascript
+import "hebring/themes/ocean.css";
+```
+
+**HTML Example:**
+```html
+<link rel="stylesheet" href="node_modules/hebring/ecosystem/themes/ocean.css">
+```
+
+Once imported, you activate the theme exactly like the built-in dark theme:
+
+```html
+<html data-theme="ocean">
+```
+
+**Important Details:**
+- Ecosystem themes are optional and do not change the Core default theme.
+- Core does not automatically import ecosystem themes.
+- Ecosystem themes only override semantic tokens and do not require JavaScript.
