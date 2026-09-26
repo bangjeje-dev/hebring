@@ -457,5 +457,48 @@ The Context Menu is NOT a separate CSS primitive. It is a composition of:
   - Keyboard navigation (ArrowUp, ArrowDown, Home, End, Escape).
 - **Consumer Responsibility**: Application logic and routing.
 
-## 32. Definition of Done
-Phase 46 is complete when this UI Architecture Specification is updated and implemented correctly.
+## 32. Tabs Architecture & Accessibility
+Tabs are an independent interaction pattern. They are NOT a variation of Menu, Popover, Disclosure, or Dropdown.
+
+### Canonical Markup
+```html
+<div class="hb-tabs">
+  <div class="hb-tabs__list" role="tablist" aria-label="Tabs navigation">
+    <button class="hb-tabs__tab" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" tabindex="0">
+      Tab One
+    </button>
+    <button class="hb-tabs__tab" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="-1">
+      Tab Two
+    </button>
+  </div>
+
+  <div class="hb-tabs__panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1">
+    Panel One Content
+  </div>
+  <div class="hb-tabs__panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
+    Panel Two Content
+  </div>
+</div>
+```
+
+### Required Structure
+- **Container**: Optional `.hb-tabs` layout wrapper.
+- **Tab List**: `.hb-tabs__list` with `role="tablist"` and `aria-label` (or `aria-labelledby`).
+- **Tab**: `.hb-tabs__tab` with `role="tab"`, unique `id`, `aria-controls` pointing to the panel, `aria-selected`, and `tabindex`.
+- **Panel**: `.hb-tabs__panel` with `role="tabpanel"`, unique `id`, `aria-labelledby` pointing to the tab. Inactive panels must use the native `hidden` attribute.
+
+### Accessibility & Interaction Contract
+- **CSS Responsibility**:
+  - Styling based entirely on ARIA attributes (`[aria-selected="true"]`). No `.is-active`, `.is-selected`, or `.data-state` state classes.
+  - Relying on native `[hidden]` attribute for panel visibility.
+  - Distinct styling for `:disabled` native attribute.
+- **Adapter Responsibility**:
+  - Managing roving `tabindex` (`0` for active tab, `-1` for inactive tabs).
+  - Synchronizing `aria-selected` on tabs.
+  - Synchronizing native `hidden` state on corresponding panels.
+  - Implementing keyboard navigation (ArrowRight, ArrowLeft, Home, End).
+  - Implementing automatic activation (focusing a tab automatically activates its panel).
+- **Consumer Responsibility**: Generating unique IDs mapping tabs to panels.
+
+## 33. Definition of Done
+Phase 47 is complete when this UI Architecture Specification is updated and implemented correctly.

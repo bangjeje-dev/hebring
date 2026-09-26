@@ -326,4 +326,31 @@ fi
 
 pass "Context Menu composition respects pure architecture"
 
+# 20. Tabs Validation
+if [ ! -f "$UI_DIR/tabs.css" ]; then
+  fail "tabs.css is missing"
+fi
+
+if grep -q '\.is-active' "$UI_DIR/tabs.css" || grep -q '\.is-selected' "$UI_DIR/tabs.css" || grep -q '\.is-open' "$UI_DIR/tabs.css"; then
+  fail "Tabs CSS must not use custom .is-* state classes"
+fi
+
+if ! grep -q '\[aria-selected="true"\]' "$UI_DIR/tabs.css"; then
+  fail "Tabs CSS must style based on aria-selected"
+fi
+
+if ! grep -q 'role="tablist"' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing tablist role"
+fi
+
+if ! grep -q 'role="tabpanel"' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing tabpanel role"
+fi
+
+if ! grep -q 'TABS ADAPTER' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing TABS ADAPTER"
+fi
+
+pass "Tabs architecture respects pure constraints"
+
 echo "All Ecosystem UI tests passed!"

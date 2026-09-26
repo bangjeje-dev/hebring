@@ -1,0 +1,61 @@
+/*
+ * HEBRING TABS FOUNDATION
+ * Presentation for tabbed content interfaces.
+ */
+
+@layer components {
+  .hb-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--hb-space-4);
+  }
+
+  .hb-tabs__list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid var(--hb-color-border);
+    gap: var(--hb-space-2);
+    margin: 0;
+    padding: 0;
+  }
+
+  .hb-tabs__tab {
+    appearance: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--hb-text-sm);
+    font-weight: var(--hb-font-medium);
+    color: var(--hb-color-text-secondary);
+    padding: var(--hb-space-2) var(--hb-space-4);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px; /* Overlap list border */
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .hb-tabs__tab:hover:not(:disabled) {
+    color: var(--hb-color-text);
+    border-bottom-color: var(--hb-color-border-hover);
+  }
+
+  .hb-tabs__tab[aria-selected="true"] {
+    color: var(--hb-color-primary);
+    border-bottom-color: var(--hb-color-primary);
+  }
+
+  .hb-tabs__tab:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .hb-tabs__tab:focus-visible {
+    outline: 2px solid var(--hb-color-primary);
+    outline-offset: -2px;
+  }
+
+  .hb-tabs__panel {
+    padding: var(--hb-space-2) 0;
+  }
+}

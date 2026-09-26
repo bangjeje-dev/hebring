@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="../../ecosystem/ui/popover.css">
   <link rel="stylesheet" href="../../ecosystem/ui/menu.css">
   <link rel="stylesheet" href="../../ecosystem/ui/tooltip.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/tabs.css">
 
   <style>
     /* Playground-specific minimal styles */
@@ -346,6 +347,39 @@
           </div>
         </div>
       </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Tabs</h3>
+        <div class="hb-tabs" id="demo-tabs">
+          <div class="hb-tabs__list" role="tablist" aria-label="Settings navigation">
+            <button class="hb-tabs__tab" role="tab" aria-selected="true" aria-controls="panel-overview" id="tab-overview" tabindex="0">
+              Overview
+            </button>
+            <button class="hb-tabs__tab" role="tab" aria-selected="false" aria-controls="panel-details" id="tab-details" tabindex="-1">
+              Details
+            </button>
+            <button class="hb-tabs__tab" role="tab" aria-selected="false" aria-controls="panel-settings" id="tab-settings" tabindex="-1">
+              Settings
+            </button>
+            <button class="hb-tabs__tab" role="tab" aria-selected="false" aria-controls="panel-disabled" id="tab-disabled" tabindex="-1" disabled>
+              Disabled
+            </button>
+          </div>
+
+          <div class="hb-tabs__panel" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview">
+            <p>Overview content. Focus is easily manageable here.</p>
+          </div>
+          <div class="hb-tabs__panel" role="tabpanel" id="panel-details" aria-labelledby="tab-details" hidden>
+            <p>Details content. Includes <a href="#">a focusable link</a>.</p>
+          </div>
+          <div class="hb-tabs__panel" role="tabpanel" id="panel-settings" aria-labelledby="tab-settings" hidden>
+            <p>Settings content.</p>
+          </div>
+          <div class="hb-tabs__panel" role="tabpanel" id="panel-disabled" aria-labelledby="tab-disabled" hidden>
+            <p>Disabled panel content.</p>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -641,6 +675,67 @@
               e.preventDefault();
               item.click();
             }
+          });
+        });
+      }
+
+      // --- TABS ADAPTER (Phase 47) ---
+      const tabsGroup = document.getElementById('demo-tabs');
+      if (tabsGroup) {
+        const tabList = tabsGroup.querySelector('[role="tablist"]');
+        const tabs = Array.from(tabList.querySelectorAll('[role="tab"]:not([disabled])'));
+
+        function activateTab(newTab) {
+          // Deactivate all
+          tabs.forEach(tab => {
+            tab.setAttribute('aria-selected', 'false');
+            tab.setAttribute('tabindex', '-1');
+            const panelId = tab.getAttribute('aria-controls');
+            const panel = document.getElementById(panelId);
+            if (panel) panel.hidden = true;
+          });
+
+          // Activate new
+          newTab.setAttribute('aria-selected', 'true');
+          newTab.setAttribute('tabindex', '0');
+          const panelId = newTab.getAttribute('aria-controls');
+          const panel = document.getElementById(panelId);
+          if (panel) panel.hidden = false;
+
+          newTab.focus();
+        }
+
+        tabList.addEventListener('keydown', (e) => {
+          const currentIndex = tabs.indexOf(document.activeElement);
+          if (currentIndex === -1) return;
+
+          let nextIndex = currentIndex;
+
+          switch (e.key) {
+            case 'ArrowRight':
+              nextIndex = (currentIndex + 1) % tabs.length;
+              break;
+            case 'ArrowLeft':
+              nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+              break;
+            case 'Home':
+              nextIndex = 0;
+              break;
+            case 'End':
+              nextIndex = tabs.length - 1;
+              break;
+            default:
+              return; // Allow other keys to work normally
+          }
+
+          e.preventDefault();
+          activateTab(tabs[nextIndex]); // Automatic activation
+        });
+
+        // Click activation (automatic activation model handles keyboard, this handles mouse/touch)
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            activateTab(tab);
           });
         });
       }
