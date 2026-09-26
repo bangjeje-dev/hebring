@@ -318,5 +318,34 @@ Popover is a fundamental interaction primitive using the native HTML Popover API
 - **Adapter Responsibility**: None for a generic popover. Compositions (like menus) will add keyboard focus management.
 - **Consumer Responsibility**: Providing trigger relationships and appropriate fallback positioning logic for older browsers.
 
-## 28. Definition of Done
-Phase 41 is complete when this UI Architecture Specification is updated and implemented correctly.
+## 28. Menu Foundation DOM Contract & Accessibility
+The Menu Foundation provides the semantic and visual presentation for a collection of actions or options. It is NOT an interactive Dropdown Menu on its own; it requires a Popover and an adapter for complete dropdown behavior.
+
+### Canonical Markup
+```html
+<div class="hb-menu" role="menu">
+  <div class="hb-menu__label" role="presentation">Actions</div>
+  <button class="hb-menu__item" role="menuitem">Edit</button>
+  <a class="hb-menu__item" role="menuitem" href="/view">View</a>
+  <hr class="hb-menu__separator" role="separator" />
+  <button class="hb-menu__item" role="menuitem" disabled>Delete</button>
+</div>
+```
+
+### Required Structure
+- `.hb-menu`: The menu surface root.
+- `.hb-menu__item`: The interactive item (must be applied to a native interactive element like `<button>` or `<a>`).
+
+### Optional Structure
+- `.hb-menu__label`: A visual group label.
+- `.hb-menu__separator`: A visual divider between groups.
+
+### Accessibility Contract
+- **Browser Responsibility**: Native button/link interaction, focus management, native disabled state handling.
+- **HEBRING CSS**: Visual hierarchy, spacing, hover/focus-visible states, reduced motion.
+- **DOM Contract**: Appropriate roles (`menu`, `menuitem`, `separator`) must be applied if the menu acts as a true ARIA menu.
+- **Adapter Responsibility**: Keyboard navigation (Arrow Up/Down, Home, End), focus trapping, roving tabindex, and opening/closing when composed into a Dropdown Menu.
+- **Consumer Responsibility**: Accessible labels and application action execution.
+
+## 29. Definition of Done
+Phase 43 is complete when this UI Architecture Specification is updated and implemented correctly.

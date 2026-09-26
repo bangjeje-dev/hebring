@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../../ecosystem/ui/pagination.css">
   <link rel="stylesheet" href="../../ecosystem/ui/stepper.css">
   <link rel="stylesheet" href="../../ecosystem/ui/popover.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/menu.css">
 
   <style>
     /* Playground-specific minimal styles */
@@ -264,6 +265,28 @@
         <div id="demo-popover" class="hb-popover" popover style="position-anchor: --demo-anchor;">
           <p style="margin-top: 0;">This popover is driven entirely by the browser's native Popover API.</p>
           <p style="margin-bottom: 0; color: var(--hb-color-text-subtle);">Click outside or press Escape to close.</p>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Menu Foundation (Static)</h3>
+        <!-- This is purely a visual demonstration of the Menu surface. It is not an interactive dropdown. -->
+        <div class="hb-menu" style="width: 16rem;" role="menu">
+          <div class="hb-menu__label" role="presentation">Actions</div>
+
+          <button class="hb-menu__item" role="menuitem">
+            Edit Profile
+          </button>
+
+          <a class="hb-menu__item" role="menuitem" href="#">
+            View Settings
+          </a>
+
+          <hr class="hb-menu__separator" role="separator" />
+
+          <button class="hb-menu__item" role="menuitem" disabled>
+            Delete Account
+          </button>
         </div>
       </div>
     </section>

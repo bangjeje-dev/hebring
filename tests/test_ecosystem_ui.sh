@@ -239,4 +239,29 @@ else
   fail "popover.css is missing"
 fi
 
+# 16. Menu Reference Specifics
+if [ -f "$UI_DIR/menu.css" ]; then
+  if ! grep -q "\.hb-menu" "$UI_DIR/menu.css"; then
+    fail "menu.css is missing .hb-menu"
+  fi
+  if ! grep -q "\.hb-menu__item" "$UI_DIR/menu.css"; then
+    fail "menu.css is missing .hb-menu__item"
+  fi
+  if ! grep -q "\.hb-menu__item:disabled" "$UI_DIR/menu.css"; then
+    fail "menu.css is missing native disabled state for items"
+  fi
+  if ! grep -q "\.hb-menu__separator" "$UI_DIR/menu.css"; then
+    fail "menu.css is missing .hb-menu__separator"
+  fi
+  if ! grep -q "\.hb-menu__label" "$UI_DIR/menu.css"; then
+    fail "menu.css is missing .hb-menu__label"
+  fi
+  if grep -q "\.is-open" "$UI_DIR/menu.css" || grep -q "popover" "$UI_DIR/menu.css"; then
+    fail "menu.css contains unauthorized state/popover logic"
+  fi
+  pass "Menu CSS respects pure styling foundation"
+else
+  fail "menu.css is missing"
+fi
+
 echo "All Ecosystem UI tests passed!"
