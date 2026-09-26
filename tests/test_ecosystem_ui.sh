@@ -426,4 +426,31 @@ fi
 
 pass "Command Menu architecture respects pure native constraints"
 
+# 24. Toast Validation
+if [ ! -f "$UI_DIR/toast.css" ]; then
+  fail "toast.css is missing"
+fi
+
+if grep -q '\.is-open' "$UI_DIR/toast.css" || grep -q '\.is-active' "$UI_DIR/toast.css" || grep -q '\.is-visible' "$UI_DIR/toast.css"; then
+  fail "Toast CSS must not use custom state classes"
+fi
+
+if grep -q 'setTimeout' "$UI_DIR/toast.css" || grep -q 'setInterval' "$UI_DIR/toast.css"; then
+  fail "Toast CSS must not contain JavaScript or timer logic"
+fi
+
+if ! grep -q 'TOAST ADAPTER' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing TOAST ADAPTER"
+fi
+
+if ! grep -q 'hb-toast-region' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing hb-toast-region"
+fi
+
+if ! grep -q 'data-variant' "$UI_DIR/toast.css"; then
+  fail "Toast CSS should use data-variant for visual variants"
+fi
+
+pass "Toast architecture respects transient non-blocking constraints"
+
 echo "All Ecosystem UI tests passed!"

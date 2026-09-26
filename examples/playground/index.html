@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="../../ecosystem/ui/tabs.css">
   <link rel="stylesheet" href="../../ecosystem/ui/combobox.css">
   <link rel="stylesheet" href="../../ecosystem/ui/command-menu.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/toast.css">
 
   <style>
     /* Playground-specific minimal styles */
@@ -503,7 +504,23 @@
         <div id="cmd-output" style="margin-top: 1rem; color: var(--hb-color-text-success);"></div>
       </div>
     </section>
+
+    <section class="demo-section">
+      <div class="demo-header">
+        <h2 class="demo-title">Toast (Notifications)</h2>
+        <p class="demo-desc">Transient feedback, non-blocking, dynamically managed by adapter.</p>
+      </div>
+      <div class="demo-content">
+        <div class="hb-cluster">
+          <button type="button" class="hb-button hb-button--primary" id="btn-toast-success">Show Success</button>
+          <button type="button" class="hb-button" id="btn-toast-warning">Show Warning</button>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- Toast Region (Application Singleton typically) -->
+  <div class="hb-toast-region" aria-label="Notifications" id="demo-toast-region"></div>
 
   <script>
     /**
@@ -1221,6 +1238,96 @@
           if (option) {
             executeCommand(option);
           }
+        });
+      }
+
+      /**
+       * TOAST ADAPTER (Phase 51)
+       * Reference implementation for creating and dismissing toasts.
+       */
+      const toastRegion = document.getElementById('demo-toast-region');
+      const btnToastSuccess = document.getElementById('btn-toast-success');
+      const btnToastWarning = document.getElementById('btn-toast-warning');
+
+      if (toastRegion && btnToastSuccess && btnToastWarning) {
+        let toastCount = 0;
+
+        const createToast = (variant, title, message) => {
+          toastCount++;
+          const toastId = `toast-${toastCount}`;
+
+          const toast = document.createElement('div');
+          toast.className = 'hb-toast';
+          toast.id = toastId;
+          toast.setAttribute('role', 'status');
+          toast.setAttribute('aria-live', 'polite');
+          if (variant) {
+            toast.setAttribute('data-variant', variant);
+          }
+
+          toast.innerHTML = `
+            <div class="hb-toast__content">
+              <strong class="hb-toast__title">${title}</strong>
+              <p class="hb-toast__message">${message}</p>
+            </div>
+            <button type="button" class="hb-toast__close" aria-label="Dismiss notification">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          `;
+
+          const closeBtn = toast.querySelector('.hb-toast__close');
+          let timerId = null;
+
+          const dismiss = () => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(10px)';
+            toast.addEventListener('transitionend', () => {
+              if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+              }
+            });
+          };
+
+          const startTimer = () => {
+            timerId = setTimeout(dismiss, 4000);
+          };
+
+          const stopTimer = () => {
+            if (timerId) clearTimeout(timerId);
+          };
+
+          // Event listeners
+          closeBtn.addEventListener('click', dismiss);
+          toast.addEventListener('mouseenter', stopTimer);
+          toast.addEventListener('mouseleave', startTimer);
+          toast.addEventListener('focusin', stopTimer);
+          toast.addEventListener('focusout', startTimer);
+
+          // Add to region
+          toastRegion.appendChild(toast);
+
+          // Trigger animation (need a tiny delay for transition to work on new elements)
+          requestAnimationFrame(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(10px)';
+            requestAnimationFrame(() => {
+              toast.style.opacity = '1';
+              toast.style.transform = 'translateY(0)';
+            });
+          });
+
+          startTimer();
+        };
+
+        btnToastSuccess.addEventListener('click', () => {
+          createToast('success', 'Changes Saved', 'Your settings have been updated successfully.');
+        });
+
+        btnToastWarning.addEventListener('click', () => {
+          createToast('warning', 'Network Issue', 'Reconnecting to the server...');
         });
       }
     });

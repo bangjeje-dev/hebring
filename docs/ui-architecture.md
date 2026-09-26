@@ -580,5 +580,48 @@ Command Menu is an application command discovery interface. It is a higher-level
 - **Adapter Responsibility**: Managing simple substring filtering, keyboard navigation (Arrow Up/Down, Home/End, Enter, Escape), syncing `aria-activedescendant` on the input, and executing commands safely within the playground environment.
 - **Consumer Responsibility**: Supplying the actual command definitions and the execution logic (e.g., routing) within an application context.
 
-## 35. Definition of Done
-Phase 50 is complete when this UI Architecture Specification is updated and implemented correctly.
+## 35. Toast & Notification Foundation
+Toast represents transient, non-blocking feedback. It is distinct from Dialog (which is blocking) and Tooltip (which provides contextual description).
+
+### Canonical Markup
+```html
+<!-- Region wrapper (often application singleton) -->
+<div class="hb-toast-region" aria-label="Notifications">
+
+  <!-- Individual Toast -->
+  <div class="hb-toast" role="status" aria-live="polite" data-variant="success">
+    <div class="hb-toast__content">
+      <strong class="hb-toast__title">Changes Saved</strong>
+      <p class="hb-toast__message">Your settings have been updated successfully.</p>
+    </div>
+
+    <button type="button" class="hb-toast__close" aria-label="Dismiss notification">
+      <!-- Icon SVG -->
+    </button>
+  </div>
+
+</div>
+```
+
+### Architectural Contract
+- **Not a Modal**: Toast does not block the page.
+- **Not a Popover**: Toast does not use the Popover API and does not anchor to specific trigger elements; it is viewport-fixed.
+- **Region Responsibility**: `.hb-toast-region` handles viewport positioning (respecting safe areas), stacking (flex layout + gap), and pointer-event passthrough (`pointer-events: none`).
+- **Toast Responsibility**: `.hb-toast` handles the individual surface appearance, spacing, and reinstates `pointer-events: auto`.
+- **Variants**: Semantic feedback relies on the `data-variant` attribute (`success`, `warning`, `error`).
+- **Animation**: Reduced motion is respected natively within CSS. CSS transition completion does *not* govern the lifecycle.
+
+### Semantic / ARIA Model
+- Standard feedback uses `role="status"` and `aria-live="polite"`.
+- Critical/Urgent feedback uses `role="alert"` and `aria-live="assertive"`.
+- Do not automatically focus a Toast when it appears.
+- Close buttons must be properly labeled (e.g. `aria-label="Dismiss notification"`).
+
+### Responsibilities
+- **Browser Responsibility**: Providing layout, fixed positioning, flex gap, and safe-area environment variables.
+- **CSS Responsibility**: Styling the Toast Region (stacking/positioning) and Toast Content (surface, colors, typography, layout) without relying on global `is-visible` classes.
+- **Adapter Responsibility**: Demonstrating dynamic creation, insertion, timeout (auto-dismiss), hover pause/resume logic, explicit dismissal (closing), and DOM removal.
+- **Consumer Responsibility**: Integrating Toasts with their actual application event lifecycle, state management, and notification queuing if required. HEBRING provides the CSS surface, not a notification manager library.
+
+## 36. Definition of Done
+Phase 51 is complete when this UI Architecture Specification is updated and implemented correctly.
