@@ -303,4 +303,27 @@ fi
 
 pass "Dropdown Menu composition respects pure architecture"
 
+# 19. Context Menu Composition
+if [ -f "$UI_DIR/context-menu.css" ] || [ -f "$UI_DIR/contextmenu.css" ]; then
+  fail "Context Menu must be a composition, not a new CSS primitive file"
+fi
+
+if ! grep -q 'id="context-menu-target"' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing context-menu-target"
+fi
+
+if ! grep -q 'CONTEXT MENU ADAPTER' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing CONTEXT MENU ADAPTER"
+fi
+
+if ! grep -q 'contextmenu' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing contextmenu event listener"
+fi
+
+if ! grep -q 'clientX' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing clientX coordinate logic"
+fi
+
+pass "Context Menu composition respects pure architecture"
+
 echo "All Ecosystem UI tests passed!"

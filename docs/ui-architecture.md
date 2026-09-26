@@ -419,5 +419,43 @@ The Dropdown Menu is NOT a separate CSS primitive. It is a composition of:
   - Restoring focus to the trigger on Escape or menu activation.
 - **Consumer Responsibility**: Application action logic and routing.
 
-## 31. Definition of Done
-Phase 45 is complete when this UI Architecture Specification is updated and implemented correctly.
+## 31. Context Menu Composition & Accessibility
+The Context Menu is NOT a separate CSS primitive. It is a composition of:
+`Popover` + `Menu Foundation` + `Context Menu Adapter` = `Context Menu`
+
+### Canonical Markup
+```html
+<div id="context-menu-target" tabindex="0">
+  Right-click here
+</div>
+
+<div id="context-menu" class="hb-popover" popover>
+  <div class="hb-menu" role="menu">
+    <button class="hb-menu__item" role="menuitem" tabindex="0">Edit</button>
+    <button class="hb-menu__item" role="menuitem" tabindex="-1">Duplicate</button>
+    <button class="hb-menu__item" role="menuitem" tabindex="-1" disabled>Delete</button>
+  </div>
+</div>
+```
+
+### Required Structure
+- Target: An element that receives the `contextmenu` event. If it needs focus restoration, it should be focusable (e.g. `tabindex="0"` or inherently focusable).
+- Surface: `<div id="id" class="hb-popover" popover>`.
+- Menu: `<div class="hb-menu" role="menu">` wrapping `.hb-menu__item` elements with `role="menuitem"`.
+
+### Accessibility & Interaction Contract
+- **Browser Responsibility**: Top-layer promotion, native `popover` light-dismiss, and `:popover-open` CSS synchronization.
+- **HEBRING CSS**: Visual hierarchy, surface presentation, focus states, and native popover transitions (`@starting-style`).
+- **Adapter Responsibility**:
+  - Intercepting the `contextmenu` event on the target and calling `preventDefault()`.
+  - Capturing `event.clientX` and `event.clientY` coordinates.
+  - Opening the native popover.
+  - Positioning the popover via inline coordinates relative to the viewport.
+  - Handling viewport boundary clamping to ensure the menu is visible.
+  - Managing roving `tabindex`.
+  - Focus management (first enabled item on open, restoring focus to original element on close).
+  - Keyboard navigation (ArrowUp, ArrowDown, Home, End, Escape).
+- **Consumer Responsibility**: Application logic and routing.
+
+## 32. Definition of Done
+Phase 46 is complete when this UI Architecture Specification is updated and implemented correctly.

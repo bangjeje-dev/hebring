@@ -327,6 +327,25 @@
           </div>
         </div>
       </div>
+      <div style="margin-bottom: 2rem;">
+        <h3>Context Menu (Composition)</h3>
+        <!--
+          Popover + Menu + Context Menu Adapter
+        -->
+        <div id="context-menu-target" tabindex="0" style="border: 2px dashed var(--hb-color-border); padding: 3rem; text-align: center; border-radius: var(--hb-radius-md);">
+          Right-click here
+        </div>
+
+        <div id="demo-context-menu" class="hb-popover" popover>
+          <div class="hb-menu" role="menu">
+            <button class="hb-menu__item" role="menuitem" tabindex="0">Edit</button>
+            <button class="hb-menu__item" role="menuitem" tabindex="-1">Duplicate</button>
+            <button class="hb-menu__item" role="menuitem" tabindex="-1">Rename</button>
+            <hr class="hb-menu__separator" role="separator" />
+            <button class="hb-menu__item" role="menuitem" tabindex="-1" disabled>Delete</button>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -493,6 +512,134 @@
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
               item.click(); // Standard click handles the close and restore
+            }
+          });
+        });
+      }
+
+      // --- CONTEXT MENU ADAPTER (Phase 46) ---
+      const contextTarget = document.getElementById('context-menu-target');
+      const contextPopover = document.getElementById('demo-context-menu');
+
+      if (contextTarget && contextPopover) {
+        const contextItems = Array.from(contextPopover.querySelectorAll('.hb-menu__item:not([disabled]):not([aria-disabled="true"])'));
+        let typeaheadBuffer = '';
+        let typeaheadTimeout = null;
+        let lastFocusedElement = null;
+
+        function updateContextTabIndex(activeIndex) {
+          contextItems.forEach((item, index) => {
+            item.setAttribute('tabindex', index === activeIndex ? '0' : '-1');
+          });
+        }
+
+        contextTarget.addEventListener('contextmenu', (e) => {
+          e.preventDefault();
+
+          lastFocusedElement = document.activeElement;
+
+          // Native popover is fixed position by default, we open it first to get its layout dimensions
+          contextPopover.showPopover();
+
+          // Calculate positioning (with basic viewport clamping)
+          const rect = contextPopover.getBoundingClientRect();
+          const margin = 8; // distance from viewport edge
+
+          let x = e.clientX;
+          let y = e.clientY;
+
+          if (x + rect.width > window.innerWidth - margin) {
+            x = window.innerWidth - rect.width - margin;
+          }
+          if (y + rect.height > window.innerHeight - margin) {
+            y = window.innerHeight - rect.height - margin;
+          }
+          if (x < margin) x = margin;
+          if (y < margin) y = margin;
+
+          // Override Popover defaults for inline pointer coordinates
+          contextPopover.style.position = 'fixed';
+          contextPopover.style.inset = 'auto'; // Reset inset from default popover
+          contextPopover.style.margin = '0';
+          contextPopover.style.left = `${x}px`;
+          contextPopover.style.top = `${y}px`;
+
+          if (contextItems.length > 0) {
+            updateContextTabIndex(0);
+            contextItems[0].focus();
+          }
+        });
+
+        contextPopover.addEventListener('keydown', (e) => {
+          const currentIndex = contextItems.indexOf(document.activeElement);
+          if (currentIndex === -1) return;
+
+          let nextIndex = currentIndex;
+
+          switch (e.key) {
+            case 'ArrowDown':
+              e.preventDefault();
+              nextIndex = (currentIndex + 1) % contextItems.length;
+              break;
+            case 'ArrowUp':
+              e.preventDefault();
+              nextIndex = (currentIndex - 1 + contextItems.length) % contextItems.length;
+              break;
+            case 'Home':
+              e.preventDefault();
+              nextIndex = 0;
+              break;
+            case 'End':
+              e.preventDefault();
+              nextIndex = contextItems.length - 1;
+              break;
+            case 'Escape':
+              // Popover natively closes, restore focus explicitly
+              if (lastFocusedElement) {
+                lastFocusedElement.focus();
+              }
+              break;
+            case 'Tab':
+              contextPopover.hidePopover();
+              break;
+            default:
+              if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
+                e.preventDefault();
+                typeaheadBuffer += e.key.toLowerCase();
+
+                if (typeaheadTimeout) clearTimeout(typeaheadTimeout);
+                typeaheadTimeout = setTimeout(() => { typeaheadBuffer = ''; }, 500);
+
+                const matchIndex = contextItems.findIndex(item =>
+                  item.textContent.trim().toLowerCase().startsWith(typeaheadBuffer)
+                );
+
+                if (matchIndex !== -1) {
+                  nextIndex = matchIndex;
+                }
+              }
+              break;
+          }
+
+          if (nextIndex !== currentIndex) {
+            updateContextTabIndex(nextIndex);
+            contextItems[nextIndex].focus();
+          }
+        });
+
+        // Handle menu item activation
+        contextItems.forEach(item => {
+          item.addEventListener('click', () => {
+            contextPopover.hidePopover();
+            if (lastFocusedElement) {
+              lastFocusedElement.focus();
+            }
+          });
+
+          item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              item.click();
             }
           });
         });
