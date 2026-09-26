@@ -289,6 +289,65 @@ else
 fi
 
 # ============================================================
+# 13. Verify package exports resolve Ecosystem Icons
+# ============================================================
+echo ""
+echo "Step 13: Verifying Icon package exports resolve via Node..."
+
+cat > "$CONSUMER_DIR/test-icons.js" <<'EOF'
+import fs from 'fs';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+try {
+  const iconCssPath = require.resolve('hebring/icons/icon.css');
+  const checkSvgPath = require.resolve('hebring/icons/check.svg');
+  
+  if (!fs.existsSync(iconCssPath)) {
+    console.error("FAIL: icon.css resolves but file is missing at", iconCssPath);
+    process.exit(1);
+  }
+  
+  if (!fs.existsSync(checkSvgPath)) {
+    console.error("FAIL: check.svg resolves but file is missing at", checkSvgPath);
+    process.exit(1);
+  }
+  
+  const svgContent = fs.readFileSync(checkSvgPath, 'utf8');
+  if (!svgContent.startsWith('<svg') || !svgContent.includes('viewBox') || !checkSvgPath.endsWith('.svg')) {
+    console.error("FAIL: check.svg content is invalid or not .svg");
+    process.exit(1);
+  }
+  
+  const cssContent = fs.readFileSync(iconCssPath, 'utf8');
+  if (!cssContent.includes('.hb-icon') || !cssContent.includes('--hb-icon-size')) {
+    console.error("FAIL: icon.css content is invalid");
+    process.exit(1);
+  }
+  
+  if (!checkSvgPath.includes('node_modules')) {
+    console.error("FAIL: path leakage detected", checkSvgPath);
+    process.exit(1);
+  }
+
+  process.exit(0);
+} catch (e) {
+  console.error("FAIL:", e.message);
+  process.exit(1);
+}
+EOF
+
+if (cd "$CONSUMER_DIR" && node test-icons.js >/dev/null 2>&1); then
+  pass "Node can resolve hebring/icons/icon.css"
+  pass "Node can resolve hebring/icons/check.svg"
+  pass "Icon SVG resolves to a valid .svg asset without source leakage"
+  pass "Icon CSS resolves to a valid asset without source leakage"
+else
+  fail "Node failed to resolve Icon exports (or contents are invalid)"
+  (cd "$CONSUMER_DIR" && node test-icons.js)
+fi
+
+# ============================================================
 # Summary
 # ============================================================
 echo ""

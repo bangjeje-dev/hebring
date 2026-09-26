@@ -69,8 +69,29 @@ Applying `.hb-icon` to an `<svg>` normalizes alignment with text and establishes
 HEBRING Icons remain entirely optional.
 HEBRING Core and UI components (Cards, Badges, Alerts) NEVER import, bundle, or require icons internally. If a consumer wishes to place an icon inside an Alert, they compose the SVG inside the Alert markup themselves.
 
-## 12. Package Boundary
-Icons are an Ecosystem capability. They are distributed in the `ecosystem/icons` directory, completely decoupled from the HEBRING Core source (`src/`). They represent the Ecosystem layer and will never become a structural dependency of Core.
+## 12. Package Distribution & Consumption
+Icons are an Ecosystem capability. They are distributed via the `hebring` npm package but remain completely decoupled from the HEBRING Core source (`src/`). They represent the Ecosystem layer and will never become a structural dependency of Core.
+
+HEBRING Icons can be imported through the package subpath export:
+`hebring/icons/*`
+
+**CSS Import:**
+To include the foundational icon sizing classes, import the CSS file directly:
+```css
+@import "hebring/icons/icon.css";
+```
+Or in JavaScript/Vite:
+```js
+import "hebring/icons/icon.css";
+```
+
+**Raw SVG Import:**
+Raw SVG assets can be imported into modern frameworks/bundlers (e.g. Vite, React SVGR) using the same subpath:
+```js
+import CheckIcon from "hebring/icons/check.svg";
+```
+
+*Note: Raw SVG usage depends entirely on your consumer's asset handling/bundler configuration. Not every bundler automatically inlines SVGs.*
 
 ## 13. Contribution Rules
 New icons must be authored originally. Copying path data or source code from Lucide, Heroicons, or Material Icons is strictly prohibited to maintain the original HEBRING identity and avoid licensing conflicts.

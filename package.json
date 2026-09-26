@@ -15,6 +15,7 @@
     ".": "./dist/hebring.css",
     "./css": "./dist/hebring.css",
     "./min": "./dist/hebring.min.css",
+    "./icons/*": "./ecosystem/icons/*",
     "./package.json": "./package.json"
   },
   "keywords": [
