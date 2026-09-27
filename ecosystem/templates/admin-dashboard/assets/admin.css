@@ -54,47 +54,6 @@
   border-bottom: 1px solid var(--hb-color-border);
 }
 
-.admin-nav-group {
-  padding: var(--hb-space-4) var(--hb-space-4);
-  display: flex;
-  flex-direction: column;
-  gap: var(--hb-space-1);
-}
-
-.admin-nav-label {
-  font-size: var(--hb-text-xs);
-  font-weight: 600;
-  text-transform: uppercase;
-  color: var(--hb-color-text-muted);
-  letter-spacing: 0.05em;
-  margin: var(--hb-space-4) 0 var(--hb-space-2) var(--hb-space-3);
-}
-
-.admin-nav-link {
-  display: flex;
-  align-items: center;
-  gap: var(--hb-space-3);
-  padding: var(--hb-space-2) var(--hb-space-3);
-  border-radius: var(--hb-radius-md);
-  color: var(--hb-color-text-subtle);
-  text-decoration: none;
-  font-weight: 500;
-  transition: background-color 0.15s ease, color 0.15s ease;
-}
-
-.admin-nav-link:hover {
-  background-color: var(--hb-color-surface-muted);
-  color: var(--hb-color-text);
-}
-
-.admin-nav-link[aria-current="page"] {
-  background-color: var(--hb-color-primary);
-  color: white;
-}
-
-.admin-nav-link[aria-current="page"] svg {
-  color: white;
-}
 
 /* Header Elements */
 .admin-search-input {

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="node_modules/hebring/dist/hebring.css">
   <link rel="stylesheet" href="node_modules/hebring/ecosystem/ui/menu.css">
   <link rel="stylesheet" href="node_modules/hebring/ecosystem/ui/popover.css">
+  <link rel="stylesheet" href="node_modules/hebring/ecosystem/ui/vertical-nav.css">
 
   <!-- Template Local CSS -->
   <link rel="stylesheet" href="assets/admin.css">
@@ -32,48 +33,107 @@
       </div>
 
       <div style="overflow-y: auto; flex: 1;">
-        <nav class="admin-nav-group" aria-label="Main Navigation">
-          <div class="admin-nav-label">Workspace</div>
-          <a href="#" class="admin-nav-link" aria-current="page">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
-            Overview
-          </a>
-          <a href="#" class="admin-nav-link">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-            Analytics
-          </a>
-          <a href="#" class="admin-nav-link">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Users
-          </a>
-          
-          <div class="admin-nav-label">Commerce</div>
-          <a href="#" class="admin-nav-link">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-            Orders
-          </a>
-          <a href="#" class="admin-nav-link">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
-            Products
-          </a>
-          
-          <div class="admin-nav-label">System</div>
-          <a href="#" class="admin-nav-link">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-            Settings
-          </a>
-        </nav>
-      </div>
-      
-      <div style="padding: var(--hb-space-4);">
-        <div class="hb-card" style="background-color: var(--hb-color-surface-muted); box-shadow: none; border-color: transparent;">
-          <div class="hb-cluster" style="gap: var(--hb-space-2); margin-bottom: var(--hb-space-2);">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--hb-color-primary);"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-            <h4 class="hb-text-sm" style="font-weight: 600; margin: 0;">HEBRING Pro</h4>
+        <nav class="hb-vertical-nav" aria-label="Main Navigation" style="padding: var(--hb-space-4);">
+          <!-- Menu -->
+          <div class="hb-vertical-nav__group">
+            <div class="hb-vertical-nav__label">Menu</div>
+            
+            <div class="hb-vertical-nav__item hb-vertical-nav__item--expandable">
+              <button type="button" class="hb-vertical-nav__link" aria-expanded="true" aria-controls="nav-dashboard">
+                <svg class="hb-vertical-nav__icon" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+                <span class="hb-vertical-nav__text">Dashboard</span>
+                <svg class="hb-vertical-nav__chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <ul class="hb-vertical-nav__list hb-vertical-nav__list--nested" id="nav-dashboard">
+                <li class="hb-vertical-nav__item"><a href="#" class="hb-vertical-nav__link" aria-current="page">Overview</a></li>
+                <li class="hb-vertical-nav__item"><a href="#" class="hb-vertical-nav__link">Analytics</a></li>
+              </ul>
+            </div>
+            
+            <div class="hb-vertical-nav__item hb-vertical-nav__item--expandable">
+              <button type="button" class="hb-vertical-nav__link" aria-expanded="false" aria-controls="nav-management">
+                <svg class="hb-vertical-nav__icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <span class="hb-vertical-nav__text">Management</span>
+                <svg class="hb-vertical-nav__chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <ul class="hb-vertical-nav__list hb-vertical-nav__list--nested" id="nav-management" hidden>
+                <li class="hb-vertical-nav__item"><a href="#" class="hb-vertical-nav__link">Users</a></li>
+                <li class="hb-vertical-nav__item"><a href="#" class="hb-vertical-nav__link">Customers</a></li>
+              </ul>
+            </div>
+            
+            <div class="hb-vertical-nav__item hb-vertical-nav__item--expandable">
+              <button type="button" class="hb-vertical-nav__link" aria-expanded="false" aria-controls="nav-commerce">
+                <svg class="hb-vertical-nav__icon" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                <span class="hb-vertical-nav__text">Commerce</span>
+                <svg class="hb-vertical-nav__chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <ul class="hb-vertical-nav__list hb-vertical-nav__list--nested" id="nav-commerce" hidden>
+                <li class="hb-vertical-nav__item"><a href="#" class="hb-vertical-nav__link">Orders</a></li>
+                <li class="hb-vertical-nav__item"><a href="#" class="hb-vertical-nav__link">Products</a></li>
+                <li class="hb-vertical-nav__item"><a href="#" class="hb-vertical-nav__link">Transactions</a></li>
+                <li class="hb-vertical-nav__item"><a href="#" class="hb-vertical-nav__link">Invoices</a></li>
+              </ul>
+            </div>
           </div>
-          <p class="hb-text-xs" style="color: var(--hb-color-text-subtle); margin: 0 0 var(--hb-space-3) 0; line-height: 1.4;">Unlock advanced analytics and team collaboration tools.</p>
-          <button class="hb-button hb-button--primary hb-w-full hb-text-xs" style="padding: var(--hb-space-1.5) var(--hb-space-2);">Upgrade Plan</button>
-        </div>
+
+          <!-- Content -->
+          <div class="hb-vertical-nav__group">
+            <div class="hb-vertical-nav__label">Content</div>
+            
+            <div class="hb-vertical-nav__item">
+              <a href="#" class="hb-vertical-nav__link">
+                <svg class="hb-vertical-nav__icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                <span class="hb-vertical-nav__text">Files</span>
+              </a>
+            </div>
+            
+            <div class="hb-vertical-nav__item">
+              <a href="#" class="hb-vertical-nav__link">
+                <svg class="hb-vertical-nav__icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 18h1"/><path d="M11 18h4"/><path d="M8 14h6"/><path d="M16 14h1"/></svg>
+                <span class="hb-vertical-nav__text">Reports</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Support -->
+          <div class="hb-vertical-nav__group">
+            <div class="hb-vertical-nav__label">Support</div>
+            
+            <div class="hb-vertical-nav__item">
+              <a href="#" class="hb-vertical-nav__link">
+                <svg class="hb-vertical-nav__icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span class="hb-vertical-nav__text">Messages</span>
+              </a>
+            </div>
+            
+            <div class="hb-vertical-nav__item">
+              <a href="#" class="hb-vertical-nav__link">
+                <svg class="hb-vertical-nav__icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                <span class="hb-vertical-nav__text">Help Center</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- System -->
+          <div class="hb-vertical-nav__group">
+            <div class="hb-vertical-nav__label">System</div>
+            
+            <div class="hb-vertical-nav__item">
+              <a href="#" class="hb-vertical-nav__link">
+                <svg class="hb-vertical-nav__icon" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                <span class="hb-vertical-nav__text">Settings</span>
+              </a>
+            </div>
+            
+            <div class="hb-vertical-nav__item">
+              <a href="#" class="hb-vertical-nav__link">
+                <svg class="hb-vertical-nav__icon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                <span class="hb-vertical-nav__text">Themes</span>
+              </a>
+            </div>
+          </div>
+        </nav>
       </div>
     </aside>
 
@@ -383,5 +443,6 @@
   </div>
 
   <script src="assets/admin.js"></script>
+  <script src="node_modules/hebring/ecosystem/ui/vertical-nav.js"></script>
 </body>
 </html>
