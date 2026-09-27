@@ -701,5 +701,40 @@ Navigation Menu represents persistent or semi-persistent site/application inform
 - **Adapter Responsibility**: Toggling `aria-expanded` and managing focus restoration if complex submenu interaction is added natively via Popover.
 - **Consumer Responsibility**: Accessible labeling (`aria-label`), tracking browser history, assigning `aria-current`, and mapping routes.
 
-## 38. Definition of Done
-Phase 53 is complete when this UI Architecture Specification is updated and implemented correctly.
+## 38. Carousel Foundation
+Carousel is a content navigation pattern for presenting a sequence of related items where only part of the collection may be visible. It relies purely on native scrolling mechanics without a custom physics engine or global JS framework.
+
+### Canonical Markup
+```html
+<section class="hb-carousel" aria-label="Featured Projects">
+  <div class="hb-carousel__viewport">
+    <div class="hb-carousel__track">
+      <article class="hb-carousel__slide">Slide 1</article>
+      <article class="hb-carousel__slide">Slide 2</article>
+    </div>
+  </div>
+  <div class="hb-carousel__controls">
+    <button class="hb-button" aria-label="Previous slide">Previous</button>
+    <button class="hb-button" aria-label="Next slide">Next</button>
+  </div>
+  <div class="hb-carousel__pagination">
+    <button class="hb-carousel__indicator" aria-current="true" aria-label="Go to slide 1"></button>
+    <button class="hb-carousel__indicator" aria-current="false" aria-label="Go to slide 2"></button>
+  </div>
+</section>
+```
+
+### Architectural Contract
+- **Native Scrolling**: The `.hb-carousel__viewport` container manages overflow purely via CSS (`overflow-x: auto`), using native scroll physics and touch APIs.
+- **Scroll Snap**: Implements `scroll-snap-type` and `scroll-snap-align` to ensure predictable navigation naturally.
+- **No Global JS Carousel Engine**: Does not require autoplay, infinite looping, or custom swipe physics engines.
+- **No Tabs/Selected State Constraints**: Slide visibility is based entirely on viewport scroll position. We do not inject custom `.is-active` or `aria-selected` tracking purely for visible slides unless creating explicit tab semantics. Indicators utilize `aria-current`.
+
+### Responsibilities
+- **Browser Responsibility**: Touch inertia, track bounding, native scrolling functionality, scroll snap calculations, rendering scrollbars.
+- **CSS Responsibility**: Providing layout structure, enabling overflow behavior, specifying scroll snap configuration, sizing slides flexably, styling interactive controls and indicators, and managing `prefers-reduced-motion` fallbacks to native instant scroll.
+- **Adapter Responsibility**: Interpreting the scroll position of the viewport, calculating button disabled boundaries, orchestrating smooth programmable scrolling on button clicks, and syncing the indicator states (`aria-current`).
+- **Consumer Responsibility**: Orchestrating complex logic such as auto-rotation, rendering loops, or sophisticated dynamic lists if applicable on top of the HEBRING foundation.
+
+## 39. Definition of Done
+Phase 54 is complete when this UI Architecture Specification is updated and implemented correctly.

@@ -495,4 +495,27 @@ fi
 
 pass "Navigation Menu architecture leverages native semantics without JS routing dependency"
 
+# 27. Carousel Validation
+if [ ! -f "$UI_DIR/carousel.css" ]; then
+  fail "carousel.css is missing"
+fi
+
+if ! grep -q '\.hb-carousel__viewport' "$UI_DIR/carousel.css" || ! grep -q '\.hb-carousel__track' "$UI_DIR/carousel.css" || ! grep -q '\.hb-carousel__slide' "$UI_DIR/carousel.css"; then
+  fail "Carousel CSS is missing required structural selectors"
+fi
+
+if ! grep -q 'overflow-x' "$UI_DIR/carousel.css"; then
+  fail "Carousel must use native overflow scrolling"
+fi
+
+if grep -q '\.is-active' "$UI_DIR/carousel.css" || grep -q '\.is-current' "$UI_DIR/carousel.css" || grep -q '\.is-selected' "$UI_DIR/carousel.css"; then
+  fail "Carousel CSS must not use custom state classes for active/current items"
+fi
+
+if ! grep -q 'demo-carousel-prev' "$ROOT_DIR/examples/playground/index.html" || ! grep -q 'demo-carousel-next' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing previous/next controls for Carousel"
+fi
+
+pass "Carousel architecture respects native scrolling and avoids inappropriate JS mechanics"
+
 echo "All Ecosystem UI tests passed!"

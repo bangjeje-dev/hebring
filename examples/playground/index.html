@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="../../ecosystem/ui/command-menu.css">
   <link rel="stylesheet" href="../../ecosystem/ui/toast.css">
   <link rel="stylesheet" href="../../ecosystem/ui/navigation-menu.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/carousel.css">
 
   <style>
     /* Playground-specific minimal styles */
@@ -244,6 +245,52 @@
             </li>
           </ul>
         </nav>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Carousel</h3>
+        <section class="hb-carousel" aria-label="Featured Projects" id="demo-carousel">
+          <div class="hb-carousel__viewport" id="demo-carousel-viewport">
+            <div class="hb-carousel__track">
+              <article class="hb-carousel__slide">
+                <div class="hb-card" style="height: 12rem; display: flex; align-items: center; justify-content: center; background: var(--hb-color-background-subtle);">
+                  Slide 1
+                </div>
+              </article>
+              <article class="hb-carousel__slide">
+                <div class="hb-card" style="height: 12rem; display: flex; align-items: center; justify-content: center; background: var(--hb-color-background-subtle);">
+                  Slide 2
+                </div>
+              </article>
+              <article class="hb-carousel__slide">
+                <div class="hb-card" style="height: 12rem; display: flex; align-items: center; justify-content: center; background: var(--hb-color-background-subtle);">
+                  Slide 3
+                </div>
+              </article>
+              <article class="hb-carousel__slide">
+                <div class="hb-card" style="height: 12rem; display: flex; align-items: center; justify-content: center; background: var(--hb-color-background-subtle);">
+                  Slide 4
+                </div>
+              </article>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.5rem;">
+            <div class="hb-carousel__controls">
+              <button class="hb-button hb-button--secondary hb-button--sm" id="demo-carousel-prev" type="button" aria-label="Previous slide" disabled>
+                Previous
+              </button>
+              <button class="hb-button hb-button--secondary hb-button--sm" id="demo-carousel-next" type="button" aria-label="Next slide">
+                Next
+              </button>
+            </div>
+            <div class="hb-carousel__pagination" id="demo-carousel-pagination" aria-label="Carousel pagination">
+              <button class="hb-carousel__indicator" type="button" aria-label="Go to slide 1" aria-current="true"></button>
+              <button class="hb-carousel__indicator" type="button" aria-label="Go to slide 2" aria-current="false"></button>
+              <button class="hb-carousel__indicator" type="button" aria-label="Go to slide 3" aria-current="false"></button>
+              <button class="hb-carousel__indicator" type="button" aria-label="Go to slide 4" aria-current="false"></button>
+            </div>
+          </div>
+        </section>
       </div>
 
       <div style="margin-bottom: 2rem;">
@@ -654,6 +701,74 @@
         // Sync aria-expanded state based on popover toggle events
         navSubmenu.addEventListener('toggle', (e) => {
           navTrigger.setAttribute('aria-expanded', e.newState === 'open' ? 'true' : 'false');
+        });
+      }
+
+      // --- CAROUSEL ADAPTER (Phase 54) ---
+      const carouselViewport = document.getElementById('demo-carousel-viewport');
+      const prevBtn = document.getElementById('demo-carousel-prev');
+      const nextBtn = document.getElementById('demo-carousel-next');
+      const paginationContainer = document.getElementById('demo-carousel-pagination');
+      const indicators = paginationContainer ? Array.from(paginationContainer.querySelectorAll('.hb-carousel__indicator')) : [];
+
+      if (carouselViewport && prevBtn && nextBtn) {
+        const slides = Array.from(carouselViewport.querySelectorAll('.hb-carousel__slide'));
+
+        const updateControls = () => {
+          const scrollLeft = carouselViewport.scrollLeft;
+          const scrollWidth = carouselViewport.scrollWidth;
+          const clientWidth = carouselViewport.clientWidth;
+
+          prevBtn.disabled = scrollLeft <= 0;
+          // Use a small threshold (1px) for floating point precision issues
+          nextBtn.disabled = scrollLeft + clientWidth >= scrollWidth - 1;
+        };
+
+        carouselViewport.addEventListener('scroll', () => {
+          // Debounce could be added here in a real app
+          updateControls();
+
+          // Update indicators based on approximate scroll position
+          if (slides.length > 0 && indicators.length === slides.length) {
+            const slideWidth = slides[0].clientWidth + 16; // 16px gap
+            const currentIndex = Math.min(
+              Math.max(Math.round(carouselViewport.scrollLeft / slideWidth), 0),
+              slides.length - 1
+            );
+
+            indicators.forEach((ind, index) => {
+              ind.setAttribute('aria-current', index === currentIndex ? 'true' : 'false');
+            });
+          }
+        }, { passive: true });
+
+        // Wait for initial render to calculate widths properly
+        requestAnimationFrame(updateControls);
+        window.addEventListener('resize', updateControls);
+
+        const scrollBySlides = (direction) => {
+          if (slides.length === 0) return;
+          const slideWidth = slides[0].clientWidth + 16; // 16px is the 1rem gap
+          carouselViewport.scrollBy({
+            left: direction * slideWidth,
+            behavior: 'smooth'
+          });
+        };
+
+        prevBtn.addEventListener('click', () => scrollBySlides(-1));
+        nextBtn.addEventListener('click', () => scrollBySlides(1));
+
+        // Indicator clicks
+        indicators.forEach((btn, index) => {
+          btn.addEventListener('click', () => {
+             if (slides.length > 0) {
+                const slideWidth = slides[0].clientWidth + 16;
+                carouselViewport.scrollTo({
+                  left: index * slideWidth,
+                  behavior: 'smooth'
+                });
+             }
+          });
         });
       }
 
