@@ -62,6 +62,16 @@ import 'hebring/min';
 
 Alternatively, you can link the stylesheet directly in HTML if serving from a static location or CDN.
 
+## Documentation
+
+HEBRING is thoroughly documented. Start here:
+
+- [Getting Started](docs/getting-started.md)
+- [Architecture Guide](docs/architecture-guide.md)
+- [Components](docs/components.md)
+- [UI Architecture (Ecosystem)](docs/ui-architecture.md)
+- [Design Tokens](docs/design-tokens.md)
+
 ### Local Development
 
 Clone the repository and install dependencies:
