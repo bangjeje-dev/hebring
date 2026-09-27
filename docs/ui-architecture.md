@@ -661,5 +661,45 @@ Alert Dialog is a specialized confirmation-oriented modal interaction for action
 - **Adapter Responsibility**: Managing `showModal()`, `close()`, initial focus shifting (e.g. defaulting to Cancel), and restoring focus to the original trigger upon dialog dismissal.
 - **Consumer Responsibility**: Orchestrating actual backend deletions, network async behavior, button states while loading, and final contextual logic routing.
 
-## 37. Definition of Done
-Phase 52 is complete when this UI Architecture Specification is updated and implemented correctly.
+## 37. Navigation Menu Foundation
+Navigation Menu represents persistent or semi-persistent site/application information architecture. It is destination-oriented, distinguishing it from action-oriented Menus.
+
+### Canonical Markup
+```html
+<nav class="hb-navigation" aria-label="Main Navigation">
+  <ul class="hb-navigation__list">
+    <li class="hb-navigation__item">
+      <a class="hb-navigation__link" href="#" aria-current="page">Home</a>
+    </li>
+    <li class="hb-navigation__item">
+      <!-- Submenu Trigger -->
+      <button class="hb-navigation__trigger" aria-expanded="false" popovertarget="nav-products">
+        Products
+      </button>
+      <!-- Submenu Content -->
+      <div id="nav-products" class="hb-popover" popover>
+        <ul class="hb-navigation__content">
+          <li class="hb-navigation__item">
+            <a class="hb-navigation__link" href="#">Analytics</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</nav>
+```
+
+### Architectural Contract
+- **Semantics**: Uses `<nav>`, `<ul>`, `<li>`, and `<a>`. It explicitly does **not** use `role="menu"` or `role="menuitem"`. Navigation is not a desktop widget.
+- **Current Page**: State is driven by `aria-current="page"`. Custom `.is-active` state classes are strictly forbidden.
+- **Router Boundary**: HEBRING CSS styles the active state based on attributes but never parses URLs or tracks history. The consumer application router assigns `aria-current`.
+- **Submenus**: Optional interactions are composed using native primitives (e.g. Popover API) rather than an exclusive Navigation CSS positioning engine.
+
+### Responsibilities
+- **Browser Responsibility**: Native link handling, Tab focus progression, Popover APIs (for submenus).
+- **CSS Responsibility**: Supplying layout (horizontal vs. wrapped), readable spacing, hover states, visible focus states, and current page styles via `[aria-current="page"]`.
+- **Adapter Responsibility**: Toggling `aria-expanded` and managing focus restoration if complex submenu interaction is added natively via Popover.
+- **Consumer Responsibility**: Accessible labeling (`aria-label`), tracking browser history, assigning `aria-current`, and mapping routes.
+
+## 38. Definition of Done
+Phase 53 is complete when this UI Architecture Specification is updated and implemented correctly.

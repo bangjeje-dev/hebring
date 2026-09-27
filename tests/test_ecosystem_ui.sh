@@ -472,4 +472,27 @@ fi
 
 pass "Alert Dialog architecture properly reuses Modal foundation natively"
 
+# 26. Navigation Menu Validation
+if [ ! -f "$UI_DIR/navigation-menu.css" ]; then
+  fail "navigation-menu.css is missing"
+fi
+
+if grep -q '\.is-active' "$UI_DIR/navigation-menu.css" || grep -q '\.is-open' "$UI_DIR/navigation-menu.css" || grep -q '\.is-selected' "$UI_DIR/navigation-menu.css"; then
+  fail "Navigation Menu CSS must not use custom state classes"
+fi
+
+if ! grep -q 'hb-navigation' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing hb-navigation"
+fi
+
+if ! grep -q 'aria-current="page"' "$ROOT_DIR/examples/playground/index.html"; then
+  fail "Playground is missing aria-current=\"page\" for navigation"
+fi
+
+if grep -q 'role="menuitem"' "$UI_DIR/navigation-menu.css"; then
+  fail "Navigation Menu CSS should not rely on ARIA menuitem semantics"
+fi
+
+pass "Navigation Menu architecture leverages native semantics without JS routing dependency"
+
 echo "All Ecosystem UI tests passed!"

@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="../../ecosystem/ui/combobox.css">
   <link rel="stylesheet" href="../../ecosystem/ui/command-menu.css">
   <link rel="stylesheet" href="../../ecosystem/ui/toast.css">
+  <link rel="stylesheet" href="../../ecosystem/ui/navigation-menu.css">
 
   <style>
     /* Playground-specific minimal styles */
@@ -209,6 +210,40 @@
             <button class="hb-button" data-drawer-close>Done</button>
           </div>
         </dialog>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Navigation Menu</h3>
+        <nav class="hb-navigation" aria-label="Main Navigation">
+          <ul class="hb-navigation__list">
+            <li class="hb-navigation__item">
+              <a class="hb-navigation__link" href="#" aria-current="page">Home</a>
+            </li>
+            <li class="hb-navigation__item">
+              <a class="hb-navigation__link" href="#">Products</a>
+            </li>
+            <li class="hb-navigation__item">
+              <!-- Using native popover API for submenu interaction -->
+              <button class="hb-navigation__trigger" id="nav-resources-trigger" popovertarget="nav-resources-submenu" aria-expanded="false">
+                Resources
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events: none;"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div id="nav-resources-submenu" class="hb-popover" popover>
+                <ul class="hb-navigation__content">
+                  <li class="hb-navigation__item" style="display: block;">
+                    <a class="hb-navigation__link" href="#" style="width: 100%;">Documentation</a>
+                  </li>
+                  <li class="hb-navigation__item" style="display: block;">
+                    <a class="hb-navigation__link" href="#" style="width: 100%;">Blog</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="hb-navigation__item">
+              <a class="hb-navigation__link" href="#">Pricing</a>
+            </li>
+          </ul>
+        </nav>
       </div>
 
       <div style="margin-bottom: 2rem;">
@@ -610,6 +645,16 @@
 
         alertDialogCancelBtn.addEventListener('click', () => closeAlertDialog('Cancelled'));
         alertDialogConfirmBtn.addEventListener('click', () => closeAlertDialog('Deleted'));
+      }
+
+      // --- NAVIGATION MENU ADAPTER (Phase 53) ---
+      const navTrigger = document.getElementById('nav-resources-trigger');
+      const navSubmenu = document.getElementById('nav-resources-submenu');
+      if (navTrigger && navSubmenu) {
+        // Sync aria-expanded state based on popover toggle events
+        navSubmenu.addEventListener('toggle', (e) => {
+          navTrigger.setAttribute('aria-expanded', e.newState === 'open' ? 'true' : 'false');
+        });
       }
 
       // --- DRAWER ADAPTER ---
