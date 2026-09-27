@@ -1,94 +1,90 @@
-# HEBRING Template Architecture
+# Template Architecture
 
-## 1. Template Philosophy
-HEBRING Templates are intended to be high-quality, real-world starting points that demonstrate how to compose HEBRING Core, UI components, Themes, and Icons into cohesive layouts. They exist to reduce boilerplate and teach best practices. A template is a starting point, not a lock-in mechanism—developers are expected to take, modify, dissect, and independently deploy templates without proprietary restrictions.
+## 1. Purpose
+The HEBRING Template layer is an ecosystem capability intended to provide high-quality, real-world starting points that demonstrate how to compose HEBRING Core, UI components, Themes, and Icons into cohesive layouts. Templates exist to reduce boilerplate and teach best practices. They are intended as starting points for developers, not proprietary lock-in mechanisms or JavaScript frameworks.
 
-## 2. Template Definition
-- **What a Template is**: A pre-constructed composition of HTML and HEBRING CSS classes representing a common page, section, or layout pattern.
-- **What a Template is NOT**: A template is not the HEBRING framework itself, nor is it a proprietary component system, a WordPress theme, or a JavaScript runtime dependency.
+## 2. Template Layer Boundary
+Templates are strictly consumers of HEBRING. The layering is defined as:
+`Core CSS` → `Ecosystem UI / Themes / Icons` → `Templates / Examples` → `Applications`.
+Templates must never leak back into Core CSS, duplicate established primitives, invent new token systems, or introduce framework-specific runtime assumptions into the framework architecture.
 
-## 3. Template Categories
-Templates will be organized by purposeful taxonomy. Initial sensible categories include:
-- **Authentication**: Login, Registration, Password Reset
-- **Marketing**: Landing Pages, Features, Pricing, Hero Sections
-- **Dashboard**: Admin Panels, Data Tables, Settings, Sidebars
-- **Content**: Blogs, Documentation, Portfolios, Articles
-- **E-commerce**: Product Pages, Shopping Carts, Checkouts
+## 3. Repository Inventory
+As of the current audit phase, the repository structure for templates is established but empty:
+- `ecosystem/templates/`: Contains `.gitkeep`.
+- `examples/`: Contains the `playground/` directory and `.gitkeep`.
+No concrete templates or standalone examples currently exist. The following sections define the architectural rules for their future implementation.
 
-## 4. Composition Model
-Templates are the highest practical composition layer in the HEBRING ecosystem. The hierarchy is:
-`Template` → `Sections / Patterns` → `UI Components` → `Core Primitives` → `Tokens` → `Native CSS`
-A template may use any layer below it, but lower layers never depend on templates.
+## 4. Playground vs Example vs Template vs Application
+- **Playground**: A single, comprehensive reference implementation (`examples/playground/`) used to validate the CSS architecture natively during development.
+- **Example**: An isolated snippet demonstrating a specific feature or composition.
+- **Template**: A contextual, page-level or section-level composition of UI components (e.g., a "Dashboard" or "Landing Page").
+- **Application**: The final product built by a consumer, which owns the routing, data models, and business logic.
 
-## 5. Template vs UI Boundary
-- **UI Component**: A reusable, single-responsibility element (e.g., a `.hb-card` or `.hb-alert`).
-- **Template**: A contextual composition of UI components and primitives fulfilling a specific user journey (e.g., a complete "Pricing Section" containing a header grid, multiple pricing cards, feature lists, and call-to-action buttons). Templates compose UI; UI remains independent.
+## 5. Core CSS Consumption
+Future templates must consume HEBRING Core CSS explicitly (e.g., pointing to `dist/hebring.css` or importing from the package root). Templates must not include custom compiled CSS that modifies or overwrites Core behavior.
 
-## 6. Portability
-Templates are distributed as plain, framework-neutral HTML and CSS. They avoid framework coupling (React, Vue, Angular) to guarantee maximum portability. A developer can copy the template HTML and paste it into any environment where HEBRING CSS is loaded.
+## 6. Ecosystem UI Consumption
+Templates should consume Ecosystem UI components (e.g., Modal, Navigation Menu) by explicitly importing their respective CSS files and adhering to the documented DOM contracts. Templates must not reinvent existing Ecosystem components.
 
-## 7. Structure
-A conceptual template directory structure follows a simple static site model:
-```
-template-[name]/
-├── index.html
-├── preview.png
-└── README.md
-```
-No complex bundlers or transpilers are enforced per-template.
+## 7. Theme Consumption
+Templates must support HEBRING themes natively by relying exclusively on semantic tokens (e.g., `var(--hb-color-surface)`). Templates must not hardcode hex colors or implement alternative, undocumented theming systems.
 
-## 8. Naming
-Template names must be stable, predictable, and describe their purpose rather than an iteration or internal version.
-- **Valid**: `dashboard-admin`, `marketing-landing`, `auth-login`
-- **Invalid**: `landing-v2-final`, `test-dashboard-new`
+## 8. Icon Consumption
+Templates may demonstrate HEBRING Icons using the unstyled `currentColor` SVG model. Templates should not mandate external icon libraries as a core framework requirement.
 
-## 9. Accessibility
-Templates are bound by the same strict accessibility contracts as Phase 14 Core Components. They must utilize semantic HTML, proper ARIA roles where necessary, focus-visible states, and maintain strict contrast ratios.
+## 9. Layout Composition
+Templates must construct layouts exclusively using HEBRING's Core layout primitives (Container, Stack, Cluster, Grid, Flow, Center). They must not invent undocumented custom layout systems.
 
-## 10. Responsive Behavior
-Templates must be fully fluid and responsive, utilizing HEBRING's Core layout primitives (grids, stacks) and utility classes. They must not rely on undocumented breakpoints or hardcoded pixel values.
+## 10. Component Composition
+Templates should compose existing HEBRING Core and Ecosystem components (Buttons, Cards, Forms, Modals) naturally. Templates must not create unnecessary duplicated component styles (e.g., avoiding custom `.template-btn` classes if `.hb-button` suffices).
 
-## 11. Theme Integration
-Templates automatically support HEBRING Themes because they consume semantic tokens and core classes. Templates must never hardcode theme-specific hex colors into their markup or custom CSS (e.g., no `style="background: #000"`).
+## 11. Responsive Architecture
+Responsive behaviors in templates must rely on HEBRING's documented breakpoints and fluid layout primitives. Viewport-detecting JavaScript or contradictory custom breakpoints are prohibited.
 
-## 12. Icon Integration
-Templates may optionally consume HEBRING Icons (using the `<svg>` format established in Phase 17). Doing so demonstrates practical usage but does not introduce Icons as a Core dependency.
+## 12. Accessibility Alignment
+Templates must adhere to the accessibility architecture defined in `docs/ecosystem-accessibility-audit.md`. This includes semantic HTML, proper ARIA relationships, and focus management.
 
-## 13. Playground Integration
-Templates serve as ideal candidates for the HEBRING Playground (Phase 19). Future workflows will allow a developer to select a Template, open it in the Playground, edit the markup interactively, and copy the customized result.
+## 13. JavaScript Boundary
+Templates may include JavaScript to demonstrate interaction (e.g., Reference Adapters for Modals), but they must not introduce hidden framework runtimes (like Vue or React) or global state managers as a requirement for utilizing HEBRING.
 
-## 14. Distribution
-Templates will be distributed via standard, open channels:
-- Included in the repository (`/templates`)
-- Downloadable ZIP archives
-- Optionally via CLI scaffolding or GitHub Template repositories.
-There is no proprietary marketplace or payment system.
+## 14. State Ownership
+State in templates must belong to native browser attributes (`[open]`, `:popover-open`) or standard ARIA attributes (`[aria-expanded]`). Templates must not introduce conflicting state conventions (like `.is-active`).
 
-## 15. Versioning
-Templates declare their compatibility with HEBRING Core versions in their `README.md`. Because HEBRING relies on stable CSS classes, templates remain largely backwards compatible, but major breaking changes to Core layout primitives will require template version bumps.
+## 15. Naming Consistency
+Any template-specific CSS classes must be clearly distinguishable and should not masquerade as HEBRING Core API. The `hb-*` prefix is reserved strictly for Core and Ecosystem components.
 
-## 16. Dependencies
-Templates have exactly one mandatory dependency: the `hebring` single npm package (specifically `dist/hebring.css`).
-Dependencies on alternative ecosystem themes or icons are strictly optional.
+## 16. Token Usage
+Templates must consume semantic and primitive tokens correctly. Hardcoded styling values (arbitrary padding, hex colors) should be avoided in favor of utility classes or token mappings.
 
-## 17. Customization
-Developers customize templates by editing the raw HTML, swapping HEBRING utility classes, or overriding semantic tokens. No proprietary template language (like Liquid or Twig) is required to parse or modify a template.
+## 17. CSS Architecture
+Template-specific CSS, if necessary, should cleanly compose on top of HEBRING without redefining the cascade layers. It should avoid `!important` overrides of core framework features.
 
-## 18. Quality Contract
-Every template must meet minimum quality standards:
-- 100% Valid Semantic HTML5.
-- fully responsive (mobile-first).
-- 100% valid HEBRING CSS classes (no invented aliases).
-- No hard-coded theme hacks.
-- No JavaScript dependencies required for layout.
-- No broken asset links.
+## 18. Template Variants
+If multiple templates share foundations, they must remain individually portable. Templates should not become an interdependent mini-framework themselves.
 
-## 19. Testing
-Future testing infrastructure for templates will validate:
-- HTML validity.
-- CSS class validity (ensuring no deprecated or nonexistent classes are used).
-- Broken link detection.
-- A11y auditing (e.g., via axe-core or Chrome DevTools integration) where feasible.
+## 19. Demo / Production Boundary
+Templates are provided as demonstration starting points. They bridge the gap between Playground (testing) and Application (production) by providing structural boilerplate that the consumer takes ownership of.
 
-## 20. Future Expansion
-As the ecosystem matures, templates may be branched into framework-specific adapters (e.g., React or Vue versions of the HTML) only if the framework-neutral HTML version remains the authoritative source of truth.
+## 20. Package Boundary
+Templates and examples must remain excluded from the core npm package distribution (`dist/`). The `hebring` package distributes the CSS and Icons, not the HTML boilerplate.
+
+## 21. Documentation Alignment
+Documentation referencing templates will direct users to the `ecosystem/templates` directory. The terminology must strictly refer to them as starting points, not mandatory framework dependencies.
+
+## 22. Developer Experience
+A developer must easily understand that a template is a portable HTML/CSS composition they can copy and modify, entirely independent of any JavaScript build step or framework lock-in.
+
+## 23. Performance / Complexity
+Templates should remain lightweight, avoiding massive asset dependencies, excessive third-party libraries, or complex build requirements.
+
+## 24. Testing / Validation
+Templates must pass semantic HTML validation, utilize valid HEBRING CSS classes, and demonstrate unbroken responsive and accessibility patterns without requiring automated browser test suites in the core repository.
+
+## 25. Findings
+The template architecture is correctly defined as a consumer layer on top of HEBRING. Currently, no templates exist, ensuring zero leakage or contradictory implementations. The conceptual boundary is solid.
+
+## 26. Remediation
+Replaced the previous `template-architecture.md` with this formal architectural audit boundary to proactively govern future template implementation.
+
+## 27. Final Template Architecture Assessment
+The template layer architecture is sound, empty, and prepared for future implementation without risking the integrity of the HEBRING Core or Ecosystem UI boundaries.
