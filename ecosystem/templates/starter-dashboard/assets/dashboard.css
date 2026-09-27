@@ -1,0 +1,116 @@
+/* 
+ * Dashboard Application Styles
+ * 
+ * These styles define the macro-layout of the dashboard shell.
+ * They are intentionally kept separate from the HEBRING framework
+ * to demonstrate the boundary between Framework API (hb-*) and
+ * Application Architecture.
+ */
+
+/* Shell layout using standard CSS Grid */
+.dashboard-shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+/* Sidebar is hidden by default on mobile (handled via a drawer pattern or media queries) */
+.dashboard-sidebar {
+  display: none;
+  background-color: var(--hb-color-background-subtle);
+  border-right: 1px solid var(--hb-color-border-subtle);
+  padding: var(--hb-space-4);
+  flex-direction: column;
+}
+
+/* Desktop layout overrides */
+@media (min-width: 768px) {
+  .dashboard-shell {
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: 1fr;
+  }
+  
+  .dashboard-sidebar {
+    display: flex;
+  }
+  
+  .dashboard-mobile-header {
+    display: none;
+  }
+}
+
+.dashboard-mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--hb-space-4);
+  border-bottom: 1px solid var(--hb-color-border-subtle);
+  background-color: var(--hb-color-background);
+}
+
+.dashboard-main {
+  padding: var(--hb-space-4) var(--hb-space-4) var(--hb-space-8);
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .dashboard-main {
+    padding: var(--hb-space-8);
+  }
+}
+
+/* Custom Grid for Metrics */
+.dashboard-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--hb-space-4);
+}
+
+@media (min-width: 640px) {
+  .dashboard-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-metrics-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Primary / Secondary Content Split */
+.dashboard-content-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--hb-space-6);
+}
+
+@media (min-width: 1024px) {
+  .dashboard-content-split {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Sidebar navigation links */
+.dashboard-nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--hb-space-3);
+  padding: var(--hb-space-2) var(--hb-space-3);
+  border-radius: var(--hb-radius-md);
+  color: var(--hb-color-text-subtle);
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.dashboard-nav-link:hover {
+  background-color: var(--hb-color-surface-hover);
+  color: var(--hb-color-text);
+}
+
+.dashboard-nav-link[aria-current="page"] {
+  background-color: var(--hb-color-surface-muted);
+  color: var(--hb-color-text);
+  font-weight: 500;
+}
