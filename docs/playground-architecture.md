@@ -1,66 +1,90 @@
-# HEBRING Playground Architecture
+# Playground Architecture
 
 ## 1. Purpose
-The HEBRING Playground is a dedicated development and demonstration tool designed to make the framework effortlessly discoverable and learnable. It allows developers to interactively write HTML, apply HEBRING classes, and immediately visualize the CSS rendering without requiring a local project setup or build step.
+The HEBRING Playground (`examples/playground/index.html`) serves as the definitive reference implementation for the framework. It exists to validate the CSS architecture in a real browser environment, demonstrate correct semantic markup, and provide reference JavaScript adapters for complex interactive components. 
 
-## 2. Developer Experience Goals
-The target developer flow is: **Discover → Experiment → Understand → Copy → Install → Build**.
-To achieve this, the Playground must minimize friction. It should load instantly, provide immediate visual feedback, and ensure that the code written in the Playground is exactly the code needed in a production environment.
+PLAYGROUND is reference infrastructure and NOT part of the HEBRING runtime package.
 
-## 3. Architecture
-The Playground acts as an independent consumer application. It sits completely outside the HEBRING Core architecture.
-It functions as a static or lightweight client-side application that imports the compiled `hebring.css` distribution file and renders user-provided markup.
+## 2. Reference Implementation Boundary
+The Playground demonstrates how consumers should integrate HEBRING into their applications. It is deliberately constructed as a single static HTML file with vanilla JavaScript. It does not use a build system, framework (React, Vue), or global state manager. This guarantees that HEBRING's functionality relies entirely on CSS and native browser capabilities, rather than a hidden runtime dependency.
 
-## 4. Dependency Direction
-The strict architectural dependency flow is:
-`Playground` → `Ecosystem (Themes/Icons)` → `Core` → `Native CSS`
+## 3. File Inventory
+- `examples/playground/index.html`: The single canonical reference application. It contains all HTML markup, isolated demo styles, and reference JavaScript adapters.
 
-**CRITICAL INVARIANT:** HEBRING Core, UI Components, Icons, and Themes must NEVER depend on the Playground. The Playground is purely a consumer.
+## 4. Core CSS Consumption
+The Playground accurately consumes the core framework via direct `<link>` tags pointing to the development source (`../../src/index.css`). This simulates consumer usage while allowing for immediate visual regression testing during framework development.
 
-## 5. Technology Boundary
-The Playground is permitted to use JavaScript (unlike Core), as it is a web-based developer tool requiring state management (e.g., syncing an editor with a preview pane). However:
-- Playground JavaScript must remain isolated and never leak into the HEBRING Core bundle.
-- The Playground should prefer simple, vanilla web standards or minimal, buildless tools (e.g., standard Web Components or lightweight DOM manipulation) to avoid introducing massive framework dependencies (React/Vue/Svelte) into the repository.
-- A static bundler (like Vite) may eventually be used for the Playground itself, provided its configuration remains strictly separated from the Core library build process.
+## 5. Ecosystem UI Consumption
+Ecosystem UI components are loaded individually via direct links (e.g., `../../ecosystem/ui/modal.css`). This mirrors the public package export model where Ecosystem CSS is explicitly requested by the consumer rather than bundled by default into the Core framework.
 
-## 6. Editor Model
-The Playground requires a minimal HTML text editor. It should ideally support basic syntax highlighting and indentation. The editor captures raw HTML strings which are then passed to the preview model.
+## 6. DOM Contract Alignment
+The HTML markup in the Playground strictly adheres to the specifications defined in `docs/ecosystem-dom-contracts.md`. It correctly leverages native elements like `<dialog>`, `<details>`, and `popover` attributes, proving the validity of the CSS architecture against standard HTML.
 
-## 7. Preview Model
-The Preview model takes the raw HTML from the Editor and injects it into a rendering context. This context must be accurately styled by the exact `dist/hebring.css` artifact that a user would download from npm.
+## 7. Accessibility Alignment
+The markup correctly implements ARIA roles (`role="menu"`, `role="tablist"`), semantic boundaries, and accessible names. Keyboard interactions (e.g., Arrow key navigation in tabs and comboboxes) are manually orchestrated by reference adapters in alignment with W3C APG guidelines and `docs/ecosystem-accessibility-audit.md`.
 
-## 8. CSS Loading
-The Playground must load the exact distribution artifacts (`dist/hebring.css`). It should not attempt to hot-reload or dynamically compile the raw `src/` CSS files on the client. It acts exactly like a consumer application referencing the built stylesheet.
+## 8. Reference Adapter Boundary
+The embedded JavaScript acts purely as a set of Reference Adapters. Each adapter bridges the gap between native browser events and the semantic state expected by the CSS.
+- **Allowed**: Managing focus, syncing `aria-expanded` based on popover toggle events, handling keyboard arrow navigation.
+- **Prohibited**: Global data models, routing, complex state machines, or framework-like reactivity.
 
-## 9. Theme Handling
-Themes are natively driven by CSS custom properties bound to data attributes. The Playground will implement a UI toggle (e.g., a "Light / Dark" button) that simply toggles `data-theme="dark"` on the preview container or iframe. No JavaScript-based CSS styling engines are permitted.
+## 9. Global Event Listeners
+Global event listeners (`document.addEventListener`) are strictly limited to necessary interactions, such as binding a global keyboard shortcut (e.g., `Cmd+K` for the Command Menu). The majority of listeners are correctly scoped to their specific component DOM nodes.
 
-## 10. Icon Handling
-The Playground will demonstrate icons by providing raw SVG snippets (referencing `ecosystem/icons`) that developers can paste into the editor. The icons will correctly inherit `currentColor` from the surrounding HEBRING utility or component classes. The Playground will not force icons to be a Core dependency.
+## 10. State Ownership
+State is correctly mapped to authoritative HTML attributes.
+- Open/close states rely on native `[open]` or `:popover-open` semantics.
+- Selection states rely on `aria-selected="true"`.
+- The Playground correctly avoids introducing custom architectural state classes (like `.is-active`).
 
-## 11. Responsive Preview
-To validate HEBRING's fluid and responsive design, the Playground will offer a responsive preview mechanism. The preferred approach is providing predefined viewport size toggles (Mobile, Tablet, Desktop) that resize the preview container/iframe using CSS width transitions, avoiding the need for a complex JavaScript browser emulator.
+## 11. Component Coverage
+The Playground successfully demonstrates the majority of the Ecosystem UI components (Modal, Alert Dialog, Drawer, Popover, Menu, Dropdown Menu, Context Menu, Tabs, Accordion, Combobox, Command Menu, Navigation Menu, Carousel). The coverage provides a comprehensive proof of concept for the architecture.
 
-## 12. Copy Experience
-Developers must be able to copy the exact HTML from the Playground editor and paste it directly into their own projects. The Playground must not introduce proprietary template syntax, pseudo-markup, or Playground-specific wrapper classes that would break when copied to a standard HTML environment.
+## 12. Demo Isolation
+Each interactive demo is functionally isolated. Reference adapters query DOM elements via specific IDs (e.g., `demo-cmd`, `demo-tabs`). State mutations in one adapter do not leak into or affect sibling components.
 
-## 13. Documentation Integration
-Future documentation pages will link directly to Playground states (e.g., via URL parameters containing base64 encoded HTML) or embed minimal instances of the Playground to provide interactive examples of components and utilities directly within the reading experience.
+## 13. ID Management
+IDs (`id="..."`) are used responsibly to establish ARIA relationships (`aria-controls`, `aria-labelledby`) and configure native browser features (`popovertarget`). They are unique within the document.
 
-## 14. Security Considerations
-Because the Playground renders arbitrary user-provided HTML, security boundaries are paramount:
-- **Isolation**: The preview should ideally be rendered inside a sandboxed `<iframe>` to prevent CSS bleed and script execution from affecting the parent Playground application.
-- **Sanitization**: If rendering directly in the DOM, strict HTML sanitization (e.g., DOMPurify) must strip `<script>` tags, `onload` attributes, and other XSS vectors before injection.
+## 14. Script Architecture
+JavaScript is intentionally inlined at the bottom of the HTML file. This architectural decision prevents the Playground's reference JS from being accidentally perceived as an external dependency or runtime library that consumers must install. It reinforces that HEBRING is CSS-only.
 
-## 15. Performance Considerations
-The Playground must remain lightweight. By relying on the pre-compiled `dist/hebring.css` and minimal vanilla JavaScript for syncing the editor and preview, the Playground ensures fast initialization and seamless typing responsiveness.
+## 15. Native Platform Demonstrations
+The Playground relies heavily on native platform capabilities:
+- Native `<dialog>` for Modals, Alert Dialogs, and Command Menus.
+- Native `popover` API for Popovers, Dropdowns, Context Menus, and Comboboxes.
+- Native `<details>` for Accordions.
+The CSS correctly styles these native elements without reinventing their core behaviors.
 
-## 16. Testing
-Playground testing will validate:
-- The Playground successfully loads the latest `dist/hebring.css`.
-- Core CSS builds do not accidentally include Playground JavaScript or CSS.
-- The `<iframe>` or preview container accurately reflects DOM updates.
-- Security constraints (e.g., `<script>` execution blocked) are upheld.
+## 16. Composition Demonstrations
+The Playground includes demonstrations of component composition (e.g., placing interactive elements within a Modal). These compositions validate the `@layer` specificity rules and ensure that isolated component CSS does not conflict when nested.
 
-## 17. Future Expansion
-Once the minimal prototype is proven, the Playground may expand to include a utility class auto-completer, interactive token explorers, and deeper integration with alternative ecosystem themes, provided all expansion adheres to the dependency invariants.
+## 17. Responsive Demonstrations
+Responsive behaviors are correctly delegated to CSS media queries and native fluid layouts. The JavaScript adapters do not perform manual viewport size calculations, preserving the CSS-first philosophy.
+
+## 18. Motion / Reduced Motion
+Transitions are handled via CSS. The JavaScript adapters do not enforce manual animation frames (except for scroll positioning in the Carousel), respecting global browser motion preferences.
+
+## 19. Edge Case Demonstrations
+The Playground includes essential edge case validations, such as handling disabled menu items, typeahead navigation in menus, and empty states in filtering components (Combobox, Command Menu).
+
+## 20. Documentation Alignment
+The examples presented in the Playground are the canonical source of truth and align perfectly with the theoretical architectures documented in the `docs/` folder.
+
+## 21. Package Boundary
+The `examples/` directory is properly excluded from the distributed npm package. It serves exclusively as a development and reference tool.
+
+## 22. Performance / Complexity
+The Playground is lightweight. The JavaScript adapters are procedural and highly specific, avoiding complex abstractions that would degrade performance or obscure the underlying DOM mechanics.
+
+## 23. Testing
+While the Playground itself is not subjected to automated browser tests (Playwright/Cypress), its static presence ensures that developers can manually verify visual regressions during architectural refactoring.
+
+## 24. Findings
+The Playground architecture successfully achieves its purpose. It acts as an accurate, isolated, and framework-neutral reference implementation that proves the HEBRING CSS architecture without accidentally introducing a JavaScript runtime library.
+
+## 25. Remediation
+NO SOURCE CHANGES REQUIRED.
+
+## 26. Final Playground Assessment
+The `examples/playground/` infrastructure is architecturally sound and fulfills its role as a pure reference implementation.
