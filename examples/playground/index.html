@@ -33,14 +33,54 @@
 </head>
 <body>
 
-  <header>
-    <h1>HEBRING Playground</h1>
-    <p>Minimal local environment for visual development and demonstration.</p>
+  <header style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--hb-color-border);">
+    <h1 style="margin-bottom: 0.5rem;">HEBRING Playground</h1>
+    <p style="color: var(--hb-color-text-subtle); margin-top: 0; margin-bottom: 1.5rem;">
+      An interactive, framework-neutral learning environment and reference implementation. <br>
+      <a href="../../README.md" class="hb-link">Back to Documentation</a>
+    </p>
+
+    <nav aria-label="Playground Navigation" style="background: var(--hb-color-surface-muted); padding: 1rem; border-radius: var(--hb-radius-md);">
+      <h2 class="hb-text-sm" style="margin-top: 0; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--hb-color-text-subtle);">Navigation</h2>
+      <ul class="hb-cluster" style="list-style: none; padding: 0; margin: 0; gap: 1rem;">
+        <li><a href="#core-layout" class="hb-link">Core: Layout</a></li>
+        <li><a href="#core-components" class="hb-link">Core: Components</a></li>
+        <li><a href="#core-responsive" class="hb-link">Core: Responsive</a></li>
+        <li><a href="#ecosystem-themes" class="hb-link">Ecosystem: Themes</a></li>
+        <li><a href="#ecosystem-ui" class="hb-link">Ecosystem: Interactive UI</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main>
-    <!-- Component prototypes will be previewed here -->
-    <section style="margin-top: 2rem;">
+    <section id="core-layout" style="margin-top: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--hb-color-border-subtle);">
+      <h2 style="margin-bottom: 0.5rem;">Core: Layout Primitives</h2>
+      <p style="color: var(--hb-color-text-subtle); margin-top: 0; margin-bottom: 2rem;">Fundamental structural classes. CSS-only.</p>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>Stack (Vertical Flow)</h3>
+        <div class="hb-stack" style="border: 1px dashed var(--hb-color-border); padding: 1rem;">
+          <div style="background: var(--hb-color-surface-muted); padding: 0.5rem;">Item 1</div>
+          <div style="background: var(--hb-color-surface-muted); padding: 0.5rem;">Item 2</div>
+          <div style="background: var(--hb-color-surface-muted); padding: 0.5rem;">Item 3</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 2rem;">
+        <h3>Cluster (Horizontal Wrap)</h3>
+        <div class="hb-cluster" style="border: 1px dashed var(--hb-color-border); padding: 1rem;">
+          <span class="hb-badge">Tag 1</span>
+          <span class="hb-badge">Tag 2</span>
+          <span class="hb-badge">Tag 3</span>
+          <span class="hb-badge">Tag 4</span>
+          <span class="hb-badge">Tag 5</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="core-components" style="margin-top: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--hb-color-border-subtle);">
+      <h2 style="margin-bottom: 0.5rem;">Core: Components</h2>
+      <p style="color: var(--hb-color-text-subtle); margin-top: 0; margin-bottom: 2rem;">Static, semantic HTML elements powered by HEBRING variables. CSS-only.</p>
       <h2>Buttons (Phase 07.5)</h2>
 
       <div style="margin-bottom: 2rem;">
@@ -78,8 +118,9 @@
       </div>
     </section>
 
-    <section style="margin-top: 2rem;">
-      <h2>Responsive Utilities (Phase 08.4)</h2>
+    <section id="core-responsive" style="margin-top: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--hb-color-border-subtle);">
+      <h2 style="margin-bottom: 0.5rem;">Core: Responsive Utilities</h2>
+      <p style="color: var(--hb-color-text-subtle); margin-top: 0; margin-bottom: 2rem;">Media query driven overrides for layout and visibility. CSS-only.</p>
       <div style="margin-bottom: 2rem;">
         <h3>1. Display</h3>
         <div style="border: 1px dashed var(--hb-color-border); padding: var(--hb-space-4);">
@@ -125,9 +166,9 @@
         </div>
       </div>
     </section>
-    <section style="margin-top: 2rem; padding: 2rem; background: var(--hb-color-background); color: var(--hb-color-text); border-radius: var(--hb-radius-md);" data-theme="dark">
-      <h2>Dark Theme (Phase 09.5)</h2>
-      <p style="color: var(--hb-color-text-muted); margin-bottom: 2rem;">This section inherits the dark theme semantic mappings.</p>
+    <section id="ecosystem-themes" style="margin-top: 3rem; padding: 2rem; background: var(--hb-color-background); color: var(--hb-color-text); border-radius: var(--hb-radius-md);" data-theme="dark">
+      <h2 style="margin-bottom: 0.5rem; margin-top: 0;">Ecosystem: Dark Theme</h2>
+      <p style="color: var(--hb-color-text-subtle); margin-top: 0; margin-bottom: 2rem;">This section inherits the dark theme semantic mappings from <code>ecosystem/themes/ocean.css</code> (if loaded) or default dark mode mappings.</p>
 
       <div style="margin-bottom: 2rem;">
         <h3>Surface & Text</h3>
@@ -146,8 +187,9 @@
         </div>
       </div>
     </section>
-    <section style="margin-top: 2rem;">
-      <h2>Ecosystem UI (Phase 37)</h2>
+    <section id="ecosystem-ui" style="margin-top: 3rem;">
+      <h2 style="margin-bottom: 0.5rem;">Ecosystem: Interactive UI</h2>
+      <p style="color: var(--hb-color-text-subtle); margin-top: 0; margin-bottom: 2rem;">Complex components demonstrating the HEBRING DOM contract. Driven by native browser state and the minimal Reference Adapters found at the bottom of this file.</p>
       <div style="margin-bottom: 2rem;">
         <h3>Modal (Native Dialog)</h3>
         <p style="color: var(--hb-color-text-subtle); margin-bottom: 1rem;">
