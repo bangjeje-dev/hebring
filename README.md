@@ -4,9 +4,9 @@ A modern, lightweight, and understandable CSS framework for building web interfa
 
 ## Project Status
 
-**Stable — Phase 11**
+**Stable — Phase 67**
 
-HEBRING is functionally complete with a stable foundational architecture. The framework's core CSS layers (reset, base, layout, components, utilities) are established.
+HEBRING is functionally complete with a stable foundational architecture. The framework is strictly divided into Core (CSS primitives, layout, base components) and Ecosystem (complex interactive UI, themes, icons, templates).
 
 ## Core Philosophy
 
@@ -25,10 +25,11 @@ HEBRING is built around eight foundational principles:
 
 ```
 hebring/
-├── src/          # Framework source files
+├── src/          # Core framework source files (CSS only, zero JS)
+├── ecosystem/    # Ecosystem UI, Icons, Themes, and Templates
 ├── docs/         # Documentation and architectural guides
-├── examples/     # Reference implementations and examples
-├── tests/        # Test suites and regression fixtures
+├── examples/     # Reference implementations including the Playground
+├── tests/        # Shell-based test suites and regression fixtures
 ├── package.json  # Project manifest
 ├── README.md     # Project overview and documentation
 ├── LICENSE       # MIT License
@@ -69,8 +70,14 @@ HEBRING is thoroughly documented. Start here:
 - [Getting Started](docs/getting-started.md)
 - [Architecture Guide](docs/architecture-guide.md)
 - [Components](docs/components.md)
-- [UI Architecture (Ecosystem)](docs/ui-architecture.md)
+- [Ecosystem UI Architecture](docs/ui-architecture.md)
 - [Design Tokens](docs/design-tokens.md)
+- [Themes](docs/themes.md)
+- [Icons](docs/icons.md)
+- [Playground Architecture](docs/playground-architecture.md)
+
+**Interactive Sandbox:**  
+You can explore the live, framework-neutral reference implementation in `examples/playground/index.html`.
 
 ### Local Development
 

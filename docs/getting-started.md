@@ -111,3 +111,5 @@ To get the most out of HEBRING, we recommend exploring the documentation in this
 2. **[Architecture](architecture-guide.md)**: Learn how the framework's CSS layers interact.
 3. **[Themes](themes.md)**: Discover how semantic token mapping powers effortless theming.
 4. **[Responsive Design](responsive.md)**: Learn how to build for multiple viewports.
+5. **[Ecosystem UI Architecture](ui-architecture.md)**: Understand how to build complex, interactive UI components on top of Core.
+6. **[Playground Architecture](playground-architecture.md)**: Explore the live sandbox at `examples/playground/index.html`.
