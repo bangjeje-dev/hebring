@@ -2,6 +2,10 @@
 
 A modern, lightweight, and understandable CSS framework for building web interfaces.
 
+<p align="center">
+  <img src="./assets/README/banner.png" alt="HEBRING CSS Framework" width="100%">
+</p>
+
 ## Project Status
 
 **Stable — Phase 67**
