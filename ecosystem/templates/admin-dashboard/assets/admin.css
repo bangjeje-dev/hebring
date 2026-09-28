@@ -45,6 +45,22 @@
   width: 100%;
 }
 
+.admin-page-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--hb-space-4);
+  margin-bottom: var(--hb-space-8);
+}
+
+.admin-content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--hb-space-6);
+  margin-bottom: var(--hb-space-6);
+}
+
 /* Sidebar Elements */
 .admin-sidebar-logo {
   height: 72px;
@@ -104,6 +120,9 @@
   .admin-main {
     padding: var(--hb-space-6);
   }
+  .admin-content-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 768px) {
@@ -143,6 +162,11 @@
 
   .admin-sidebar-logo {
     height: 64px;
+  }
+  
+  .admin-page-header {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 

@@ -193,7 +193,7 @@
       <div class="admin-container">
         
         <!-- Page Heading -->
-        <header class="hb-cluster" style="justify-content: space-between; align-items: flex-end; margin-bottom: var(--hb-space-8);">
+        <header class="admin-page-header">
           <div class="hb-stack" style="gap: var(--hb-space-1);">
             <h1 class="hb-text-3xl" style="margin: 0; font-weight: 700; letter-spacing: -0.02em;">Dashboard Overview</h1>
             <p class="hb-text-base" style="color: var(--hb-color-text-subtle); margin: 0;">Welcome back. Here's what's happening today.</p>
@@ -254,11 +254,9 @@
         </div>
 
         <!-- Main Content Grid -->
-        <div class="hb-grid" style="grid-template-columns: 2fr 1fr; gap: var(--hb-space-6);">
-          
-          <div class="hb-stack" style="gap: var(--hb-space-6);">
+        <div class="admin-content-grid">
             <!-- Large Chart Card -->
-            <div class="hb-card" style="padding: var(--hb-space-6);">
+          <div class="hb-card" style="padding: var(--hb-space-6); display: flex; flex-direction: column;">
               <div class="hb-cluster" style="justify-content: space-between; align-items: flex-start; margin-bottom: var(--hb-space-6);">
                 <div>
                   <h2 class="hb-text-xl" style="margin: 0; font-weight: 600;">Revenue Overview</h2>
@@ -272,7 +270,7 @@
               </div>
 
               <!-- Static SVG Demonstration Chart -->
-              <svg class="admin-chart-svg" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <svg class="admin-chart-svg" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="flex: 1; min-height: 250px;">
                 <!-- Grid Lines -->
                 <line x1="40" y1="50" x2="780" y2="50" stroke="var(--hb-color-border)" stroke-dasharray="4" />
                 <line x1="40" y1="125" x2="780" y2="125" stroke="var(--hb-color-border)" stroke-dasharray="4" />
@@ -310,8 +308,64 @@
               </svg>
             </div>
 
-            <!-- Recent Orders Table -->
-            <div class="hb-card" style="padding: 0; overflow: hidden;">
+            <!-- Activity Feed -->
+          <div class="hb-card" style="padding: var(--hb-space-6); display: flex; flex-direction: column;">
+            <div class="hb-cluster" style="justify-content: space-between; align-items: center; margin-bottom: var(--hb-space-6);">
+              <h2 class="hb-text-xl" style="margin: 0; font-weight: 600;">Recent Activity</h2>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--hb-color-text-muted);"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            
+            <div class="hb-stack" style="gap: var(--hb-space-5); flex: 1;">
+              
+              <!-- Activity Item -->
+              <div class="hb-cluster" style="align-items: flex-start; gap: var(--hb-space-4);">
+                <div class="hb-avatar hb-avatar--sm" style="background-color: var(--hb-color-primary); color: white;">OM</div>
+                <div class="hb-stack" style="gap: var(--hb-space-1); flex: 1;">
+                  <div class="hb-text-sm" style="line-height: 1.4;"><span style="font-weight: 600; color: var(--hb-color-text);">Olivia Martin</span> placed a new order for <span style="font-weight: 500;">MacBook Pro 16"</span>.</div>
+                  <div class="hb-text-xs" style="color: var(--hb-color-text-subtle);">2 hours ago</div>
+                </div>
+              </div>
+
+              <!-- Activity Item -->
+              <div class="hb-cluster" style="align-items: flex-start; gap: var(--hb-space-4);">
+                <div class="hb-avatar hb-avatar--sm" style="background-color: var(--hb-color-surface-success); color: var(--hb-color-text-success);">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                </div>
+                <div class="hb-stack" style="gap: var(--hb-space-1); flex: 1;">
+                  <div class="hb-text-sm" style="line-height: 1.4;">Automated monthly backup <span style="font-weight: 600; color: var(--hb-color-text-success);">completed successfully</span> across 4 regions.</div>
+                  <div class="hb-text-xs" style="color: var(--hb-color-text-subtle);">5 hours ago</div>
+                </div>
+              </div>
+
+              <!-- Activity Item -->
+              <div class="hb-cluster" style="align-items: flex-start; gap: var(--hb-space-4);">
+                <div class="hb-avatar hb-avatar--sm" style="background-color: var(--hb-color-danger); color: white;">SJ</div>
+                <div class="hb-stack" style="gap: var(--hb-space-1); flex: 1;">
+                  <div class="hb-text-sm" style="line-height: 1.4;"><span style="font-weight: 600; color: var(--hb-color-text);">Sarah Johnson</span> failed to authenticate (3 attempts).</div>
+                  <div class="hb-text-xs" style="color: var(--hb-color-text-subtle);">Yesterday at 14:32</div>
+                </div>
+              </div>
+              
+              <!-- Activity Item -->
+              <div class="hb-cluster" style="align-items: flex-start; gap: var(--hb-space-4);">
+                <div class="hb-avatar hb-avatar--sm" style="background-color: var(--hb-color-surface-muted); color: var(--hb-color-text-muted);">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                </div>
+                <div class="hb-stack" style="gap: var(--hb-space-1); flex: 1;">
+                  <div class="hb-text-sm" style="line-height: 1.4;">System generated <span style="font-weight: 600; color: var(--hb-color-text);">Q3 Financial Report</span>.</div>
+                  <div class="hb-text-xs" style="color: var(--hb-color-text-subtle);">Oct 25, 2026</div>
+                </div>
+              </div>
+
+            </div>
+
+            <button class="hb-button hb-button--secondary hb-w-full" style="margin-top: var(--hb-space-6);">View All Activity</button>
+          
+        </div>
+        </div>
+
+        <!-- Recent Orders Table -->
+        <div class="hb-card" style="padding: 0; overflow: hidden; margin-bottom: var(--hb-space-8);">
               <div class="hb-cluster" style="justify-content: space-between; align-items: center; padding: var(--hb-space-5); border-bottom: 1px solid var(--hb-color-border);">
                 <h2 class="hb-text-xl" style="margin: 0; font-weight: 600;">Recent Orders</h2>
                 <a href="#" class="hb-text-sm" style="font-weight: 500; color: var(--hb-color-primary); text-decoration: none;">View Full Register &rarr;</a>
@@ -380,63 +434,6 @@
                 </table>
               </div>
             </div>
-          </div>
-
-          <!-- Activity Feed -->
-          <div class="hb-card" style="padding: var(--hb-space-6);">
-            <div class="hb-cluster" style="justify-content: space-between; align-items: center; margin-bottom: var(--hb-space-6);">
-              <h2 class="hb-text-xl" style="margin: 0; font-weight: 600;">Recent Activity</h2>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--hb-color-text-muted);"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-            </div>
-            
-            <div class="hb-stack" style="gap: var(--hb-space-5);">
-              
-              <!-- Activity Item -->
-              <div class="hb-cluster" style="align-items: flex-start; gap: var(--hb-space-4);">
-                <div class="hb-avatar hb-avatar--sm" style="background-color: var(--hb-color-primary); color: white;">OM</div>
-                <div class="hb-stack" style="gap: var(--hb-space-1); flex: 1;">
-                  <div class="hb-text-sm" style="line-height: 1.4;"><span style="font-weight: 600; color: var(--hb-color-text);">Olivia Martin</span> placed a new order for <span style="font-weight: 500;">MacBook Pro 16"</span>.</div>
-                  <div class="hb-text-xs" style="color: var(--hb-color-text-subtle);">2 hours ago</div>
-                </div>
-              </div>
-
-              <!-- Activity Item -->
-              <div class="hb-cluster" style="align-items: flex-start; gap: var(--hb-space-4);">
-                <div class="hb-avatar hb-avatar--sm" style="background-color: var(--hb-color-surface-success); color: var(--hb-color-text-success);">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-                </div>
-                <div class="hb-stack" style="gap: var(--hb-space-1); flex: 1;">
-                  <div class="hb-text-sm" style="line-height: 1.4;">Automated monthly backup <span style="font-weight: 600; color: var(--hb-color-text-success);">completed successfully</span> across 4 regions.</div>
-                  <div class="hb-text-xs" style="color: var(--hb-color-text-subtle);">5 hours ago</div>
-                </div>
-              </div>
-
-              <!-- Activity Item -->
-              <div class="hb-cluster" style="align-items: flex-start; gap: var(--hb-space-4);">
-                <div class="hb-avatar hb-avatar--sm" style="background-color: var(--hb-color-danger); color: white;">SJ</div>
-                <div class="hb-stack" style="gap: var(--hb-space-1); flex: 1;">
-                  <div class="hb-text-sm" style="line-height: 1.4;"><span style="font-weight: 600; color: var(--hb-color-text);">Sarah Johnson</span> failed to authenticate (3 attempts).</div>
-                  <div class="hb-text-xs" style="color: var(--hb-color-text-subtle);">Yesterday at 14:32</div>
-                </div>
-              </div>
-              
-              <!-- Activity Item -->
-              <div class="hb-cluster" style="align-items: flex-start; gap: var(--hb-space-4);">
-                <div class="hb-avatar hb-avatar--sm" style="background-color: var(--hb-color-surface-muted); color: var(--hb-color-text-muted);">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
-                </div>
-                <div class="hb-stack" style="gap: var(--hb-space-1); flex: 1;">
-                  <div class="hb-text-sm" style="line-height: 1.4;">System generated <span style="font-weight: 600; color: var(--hb-color-text);">Q3 Financial Report</span>.</div>
-                  <div class="hb-text-xs" style="color: var(--hb-color-text-subtle);">Oct 25, 2026</div>
-                </div>
-              </div>
-
-            </div>
-
-            <button class="hb-button hb-button--secondary hb-w-full" style="margin-top: var(--hb-space-6);">View All Activity</button>
-          </div>
-
-        </div>
 
       </div>
     </main>
